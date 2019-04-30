@@ -79,7 +79,7 @@ public class ManterProfessorController extends HttpServlet {
 			ArrayList<Professor> lista = new ArrayList<>();
 			session.setAttribute("lista", lista);
 			view = request.getRequestDispatcher("index.jsp");		
-			
+			//ALTERAR
 		} else if (pAcao.equals("Alterar")) {
 			ps.update(professor);
 			ArrayList<Professor> lista = new ArrayList<>();
