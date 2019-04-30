@@ -10,15 +10,13 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<title>Cadastro de Professor</title>
-
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-
 <link href="assets/style/utils.css" rel="stylesheet" />
+
+<title>Cadastro de Professor</title>
 </head>
 <body>
 
@@ -31,7 +29,7 @@
 				<h1>Cadastro Professor</h1>
 
 				<form action="ManterProfessorController.do" method="post"
-					class="form-horizontal">
+					class="form-horizontal" name="cad">
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
@@ -53,33 +51,26 @@
 						</div>
 						<div class="form-group col-md-12">
 							<div class="form-group col-md-0">
-								<label for="inputPassword4">Senha</label> 
-								<input	id="inputPassword4" type="password" class="form-control"name="senha" style="width: 20%">
+								<label for="inputPassword4">Senha</label> <input
+									id="inputPassword4" type="password" class="form-control"
+									name="senha" style="width: 20%">
 							</div>
-							<div class="form-group col-md-0">
-								<label for="inputPassword4">Confirmar Senha</label> 
-								<input	id="inputPassword4" type="password" class="form-control"name="senha" style="width: 20%">
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input id="customControlAutosizing" type="checkbox"
+										name="administrador" class="custom-control-input" /> <label
+										class="custom-control-label" for="customControlAutosizing">
+										Administrador? </label>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="custom-control custom-checkbox">
-							<input id="customControlAutosizing" type="checkbox"
-								name="administrador" class="custom-control-input" /> <label
-								class="custom-control-label" for="customControlAutosizing">
-								Administrador? </label>
-						</div>
-					</div>
-					<input type="reset" class="btn btn-secondary" value="Limpar Campos">
-					<button type="submit" class="btn btn-primary" name="acao" value="Criar">Salvar</button>
+							<input type="reset" class="btn btn-secondary"
+								value="Limpar Campos" style="width: 20%">
+							<button type="submit" class="btn btn-primary" name="acao"
+								value="Criar" onClick="validarSenha()" style="width: 20%">Salvar</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
-
-
-
 	<script src="assets/scripts/jquery.min.js"></script>
 	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>

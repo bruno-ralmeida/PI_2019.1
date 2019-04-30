@@ -86,8 +86,6 @@ public class ProfessorDAO extends UsuarioDAO {
 		return professor;
 	}
 
-
-
 	public ArrayList<Professor> findAll() {
 		Connection conn = new ConnectionFactory().getConnection();
 
@@ -131,7 +129,7 @@ public class ProfessorDAO extends UsuarioDAO {
 	public ArrayList<Professor> findAllName(String nome) {
 		Connection conn = new ConnectionFactory().getConnection();
 
-		String sqlComand =  "SELECT professor.matricula, professor.administrador,usuario.id, usuario.nome, "
+		String sqlComand = "SELECT professor.matricula, professor.administrador,usuario.id, usuario.nome, "
 				+ "usuario.email, usuario.senha FROM Professor as professor "
 				+ "INNER JOIN Usuario as usuario ON usuario.Id = professor.professor_id "
 				+ "WHERE usuario.nome  like ? ";
@@ -139,7 +137,7 @@ public class ProfessorDAO extends UsuarioDAO {
 		Professor professor = null;
 		ArrayList<Professor> prof = new ArrayList<>();
 		try (PreparedStatement stm = conn.prepareStatement(sqlComand)) {
-			stm.setString(1,"%" + nome + "%");
+			stm.setString(1, "%" + nome + "%");
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
@@ -167,19 +165,18 @@ public class ProfessorDAO extends UsuarioDAO {
 
 		return prof;
 	}
-	
+
 	public ArrayList<Professor> findAllId(int id) {
 		Connection conn = new ConnectionFactory().getConnection();
 
-		String sqlComand =  "SELECT professor.matricula, professor.administrador,usuario.id, usuario.nome, "
+		String sqlComand = "SELECT professor.matricula, professor.administrador,usuario.id, usuario.nome, "
 				+ "usuario.email, usuario.senha FROM Professor as professor "
-				+ "INNER JOIN Usuario as usuario ON usuario.Id = professor.professor_id "
-				+ "WHERE usuario.id  like ? ";
+				+ "INNER JOIN Usuario as usuario ON usuario.Id = professor.professor_id " + "WHERE usuario.id  like ? ";
 
 		Professor professor = null;
 		ArrayList<Professor> prof = new ArrayList<>();
 		try (PreparedStatement stm = conn.prepareStatement(sqlComand)) {
-			stm.setString(1,"%" + id + "%");
+			stm.setString(1, "%" + id + "%");
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
@@ -207,13 +204,13 @@ public class ProfessorDAO extends UsuarioDAO {
 
 		return prof;
 	}
+
 	/**
 	 * CRUD: Atualiza dados do professor
 	 */
 	public void update(Professor professor) {
 		Connection conn = new ConnectionFactory().getConnection();
 
-		// Atualiza email e senha
 		updateUsuario(professor);
 
 		String sqlComand = "UPDATE Professor SET administrador = ?, matricula = ? WHERE professor_id = ?";

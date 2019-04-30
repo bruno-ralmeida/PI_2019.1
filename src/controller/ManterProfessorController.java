@@ -25,8 +25,8 @@ public class ManterProfessorController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
@@ -34,25 +34,25 @@ public class ManterProfessorController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String pAcao = request.getParameter("acao");
-		String pId = request.getParameter("id");
 		String pNome = request.getParameter("nome");
 		String pEmail = request.getParameter("email");
 		String pSenha = request.getParameter("senha");
 		String pCsenha = request.getParameter("cSenha");
 		String pMatricula = request.getParameter("matricula");
 		String pAdministrador = request.getParameter("administrador");
-		
 
-		if(pAdministrador == null || pAdministrador.isEmpty()) pAdministrador = "0";
-		if(pAdministrador.equals("on")) pAdministrador = "1";
-		
+		if (pAdministrador == null || pAdministrador.isEmpty())
+			pAdministrador = "0";
+		if (pAdministrador.equals("on"))
+			pAdministrador = "1";
+
 		int id = -1;
 		try {
-			id = Integer.parseInt(pId);
+			id = Integer.parseInt(request.getParameter("id"));
 		} catch (NumberFormatException e) {
 
 		}
@@ -62,57 +62,43 @@ public class ManterProfessorController extends HttpServlet {
 		professor.setNome(pNome);
 		professor.setMatricula(pMatricula);
 		professor.setAdministrador(Integer.parseInt(pAdministrador));
-		
+
 		ProfessorService ps = new ProfessorService();
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
-			//CRIAR
+		// CRIAR
 		if (pAcao.equals("Criar")) {
 			ps.create(professor);
 			ArrayList<Professor> lista = new ArrayList<>();
 			lista.add(professor);
 			session.setAttribute("lista", lista);
 			view = request.getRequestDispatcher("index.jsp");
-			//EXCLUIR
+			// EXCLUIR
 		} else if (pAcao.equals("Excluir")) {
 			ps.delete(professor.getId());
-			ArrayList<Professor> listaNova = (ArrayList<Professor>)session.getAttribute("lista");
-			listaNova.remove(busca(professor, listaNova));
-			session.setAttribute("lista", listaNova);
-			view = request.getRequestDispatcher("index.jsp");	
-			//ALTERAR
+			ArrayList<Professor> lista = new ArrayList<>();
+			session.setAttribute("lista", lista);
+			view = request.getRequestDispatcher("index.jsp");		
+			
 		} else if (pAcao.equals("Alterar")) {
 			ps.update(professor);
-			ArrayList<Professor> lista = (ArrayList<Professor>)session.getAttribute("lista");
-			int pos = busca(professor, lista);
-			lista.remove(pos);
-			lista.add(pos, professor);
+			ArrayList<Professor> lista = new ArrayList<>();
 			session.setAttribute("lista", lista);
-			request.setAttribute("Professor", professor);
-			view = request.getRequestDispatcher("detProfessor.jsp");			
+			request.setAttribute("professor", professor);
+			view = request.getRequestDispatcher("detProfessor.jsp"); 
 		} else if (pAcao.equals("Visualizar")) {
 			professor = ps.load(professor.getId());
 			request.setAttribute("professor", professor);
-			view = request.getRequestDispatcher("detProfessor.jsp");		
+			view = request.getRequestDispatcher("detProfessor.jsp");
 		} else if (pAcao.equals("Editar")) {
 			professor = ps.load(professor.getId());
 			request.setAttribute("professor", professor);
-			view = request.getRequestDispatcher("AlterarProfessor.jsp");		
+			view = request.getRequestDispatcher("alterarProfessor.jsp");
 		}
-		
+
 		view.forward(request, response);
 
 	}
 
-	public int busca(Professor Professor, ArrayList<Professor> lista) {
-		Professor to;
-		for(int i = 0; i < lista.size(); i++){
-			to = lista.get(i);
-			if(to.getId() == Professor.getId()){
-				return i;
-			}
-		}
-		return -1;
-	}
 
 }

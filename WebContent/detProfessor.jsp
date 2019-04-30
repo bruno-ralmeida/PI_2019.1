@@ -20,14 +20,33 @@
 	<c:import url="Menu.jsp" />
 	<!-- Container Principal -->
 	<div id="main" class="container" style="padding-top: 3%">
-		<h2 class="page-header">Detalhes do Professor <Strong>${professor.nome }</Strong></h2>
+		<h2 class="page-header">
+			Detalhes do Professor <Strong>${professor.nome }</Strong>
+		</h2>
 		<div class="row">
-			<div class="col-md-12"  style="padding-top: 2%">
-				<p><strong>id: </strong> ${professor.id }</p>
-				<p><strong>Nome: </strong> ${professor.nome }</p>
-				<p><strong>Matricula: </strong>${professor.matricula }</p>
-				<p><strong>E-Mail: </strong>${professor.email }</p>
-				<p><strong>Administrador: </strong>${professor.administrador }</p>
+			<div class="col-md-12" style="padding-top: 2%">
+				<p>
+					<strong>id: </strong> ${professor.id }
+				</p>
+				<p>
+					<strong>Nome: </strong> ${professor.nome }
+				</p>
+				<p>
+					<strong>Matricula: </strong>${professor.matricula }</p>
+				<p>
+					<strong>E-Mail: </strong>${professor.email }</p>
+
+
+				<c:if test="${professor.administrador == 1 }">
+					<p>
+						<strong>Administrador: </strong>Sim
+					</p>
+				</c:if>
+				<c:if test="${professor.administrador == 0 }">
+					<p>
+						<strong>Administrador: </strong>Não
+					</p>
+				</c:if>
 			</div>
 		</div>
 		<hr />
