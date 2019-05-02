@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,14 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.ProfessorService;
 import service.TurmaService;
+import model.Professor;
 
 /**
  * Servlet implementation class ListarProfessorController
  */
-@WebServlet("/ListarProfessorController")
+@WebServlet("/ListarProfessorController.do")
 public class ListarProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +36,21 @@ public class ListarProfessorController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ProfessorService ps = new ProfessorService();
+		ArrayList<Professor> lista = null;
+		String buscar = request.getParameter("bProf");
+		String acao = request.getParameter("acao");
+		HttpSession session = request.getSession();
+
+		if (acao.equals("Buscar")) {
+			lista = ps.findAllName(buscar);
+			session.setAttribute("lista", lista);
+		} else if (acao.equals("reiniciar")) {
+			lista = ps.findAll();
+			session.setAttribute("lista", lista);
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -43,21 +59,8 @@ public class ListarProfessorController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//RECEBE O PARAMETRO NOME DO PROFESSOR DESEJADO
-		String pBprof = request.getParameter("bProf");
+		doGet(request, response);
 		
-		
-		//SERVICE
-		ProfessorService ps = new ProfessorService();
-		//BUSCA TODOS
-		request.setAttribute("lista", ps.findAll());
-		//BUSCA POR NOME
-		request.setAttribute("lista", ps.findAllName(pBprof));
-		//ENVIA RESULTADO A JSP
-		
-
-		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-		view.forward(request, response);
 	}
 
 }

@@ -76,16 +76,19 @@ public class ManterProfessorController extends HttpServlet {
 			// EXCLUIR
 		} else if (pAcao.equals("Excluir")) {
 			ps.delete(professor.getId());
-			ArrayList<Professor> lista = new ArrayList<>();
-			session.setAttribute("lista", lista);
-			view = request.getRequestDispatcher("index.jsp");		
-			//ALTERAR
+			ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+			lista.remove(busca(professor, lista));
+			view = request.getRequestDispatcher("index.jsp");
+			// ALTERAR
 		} else if (pAcao.equals("Alterar")) {
 			ps.update(professor);
-			ArrayList<Professor> lista = new ArrayList<>();
+			ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+			int pos = busca(professor, lista);
+			lista.remove(pos);
+			lista.add(pos, professor);
 			session.setAttribute("lista", lista);
 			request.setAttribute("professor", professor);
-			view = request.getRequestDispatcher("detProfessor.jsp"); 
+			view = request.getRequestDispatcher("detProfessor.jsp");
 		} else if (pAcao.equals("Visualizar")) {
 			professor = ps.load(professor.getId());
 			request.setAttribute("professor", professor);
@@ -99,6 +102,15 @@ public class ManterProfessorController extends HttpServlet {
 		view.forward(request, response);
 
 	}
-
+	public int busca(Professor professor, ArrayList<Professor> lista) {
+		Professor to;
+		for (int i = 0; i < lista.size(); i++) {
+			to = lista.get(i);
+			if (to.getId() == professor.getId()) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 }
