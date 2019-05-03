@@ -6,7 +6,7 @@ import dao.ProfessorDAO;
 
 /**
 *
-* @author Grupo PI
+* @author Bruno Rocha
 */
 public class Professor extends Usuario {
 
@@ -65,6 +65,6 @@ public class Professor extends Usuario {
 	
 	@Override
 	public String toString() {
-		return "Professor [id=" + this.getId() + " matricula=" + this.getMatricula() + " admin=" + this.getAdministrador()  + " nome=" + this.getNome() + " email=" + this.getEmail() + "]"; 
+		return  this.getNome(); 
 	}
 }

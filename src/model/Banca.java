@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
 *
-* @author Grupo PI
+* @author Bruno Rocha
 */
 public class Banca {
 	private int id;

@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author Grupo PI
+ * @author Bruno Rocha
  */
 public abstract class Usuario {
     
@@ -14,6 +14,19 @@ public abstract class Usuario {
     public Usuario(String email, String senha) {
         this.email = email;
         this.senha = senha;
+    }
+    
+    public Usuario(int id, String nome, String email, String senha) {
+    	this.id = id;
+    	this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+    
+    public Usuario(int id, String nome, String email) {
+    	this.id = id;
+    	this.nome = nome;
+        this.email = email;
     }
     
     public int getId() {

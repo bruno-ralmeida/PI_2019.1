@@ -41,7 +41,7 @@ public class ManterProfessorController extends HttpServlet {
 		String pNome = request.getParameter("nome");
 		String pEmail = request.getParameter("email");
 		String pSenha = request.getParameter("senha");
-		String pCsenha = request.getParameter("cSenha");
+	//	String pCsenha = request.getParameter("cSenha");
 		String pMatricula = request.getParameter("matricula");
 		String pAdministrador = request.getParameter("administrador");
 

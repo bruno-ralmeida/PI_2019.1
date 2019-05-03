@@ -66,7 +66,7 @@
 							<input type="reset" class="btn btn-secondary"
 								value="Limpar Campos" style="width: 20%">
 							<button type="submit" class="btn btn-primary" name="acao"
-								value="Criar" onClick="validarSenha()" style="width: 20%">Salvar</button>
+								value="Criar"  style="width: 20%">Salvar</button>
 				</form>
 			</div>
 		</div>

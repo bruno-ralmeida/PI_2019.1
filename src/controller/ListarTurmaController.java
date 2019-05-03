@@ -11,20 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Grupo;
-import service.GrupoService;
+import model.Professor;
+import model.Turma;
+import service.ProfessorService;
+import service.TurmaService;
 
 /**
- * Servlet implementation class ManterAvaliacaoController
+ * Servlet implementation class ListarTurmaController
  */
-@WebServlet("/ManterAvaliacaoController.do")
-public class ManterAvaliacaoController extends HttpServlet {
+@WebServlet("/ListarTurmaController.do")
+public class ListarTurmaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ManterAvaliacaoController() {
+	public ListarTurmaController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,9 +37,16 @@ public class ManterAvaliacaoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+		TurmaService ts = new TurmaService();
+		ArrayList<Turma> listTurma = null;
+		HttpSession session = request.getSession();
+
+
+		listTurma = ts.findAll();
+		session.setAttribute("listTurma", listTurma);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("selectTurma.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -46,26 +55,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String pAcao = request.getParameter("acao");
-		int pId = Integer.parseInt(request.getParameter("id"));
-		RequestDispatcher view = null;
-		GrupoService gs = new GrupoService();
-
-		if (pAcao.equals("Turma")) {
-			ArrayList<Grupo> listGrupo = null;
-			
-			HttpSession session = request.getSession();
-
-			listGrupo = gs.loadGrupoByTurma(pId);
-			session.setAttribute("listGrupo", listGrupo);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupo.jsp");
-			dispatcher.forward(request, response);
-
-			// doGet(request, response);
-		}
-		view.forward(request, response);
+		doGet(request, response);
 	}
 
 }

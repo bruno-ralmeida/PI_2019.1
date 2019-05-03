@@ -4,23 +4,36 @@ import java.util.ArrayList;
 
 /**
 *
-* @author Grupo PI
+* @author Bruno Rocha
 */
 public class Grupo {
 	
 	private int id;
 	private int numero;
 	private String nome;
-	private Professor professor;
+	private Professor orientador;
 	private ArrayList<Aluno> lstAlunos;
 	
 	public Grupo() {
 		
 	}
 	
-	public Grupo(int id,int numero, String nome, Professor professor, ArrayList<Aluno> lstAlunos) {
+	public Grupo(int id, int numero, String nome) {
 		this.id = id;
-		this.professor = professor;
+		this.numero = numero;
+		this.nome = nome;
+	}
+	
+	public Grupo(int id, int numero, String nome, Professor orientador) {
+		this.id = id;
+		this.orientador = orientador;
+		this.numero = numero;
+		this.nome = nome;
+	}
+	
+	public Grupo(int id, int numero, String nome, Professor orientador, ArrayList<Aluno> lstAlunos) {
+		this.id = id;
+		this.orientador = orientador;
 		this.numero = numero;
 		this.nome = nome;
 		this.lstAlunos = lstAlunos;
@@ -34,12 +47,12 @@ public class Grupo {
 		this.id = id;
 	}
 
-	public Professor getProfessor() {
-		return professor;
+	public Professor getOrientador() {
+		return orientador;
 	}
 	
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+	public void setOrientador(Professor orientador) {
+		this.orientador = orientador;
 	}
 	
 	public int getNumero() {

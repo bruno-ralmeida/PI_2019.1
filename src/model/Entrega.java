@@ -4,7 +4,7 @@ import java.sql.Date;
 
 /**
 *
-* @author Grupo PI
+* @author Bruno Rocha
 */
 public class Entrega {
 

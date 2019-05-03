@@ -42,7 +42,9 @@
 
 							<label for="exampleFormControlSelect1">Selecione a turma</label>
 								<select class="form-control">
-									<option>${turma.sigla}</option>
+								<c:forEach var="turma" items="${teste}">
+									<option value="${turma.sigla}"> teste </option>
+									</c:forEach>
 								</select>
 						</div>
 						<div class="col">

@@ -25,7 +25,7 @@
 	<div id="main" class="container" style="padding-top: 3%">
 
 
-		<form action="ListarProfessorController" method="post">
+		<form action="ListarProfessorController.do" method="post">
 			<div id="top" class="row">
 				<div class="col-md-3">
 					<h2><strong>Professores</strong></h2>
@@ -37,7 +37,7 @@
 							placeholder="Pesquisar Professores (deixe vazio para trazer todos)">
 						<span class="input-group-btn" style="padding-left: 5%">
 							<button class="btn btn-default" type="submit" name="acao"
-								value="buscar">
+								value="Buscar">
 								<span class="glyphicon glyphicon-search">Buscar</span>
 							</button>
 						</span>

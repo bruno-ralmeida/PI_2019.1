@@ -24,22 +24,11 @@ a {
 			<li class="nav-item"><a class="nav-link active"
 				href="cadProfessor.jsp">Cadastro de Professor</a></li>
 			<li class="nav-item"><a class="nav-link active"
-				href="cadAvaliacao.jsp">Avaliação Semanal</a></li>
+				href="selectTurma.jsp">Avaliação Semanal</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">Gerar
 					Declarção</a></li>
 
 		</ul>
-		<!-- <ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle " href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Semestre </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">2018/01</a> <a
-							class="dropdown-item" href="#">2018/02</a> <a
-							class="dropdown-item" href="#">2019/01</a>
-					</div></li>
-			</ul>
- -->
+
 	</div>
 </nav>

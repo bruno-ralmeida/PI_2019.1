@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
 *
-* @author Grupo PI
+* @author Bruno Rocha
 */
 public class Avaliacao {
 	

@@ -41,7 +41,9 @@ public class TurmaDAO {
 	public Turma load(int id) { // retorna uma Grupo com base no ID dela
 		Connection conn = new ConnectionFactory().getConnection();
 
-		String sqlComand = "SELECT * FROM turma WHERE id=?";
+		String sqlComand = "SELECT * FROM turma" + 
+							"INNER JOIN turma_aluno" + 
+							"ON turma.id = ?;";
 
 		Turma turma = null;
 
