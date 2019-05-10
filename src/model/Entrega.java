@@ -4,7 +4,7 @@ import java.sql.Date;
 
 /**
 *
-* @author Bruno Rocha
+* @author Grupo PI
 */
 public class Entrega {
 
@@ -15,6 +15,11 @@ public class Entrega {
 	
 	public Entrega() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Entrega(int id, Date dtCadastro) {
+		this.id = id;
+		this.dataCadastro = dtCadastro;
 	}
 		
 	public Entrega(Grupo grupo, Atividade atividade, int id, Date dtCadastro) {
@@ -55,5 +60,11 @@ public class Entrega {
 	public void setDtCadastro(Date dtCadastro) {
 		this.dataCadastro = dtCadastro;
 	}
+
+	@Override
+	public String toString() {
+		return "Entrega [dataCadastro=" + dataCadastro + "]";
+	}
+	
 	
 }

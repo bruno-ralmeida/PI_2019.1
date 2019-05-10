@@ -24,28 +24,14 @@
 	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 3%">
 
-
-		<form action="ListarGrupoController.do" method="post">
+		<form action="ListarAlunosController.do" method="post">
 			<div id="top" class="row">
 				<div class="col-md-3">
 					<h3>
-						<strong>Selecione um Grupo </strong>
+						<strong>Avaliar Aluno </strong>
 					</h3>
 				</div>
-
-				<!-- <div class="col-md-6">
-					<div class="input-group h2">
-						<input name="bProf" class="form-control" id="search" type="text"
-							placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
-						<span class="input-group-btn" style="padding-left: 5%">
-							<button class="btn btn-default" type="submit" name="acao"
-								value="buscar">
-								<span class="glyphicon glyphicon-search">Buscar</span>
-							</button>
-						</span>
-					</div>
-				</div> -->
-
+				<input name="data" class="form-control" id="data" type="date" style="width: 20%">
 			</div>
 			<!-- /#top -->
 		</form>
@@ -58,27 +44,30 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Professor</th>
-							<th>Número do grupo</th>
-							<th>Nome do Grupo</th>
-							<th class="actions">Ações</th>
+							<th>RA</th>
+							<th>Nome</th>
+							<th>E-mail</th>
+							<th>Nota</th>
+							<th>Descrição</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="grupo" items="${listGrupo }">
+						<c:forEach var="u" items="${listAluno }">
 							<tr>
-								<td>${grupo.id }</td>
-								<td>${grupo.orientador }</td>
-								<td>${grupo.numero }</td>
-								<td>${grupo.nome }</td>
-								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
-									style="padding: 2%">Selecionar</a></td>
+								<td>${u.id }</td>
+								<td>${u.ra }</td>
+								<td>${u.nome }</td>
+								<td>${u.email }</td>
+								<td style="width: 15%"><input name="nota"
+									class="form-control" id="search" type="number" min=0 max=10></td>
+								<td><input name="desc" class="form-control" id="nota"
+									type="text"></td>
 							</tr>
 						</c:forEach>
 					<thead>
 					</tbody>
 				</table>
+				<a class="btn btn-success btn-xs" href="ManterAvaliacaoController.do?acao=Nota&id=${u.id }">Avaliar</a>
 			</div>
 		</div>
 </body>

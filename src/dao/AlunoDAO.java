@@ -145,7 +145,7 @@ public class AlunoDAO extends UsuarioDAO {
 		ArrayList<Aluno> lista = new ArrayList<>();
 		Aluno aluno = null;
 		
-		String sqlComand = 	"SELECT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g "
+		String sqlComand = 	"SELECT DISTINCT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g "
 								+ "JOIN turma_aluno t ON g.id = t.grupo_id "
 								+ "JOIN aluno a ON t.aluno_id = a.aluno_id "
 								+ "JOIN usuario u ON a.aluno_id = u.id WHERE g.id = ?";

@@ -77,4 +77,12 @@ public class Grupo {
 	public void setAlunos(ArrayList<Aluno> lstAlunos) {
 		this.lstAlunos = lstAlunos;
 	}
+
+	@Override
+	public String toString() {
+		return "Grupo [numero=" + numero + ", nome=" + nome + "]";
+	}
+	
+	
+	
 }

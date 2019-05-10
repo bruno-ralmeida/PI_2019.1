@@ -19,18 +19,12 @@
 <title>Cadastro de Professor</title>
 </head>
 <body>
-
-
 	<div class="container" style="padding-top: 3%">
 		<div class="row">
 			<div class="col-lg-12  mt-30">
-
-
 				<h1>Cadastro Professor</h1>
-
 				<form action="ManterProfessorController.do" method="post"
 					class="form-horizontal" name="cad">
-
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputName">Nome</label> <input id="inputName"
@@ -53,7 +47,7 @@
 							<div class="form-group col-md-0">
 								<label for="inputPassword4">Senha</label> <input
 									id="inputPassword4" type="password" class="form-control"
-									name="senha" style="width: 20%">
+									name="senha" style="width: 20%" required="required">
 							</div>
 							<div class="form-group">
 								<div class="custom-control custom-checkbox">

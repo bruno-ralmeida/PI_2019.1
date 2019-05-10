@@ -31,10 +31,8 @@ public class GrupoDAO {
 				grupo.setNome((rs.getString("nome")));
 				grupo.setOrientador(professorDAO.load(rs.getInt("orientador_id")));
 			}
-			System.out.println("Grupo fui carregado: ");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Grupo não fui carregado erro: " + e);
 		} finally {
 			try {
 				conn.close();

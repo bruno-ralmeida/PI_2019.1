@@ -89,5 +89,12 @@ public class Atividade {
 	public void setDtFim(Date dtFim) {
 		this.dataFim = dtFim;
 	}
+
+	@Override
+	public String toString() {
+		return "Atividade [id=" + id + ", descricao=" + descricao + "]";
+	}
+	
+	
 	
 }

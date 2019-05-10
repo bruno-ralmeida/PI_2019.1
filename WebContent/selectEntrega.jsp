@@ -24,28 +24,13 @@
 	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 3%">
 
-
-		<form action="ListarGrupoController.do" method="post">
+		<form action="ListarEntregaController.do" method="post">
 			<div id="top" class="row">
 				<div class="col-md-3">
 					<h3>
-						<strong>Selecione um Grupo </strong>
+						<strong>Selecione uma Entrega </strong>
 					</h3>
 				</div>
-
-				<!-- <div class="col-md-6">
-					<div class="input-group h2">
-						<input name="bProf" class="form-control" id="search" type="text"
-							placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
-						<span class="input-group-btn" style="padding-left: 5%">
-							<button class="btn btn-default" type="submit" name="acao"
-								value="buscar">
-								<span class="glyphicon glyphicon-search">Buscar</span>
-							</button>
-						</span>
-					</div>
-				</div> -->
-
 			</div>
 			<!-- /#top -->
 		</form>
@@ -58,21 +43,19 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Professor</th>
-							<th>Número do grupo</th>
-							<th>Nome do Grupo</th>
+							<th>Grupo</th>
+							<th>Atividade</th>
 							<th class="actions">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="grupo" items="${listGrupo }">
+						<c:forEach var="entrega" items="${listEntrega }">
 							<tr>
-								<td>${grupo.id }</td>
-								<td>${grupo.orientador }</td>
-								<td>${grupo.numero }</td>
-								<td>${grupo.nome }</td>
+								<td>${entrega.id }</td>
+								<td>${entrega.grupo }</td>
+								<td>${entrega.atividade }</td>
 								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
+									href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }"
 									style="padding: 2%">Selecionar</a></td>
 							</tr>
 						</c:forEach>

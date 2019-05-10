@@ -11,7 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AlunoDAO;
+import dao.EntregaDAO;
+import model.Aluno;
+import model.Entrega;
 import model.Grupo;
+import service.AlunoService;
+import service.EntregaService;
 import service.GrupoService;
 
 /**
@@ -20,6 +26,8 @@ import service.GrupoService;
 @WebServlet("/ManterAvaliacaoController.do")
 public class ManterAvaliacaoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private RequestDispatcher view;
+	private RequestDispatcher view2;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,26 +54,51 @@ public class ManterAvaliacaoController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String pId = request.getParameter("id");
 		String pAcao = request.getParameter("acao");
-		int pId = Integer.parseInt(request.getParameter("id"));
-		RequestDispatcher view = null;
+		
+		
+		int id = -1;
+	
+		try {
+		
+			id = Integer.parseInt(pId);
+			
+		} catch(Exception e) {
+			
+		}
+		
+		
+		HttpSession session = request.getSession();
 		GrupoService gs = new GrupoService();
-
+		AlunoService as = new AlunoService();
+		EntregaService es = new EntregaService();
+		
+		
+		
 		if (pAcao.equals("Turma")) {
 			ArrayList<Grupo> listGrupo = null;
-			
-			HttpSession session = request.getSession();
-
-			listGrupo = gs.loadGrupoByTurma(pId);
+			session = request.getSession();
+			listGrupo = gs.loadGrupoByTurma(id);
 			session.setAttribute("listGrupo", listGrupo);
-
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupo.jsp");
 			dispatcher.forward(request, response);
-
-			// doGet(request, response);
+		} else if (pAcao.equals("Grupo")) {
+			ArrayList<Entrega> listEntrega = null;
+			session = request.getSession();
+			listEntrega = es.loadTodos(id);
+			session.setAttribute("listEntrega", listEntrega);		
+			RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
+			dispatcher.forward(request, response);
+		} else if (pAcao.equals("Entrega")) {
+			ArrayList<Aluno> listAluno = null;
+			listAluno = as.grupoAlunos(6);
+			session.setAttribute("listAluno", listAluno);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("selectAluno.jsp");
+			dispatcher.forward(request, response);
 		}
-		view.forward(request, response);
+		
 	}
 
 }
