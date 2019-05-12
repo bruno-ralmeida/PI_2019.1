@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Home</title>
+<title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -24,20 +24,20 @@
 	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 3%">
 
-		<form action="ListarAlunosController.do" method="post">
+		<form action="ManterAvaliacaoController.do" method="post">
 			<div id="top" class="row">
+			
 				<div class="col-md-3">
 					<h3>
 						<strong>Avaliar Aluno </strong>
 					</h3>
 				</div>
-				<input name="data" class="form-control" id="data" type="date" style="width: 20%">
+				<input name="dataDig" class="form-control" type="date" style="width: 20%"  >
 			</div>
 			<!-- /#top -->
-		</form>
+		
 		<hr />
 		<div id="list" class="row">
-
 
 			<div class="table-responsive col-md-12">
 				<table class="table table-striped">
@@ -58,18 +58,26 @@
 								<td>${u.ra }</td>
 								<td>${u.nome }</td>
 								<td>${u.email }</td>
-								<td style="width: 15%"><input name="nota"
-									class="form-control" id="search" type="number" min=0 max=10></td>
-								<td><input name="desc" class="form-control" id="nota"
-									type="text"></td>
+								<td style="width: 15%"><input name="nota${u.id }"
+									class="form-control" type="number" min="0" max="10"></td>
+								<td><input name="comentario" class="form-control" type="text"></td>
+								
 							</tr>
 						</c:forEach>
 					<thead>
 					</tbody>
 				</table>
-				<a class="btn btn-success btn-xs" href="ManterAvaliacaoController.do?acao=Nota&id=${u.id }">Avaliar</a>
+				</div>
+				</div>
+				</form>
+				<div class="row" id="all">
+				<input  class="form-control" type=text placeholder="Comentar para todos" id="comentAll">
+				<input class="form-control" type="number" min="0" max="10" placeholder="Avaliar todos" id="notaAll">
+				
+				<button type="submit" class="btn btn-success" name="acao" value="avaliacao" >Avaliar</button>
+				</div>
 			</div>
-		</div>
+			
 </body>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>

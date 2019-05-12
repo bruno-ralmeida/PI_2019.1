@@ -9,8 +9,7 @@
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-
-<link href="assets/style/utils.css" rel="stylesheet" />
+<link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
 <meta charset="ISO-8859-1">
 <title>Detalhes</title>
 </head>

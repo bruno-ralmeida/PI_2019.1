@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Home</title>
+<title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -42,20 +42,23 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Grupo</th>
 							<th>Atividade</th>
 							<th class="actions">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
+					
 						<c:forEach var="entrega" items="${listEntrega }">
 							<tr>
-								<td>${entrega.id }</td>
-								<td>${entrega.grupo }</td>
+								<input type="hidden" value=${entrega.id }>
+								<td>${entrega.grupo.id }</td>
 								<td>${entrega.atividade }</td>
+								
+								
+								
 								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }"
+									href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }&idEntrega=${entrega.id }&idGrupo=${entrega.grupo.id }"
 									style="padding: 2%">Selecionar</a></td>
 							</tr>
 						</c:forEach>

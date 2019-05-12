@@ -49,7 +49,7 @@ public class ListarProfessorController extends HttpServlet {
 			lista = ps.findAll();
 			session.setAttribute("lista", lista);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("professor.jsp");
 		dispatcher.forward(request, response);
 	}
 

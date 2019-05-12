@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Home</title>
+<title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -56,7 +56,6 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Sigla</th>
 							<th>Semestre Letivo</th>
 							<th>Ano Letivo</th>
@@ -64,9 +63,10 @@
 						</tr>
 					</thead>
 					<tbody>
+						
 						<c:forEach var="turma" items="${listTurma }">
 							<tr>
-								<td>${turma.id }</td>
+								<input type="hidden" value= ${turma.id }>
 								<td>${turma.sigla }</td>
 								<td>${turma.semestreLetivo }</td>
 								<td>${turma.anoLetivo }</td>

@@ -1,39 +1,49 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import connection.ConnectionFactory;
 import model.Avaliacao;
-import model.Banca;
+import model.Entrega;
 
 public class AvaliacaoDAO {
 	
 	/**
      * CRUD: Insere banca
+     * @param conn: Connection
      */
-	public void createAvaliacao(Avaliacao avaliacao) {
+	
+	
+	
+	public void createAvaliacao(Avaliacao avaliacao, int idGrupo, int id) {
 		Connection conn = new ConnectionFactory().getConnection();
+	
+		String sql = "INSERT INTO Avaliacao (entrega_id, turma_aluno_id, nota, comentarios, dt_avaliacao) VALUES (?, ?, ?, ?, ?)";
 		
-		String sqlComand = "INSERT INTO Banca (nota, data_avaliacao, comentarios) VALUES (?, ?, ?)";
-		
-		try(PreparedStatement stm = conn.prepareStatement(sqlComand, Statement.RETURN_GENERATED_KEYS)){
-			stm.setDouble(1, avaliacao.getNota());
-			stm.setDate(2, (java.sql.Date) avaliacao.getDataAvaliacao());
-			stm.setString(3, avaliacao.getComentarios());
+		try(PreparedStatement stm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+
+				stm.setInt(1, avaliacao.getEntrega().getId());
+				stm.setInt(2,id);
+				stm.setDouble(3, avaliacao.getNota());
+				stm.setString(4, avaliacao.getComentarios());
+				stm.setDate(5, (Date) avaliacao.getDataAvaliacao());	
+			
 			
 			int affectedRows = stm.executeUpdate();
 
 	        if (affectedRows == 0) {
-	            throw new SQLException("Criação de banca falhou. Nenhuma linha criada");
+	            throw new SQLException("Criaï¿½ï¿½o de banca falhou. Nenhuma linha criada");
 	        }
 
 	        try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
 	        	if (generatedKeys.next()) avaliacao.setId((int) generatedKeys.getLong(1));
-	        	else throw new SQLException("Criação de banca falhou. Nenhum id criado");
+	        	else throw new SQLException("Criaï¿½ï¿½o de banca falhou. Nenhum id criado");
 	        }
 	        
 		}catch (SQLException e) {
@@ -43,44 +53,52 @@ public class AvaliacaoDAO {
 	
 	/**
      * CRUD: Atualiza banca
+     * @param conn: Connection
      */
-	public void updateAvaliacao(Avaliacao avaliacao) {
+	public void updateAvaliacao(ArrayList<Avaliacao> listaAvaliacao) {
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "UPDATE Avaliacao SET nota = ?, data_avaliacao = ?, comentarios = ?, WHERE id = ?";
+		String sqlComand = "UPDATE Avaliacao SET nota = ?, comentarios = ? WHERE id = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand, Statement.RETURN_GENERATED_KEYS)){
-			stm.setDouble(1, avaliacao.getNota());
-			stm.setDate(2, (java.sql.Date) avaliacao.getDataAvaliacao());
-			stm.setString(3, avaliacao.getComentarios());
-			
-			stm.executeUpdate();
+			for(int i = 0; i < listaAvaliacao.size(); i++) {
+				System.out.println("ATUALIAZANDO DAO " + listaAvaliacao.get(i).getNota());
+				stm.setDouble(1, listaAvaliacao.get(i).getNota());
+				stm.setString(2, listaAvaliacao.get(i).getComentarios());
+				stm.setInt(3, listaAvaliacao.get(i).getId());
+				stm.executeUpdate();
+			}	
+			System.out.println("Alterado com sucesso");
 		}catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Erro ao alterar: " + e);
 		}
 		
 	}
 	
 	/**
-     * CRUD: Exclui Banca
+     * CRUD: Deleta avaliacao
+     * @param conn: Connection
      */
-	public void deleteAvaliacao(Avaliacao avaliacao) {
+	public void deleteAvaliacao(int entregaId) {
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "DELETE FROM avaliacao WHERE Id = ?";
+		String sqlComand = "DELETE FROM avaliacao WHERE entrega_id = ?";
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand, Statement.RETURN_GENERATED_KEYS)){
-			stm.setInt(1, avaliacao.getId());
+			stm.setInt(1, entregaId);
 			stm.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public Avaliacao loadAvaliacao(int id) {
+	public Avaliacao loadPorId(int id) {
 		Avaliacao avaliacao = new Avaliacao();
+		AlunoDAO alunoDAO = new AlunoDAO();
+		EntregaDAO entregaDAO = new EntregaDAO();
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT nota, dt_avaliacao, comentario FROM avaliacao WHERE avaliacao.id = ?";
+		String sqlComand = "SELECT * FROM avaliacao WHERE id = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			
@@ -91,6 +109,9 @@ public class AvaliacaoDAO {
 				avaliacao.setNota(rs.getDouble("Nota"));
 				avaliacao.setDataAvaliacao(rs.getDate("dt_avaliacao"));
 				avaliacao.setComentarios(rs.getString("Comentario"));
+				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("turma_aluno_id")));
+				avaliacao.setEntrega(entregaDAO.loadEntrega(rs.getInt("entrega_id")));
+				
 			} 
 		
 		}catch(SQLException e) {
@@ -98,4 +119,65 @@ public class AvaliacaoDAO {
 		}
 		return avaliacao;
 	}
+	
+	public ArrayList<Avaliacao> loadEntregaId(int entrega) {
+		AlunoDAO alunoDAO = new AlunoDAO();
+		EntregaDAO entregaDAO = new EntregaDAO();
+		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
+		Connection conn = new ConnectionFactory().getConnection();
+		
+		String sqlComand = "SELECT * FROM avaliacao WHERE entrega_id = ?";
+		
+		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
+			
+			stm.setInt(1,entrega);
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao.setId(rs.getInt("id"));
+				avaliacao.setNota(rs.getDouble("Nota"));
+				avaliacao.setDataAvaliacao(rs.getDate("dt_avaliacao"));
+				avaliacao.setComentarios(rs.getString("comentarios"));
+				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("turma_aluno_id")));
+				avaliacao.setEntrega(entregaDAO.loadEntrega(rs.getInt("entrega_id")));
+				lista.add(avaliacao);
+			} 
+
+			System.out.println("Dados carregados com sucesso");
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println("Dados carregados SEM sucesso erro: " + e);
+		}
+		return lista;
+	}
+	
+	
+	//Passando um idEntrega e idGrupo ele verifica se essa entrega ja foi avaliada
+	public int verrifica(Entrega entrega) {
+		Connection conn = new ConnectionFactory().getConnection();
+		int i = 0;
+		
+		String sqlComand = 	"SELECT * from avaliacao WHERE entrega_id = ?";
+				
+		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
+			
+			stm.setInt(1, entrega.getId());
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				int resp = rs.getInt("id");
+				if(resp > 0) {
+					i = 1;
+				}
+			} 
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+	
+	
+	
 }

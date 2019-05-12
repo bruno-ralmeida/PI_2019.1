@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Home</title>
+<title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -32,20 +32,6 @@
 						<strong>Selecione um Grupo </strong>
 					</h3>
 				</div>
-
-				<!-- <div class="col-md-6">
-					<div class="input-group h2">
-						<input name="bProf" class="form-control" id="search" type="text"
-							placeholder="Pesquisar Grupos (deixe vazio para trazer todos)">
-						<span class="input-group-btn" style="padding-left: 5%">
-							<button class="btn btn-default" type="submit" name="acao"
-								value="buscar">
-								<span class="glyphicon glyphicon-search">Buscar</span>
-							</button>
-						</span>
-					</div>
-				</div> -->
-
 			</div>
 			<!-- /#top -->
 		</form>
@@ -57,7 +43,6 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Professor</th>
 							<th>Número do grupo</th>
 							<th>Nome do Grupo</th>
@@ -65,9 +50,11 @@
 						</tr>
 					</thead>
 					<tbody>
+					
 						<c:forEach var="grupo" items="${listGrupo }">
+						<c:if test="${usuario.id == grupo.orientador.id }">
 							<tr>
-								<td>${grupo.id }</td>
+								<input type="hidden" value=${grupo.id }>
 								<td>${grupo.orientador }</td>
 								<td>${grupo.numero }</td>
 								<td>${grupo.nome }</td>
@@ -75,7 +62,9 @@
 									href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
 									style="padding: 2%">Selecionar</a></td>
 							</tr>
+							</c:if>
 						</c:forEach>
+						
 					<thead>
 					</tbody>
 				</table>

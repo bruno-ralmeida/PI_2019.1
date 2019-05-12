@@ -75,5 +75,10 @@ public class Avaliacao {
 		this.comentarios = comentarios;
 	}
 
+	public void setAluno(Aluno loadTurmaAluno) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

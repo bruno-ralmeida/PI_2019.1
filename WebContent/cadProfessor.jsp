@@ -14,7 +14,7 @@
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-<link href="assets/style/utils.css" rel="stylesheet" />
+<link href="assets/style/bootstrap/utils.css" rel="stylesheet" />
 
 <title>Cadastro de Professor</title>
 </head>
@@ -60,7 +60,7 @@
 							<input type="reset" class="btn btn-secondary"
 								value="Limpar Campos" style="width: 20%">
 							<button type="submit" class="btn btn-primary" name="acao"
-								value="Criar"  style="width: 20%">Salvar</button>
+								value="Criar" style="width: 20%">Salvar</button>
 				</form>
 			</div>
 		</div>
