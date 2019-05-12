@@ -21,8 +21,6 @@
 						String redirectURL = "localhost:8080/PI_2019.1/login.jsp";
 						response.sendRedirect(redirectURL);
 					%>
-
-
 				</c:if>
 
 				<!-- LOGO -->
