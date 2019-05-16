@@ -16,7 +16,7 @@ public class ConnectionFactory {
         }
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         String servidor = "localhost";
         String porta = "3306";
         String database = "mydb";

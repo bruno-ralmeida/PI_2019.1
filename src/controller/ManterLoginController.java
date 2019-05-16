@@ -52,23 +52,25 @@ public class ManterLoginController extends HttpServlet {
 		
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();	
+		ProfessorService ps = new ProfessorService();
+		Professor professor = ps.load(id);
 		
 		if(id > 0) {
-			ProfessorService ps = new ProfessorService();
-			Professor professor = ps.load(id);
 			
-			//verifica se o usuario é um professor
+			//Verificação de professor.
 			if(professor != null) {
 				session.setAttribute("usuario", professor);
 				view = request.getRequestDispatcher("index.jsp");
 				view.forward(request, response);
+			}else {
+				response.sendRedirect("login.jsp");
+				
 			}
-		}	
-		if(id <= 0) {
-			
+		}else {
 			response.sendRedirect("login.jsp");
 			
-		}
+		}	
+		
 			
 		
 	}

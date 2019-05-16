@@ -21,6 +21,7 @@ import model.Aluno;
 import model.Avaliacao;
 import model.Entrega;
 import model.Grupo;
+import model.Professor;
 import service.AlunoService;
 import service.AvaliacaoService;
 import service.EntregaService;
@@ -63,7 +64,9 @@ public class ManterAvaliacaoController extends HttpServlet {
 		String pIdEntrega = request.getParameter("idEntrega");
 		String pIdGrupo = request.getParameter("idGrupo");
 		String pAcao = request.getParameter("acao");
-		String pData = request.getParameter("dataDig");
+		String sNota = null;
+		String com = null;
+		ArrayList<Aluno> lista = null;
 
 		listAluno = null;
 		RequestDispatcher view = null;
@@ -100,19 +103,48 @@ public class ManterAvaliacaoController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("Entrega")) {
+			session.setAttribute("idEntrega", idEntrega);
 			listAluno = as.grupoAlunos(idGrupo);
+			session.setAttribute("idGrupo", idGrupo);
 			session.setAttribute("listAluno", listAluno);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacaoAluno.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("avaliacao")) {
-			System.out.println(pData);
-			
-			// enviar para o jsp
-			view = request.getRequestDispatcher("index.jsp");
-			view.forward(request, response);
+			lista = (ArrayList<Aluno>) session.getAttribute("listAluno");
+			ArrayList<Avaliacao> listAvaliacao = null;
+			for (int i = 0; i < lista.size(); i++) {
+				int idT = lista.get(i).getId();
+				sNota = (String) request.getParameter("n" + idT);
+				com = (String) request.getParameter("comentario" + idT);
+				double dNota = Double.parseDouble(sNota);
 
+				// AVALIACAO MODEL
+				Avaliacao ava = new Avaliacao();
+				int idGrupoSel = (int) session.getAttribute("idGrupo");
+				int idEntregaSel = (int) session.getAttribute("idEntrega");
+				
+				ava.setGrupo(gs.load(idGrupoSel));
+				ava.setEntrega(es.loadEntrega(idEntregaSel));
+				ava.setDataAvaliacao(pegarData());
+				ava.setComentarios(com);
+
+				
+				
+				// AVALIACAO SERVICE
+				AvaliacaoService aS = new AvaliacaoService();
+
+			}
 		}
-
+		// enviar para o jsp
+		view = request.getRequestDispatcher("index.jsp");
+		view.forward(request, response);
 	}
 
+	public static Date pegarData() {
+		java.util.Date dataUtil;
+		Date data = new Date(System.currentTimeMillis());
+		dataUtil = data;
+		java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+		return dataSql;
+	}
 }
