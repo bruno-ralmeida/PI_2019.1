@@ -34,6 +34,7 @@ import service.GrupoService;
 public class ManterAvaliacaoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Aluno> listAluno;
+	private ArrayList<Avaliacao> listAvaliacao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -66,7 +67,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 		String pAcao = request.getParameter("acao");
 		String sNota = null;
 		String com = null;
-		ArrayList<Aluno> lista = null;
+		ArrayList<Aluno> listAluno = null;
 
 		listAluno = null;
 		RequestDispatcher view = null;
@@ -110,33 +111,46 @@ public class ManterAvaliacaoController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacaoAluno.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("avaliacao")) {
-			lista = (ArrayList<Aluno>) session.getAttribute("listAluno");
-			ArrayList<Avaliacao> listAvaliacao = null;
-			for (int i = 0; i < lista.size(); i++) {
-				int idT = lista.get(i).getId();
+			listAluno = (ArrayList<Aluno>) session.getAttribute("listAluno");
+			ArrayList<Avaliacao> listAvaliacao = new ArrayList<Avaliacao>();
+			int idGrupoSel = (int) session.getAttribute("idGrupo");
+			int idEntregaSel = (int) session.getAttribute("idEntrega");
+
+			for (int i = 0; i < listAluno.size(); i++) {
+				int idT = listAluno.get(i).getId();
 				sNota = (String) request.getParameter("n" + idT);
 				com = (String) request.getParameter("comentario" + idT);
 				double dNota = Double.parseDouble(sNota);
-
 				// AVALIACAO MODEL
 				Avaliacao ava = new Avaliacao();
-				int idGrupoSel = (int) session.getAttribute("idGrupo");
-				int idEntregaSel = (int) session.getAttribute("idEntrega");
-				
-				ava.setGrupo(gs.load(idGrupoSel));
 				ava.setEntrega(es.loadEntrega(idEntregaSel));
+				ava.setGrupo(gs.load(idGrupoSel));
 				ava.setDataAvaliacao(pegarData());
 				ava.setComentarios(com);
-
-				
-				
-				// AVALIACAO SERVICE
-				AvaliacaoService aS = new AvaliacaoService();
+				ava.setNota(dNota);
+				ava.setAluno(as.load(idT));
+				listAvaliacao.add(ava);
 
 			}
+
+			// AVALIACAO SERVICE
+			AvaliacaoService aS = new AvaliacaoService();
+			aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
+			
+			ArrayList<Avaliacao> lista = new ArrayList<>();
+			// carrega os objetos para mostrar na tela
+			for (int i = 0; i < listAvaliacao.size(); i++) {
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao = aS.selectId(listAvaliacao.get(i).getId());
+				lista.add(avaliacao);
+				
+			}
+			// enviar para o jsp
+			request.setAttribute("listAvaliacao", listAvaliacao);
+			request.setAttribute("idGrupo", idGrupo);
+			view = request.getRequestDispatcher("VisualizarAvaliacao.jsp");
 		}
-		// enviar para o jsp
-		view = request.getRequestDispatcher("index.jsp");
+		
 		view.forward(request, response);
 	}
 
@@ -147,4 +161,5 @@ public class ManterAvaliacaoController extends HttpServlet {
 		java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
 		return dataSql;
 	}
+
 }

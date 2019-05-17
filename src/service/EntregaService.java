@@ -16,11 +16,11 @@ public class EntregaService implements Serializable{
 	}
 	
 	public Entrega loadEntrega(int id) {
-		return dao.loadEntrega(id);
+		return dao.selectEntrega(id);
 	}
 	
 	public ArrayList<Entrega> loadTodos(int id){
-		return dao.loadTodos(id);
+		return dao.selectAll(id);
 	}
 	
 }

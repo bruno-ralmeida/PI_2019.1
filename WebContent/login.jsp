@@ -22,7 +22,7 @@
 <body style="background-color: #f0f0f0">
 	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 10%;">
-		<div class="container"padding: 4%; ">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-4 col-md-offset-12" style="margin: 0 auto;">
 					<div class="panel panel-default">
@@ -51,6 +51,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 <script src="assets/scripts/jquery.min.js"></script>

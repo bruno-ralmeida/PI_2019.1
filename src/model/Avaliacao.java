@@ -14,9 +14,9 @@ public class Avaliacao {
 	private Grupo grupo;
 	private Date dataAvaliacao;
 	private String comentarios;
+	private Aluno aluno;
 	
 	public Avaliacao() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Avaliacao(Entrega entrega, Grupo grupo, int nota, Date dataAvaliacao, String comentarios) {
@@ -74,11 +74,21 @@ public class Avaliacao {
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
 	}
-
-	public void setAluno(Aluno loadTurmaAluno) {
-		// TODO Auto-generated method stub
-		
+	
+	public Aluno getAluno() {
+		return aluno;
 	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	@Override
+	public String toString() {
+		return "Avaliacao [id=" + id + ", nota=" + nota + ", entrega=" + entrega + ", grupo=" + grupo
+				+ ", dataAvaliacao=" + dataAvaliacao + ", comentarios=" + comentarios + ", aluno=" + aluno + "]";
+	}
+		
 
 	
 }

@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="model.Turma"%>
 
-<<<<<<< HEAD
 <link href="assets/style/bootstrap/css/estilo.css"/>
 <nav class="navbar navbar-expand-md " style="background-color: #000088;">
   <a class="navbar-brand" href="index.jsp"><img src="Img/LogoUsjt.png"/></a>
@@ -36,6 +35,7 @@
         <a class="nav-link" href="#">Declaração</a>
       </li>
     </ul>
+    <!-- USER LOG -->
      </div>
     <ul class="nav justify-content-end">
     <li class="nav-item dropdown">
@@ -47,5 +47,4 @@
         </div>
     </li>
     </ul>
-   
 </nav>

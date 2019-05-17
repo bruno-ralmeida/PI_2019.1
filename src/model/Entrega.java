@@ -63,8 +63,8 @@ public class Entrega {
 
 	@Override
 	public String toString() {
-		return "Entrega [dataCadastro=" + dataCadastro + "]";
+		return "Entrega [id=" + id + ", grupo=" + grupo + ", atividade=" + atividade + ", dataCadastro=" + dataCadastro
+				+ "]";
 	}
-	
-	
+
 }

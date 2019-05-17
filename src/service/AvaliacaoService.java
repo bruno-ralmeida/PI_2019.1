@@ -18,13 +18,13 @@ public class AvaliacaoService implements Serializable {
 		dao = new AvaliacaoDAO();
 	}
 
-	public void createAvaliacao(ArrayList<Avaliacao> lstAvaliacao, int idGrupo, ArrayList<Aluno> listaAluno) {
+	public void insertAvaliacao(ArrayList<Avaliacao> lstAvaliacao, int idGrupo, ArrayList<Aluno> listaAluno) {
 		AlunoDAO AlunoDAO = new AlunoDAO();
 		ArrayList<Integer> lista = AlunoDAO.turmaAluno(idGrupo, listaAluno);
 
 		for (int i = 0; i < lstAvaliacao.size(); i++) {
 			int id = lista.get(i);
-			dao.createAvaliacao(lstAvaliacao.get(i), idGrupo, id);
+			dao.insertAvaliacao(lstAvaliacao.get(i), idGrupo, id);
 		}
 	}
 
@@ -39,12 +39,12 @@ public class AvaliacaoService implements Serializable {
 
 	public ArrayList<Avaliacao> load(int idEntrega) {
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
-		lista = dao.loadEntregaId(idEntrega);
+		lista = dao.selectEntrega(idEntrega);
 		return lista;
 	}
 
-	public Avaliacao loadPorId(int id) {
-		return dao.loadPorId(id);
+	public Avaliacao selectId(int id) {
+		return dao.selectId(id);
 	}
 
 	// Verifica se o professor logado pode avaliar o grupo

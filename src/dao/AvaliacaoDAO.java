@@ -21,7 +21,7 @@ public class AvaliacaoDAO {
 	
 	
 	
-	public void createAvaliacao(Avaliacao avaliacao, int idGrupo, int id) {
+	public void insertAvaliacao(Avaliacao avaliacao, int idGrupo, int id) {
 		Connection conn = new ConnectionFactory().getConnection();
 	
 		String sql = "INSERT INTO Avaliacao (entrega_id, turma_aluno_id, nota, comentarios, dt_avaliacao) VALUES (?, ?, ?, ?, ?)";
@@ -38,7 +38,7 @@ public class AvaliacaoDAO {
 			int affectedRows = stm.executeUpdate();
 
 	        if (affectedRows == 0) {
-	            throw new SQLException("Cria��o de banca falhou. Nenhuma linha criada");
+	            throw new SQLException("Erro na avaliação. Nenhuma linha criada");
 	        }
 
 	        try (ResultSet generatedKeys = stm.getGeneratedKeys()) {
@@ -92,7 +92,7 @@ public class AvaliacaoDAO {
 		}
 	}
 
-	public Avaliacao loadPorId(int id) {
+	public Avaliacao selectId(int id) {
 		Avaliacao avaliacao = new Avaliacao();
 		AlunoDAO alunoDAO = new AlunoDAO();
 		EntregaDAO entregaDAO = new EntregaDAO();
@@ -110,7 +110,7 @@ public class AvaliacaoDAO {
 				avaliacao.setDataAvaliacao(rs.getDate("dt_avaliacao"));
 				avaliacao.setComentarios(rs.getString("Comentario"));
 				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("turma_aluno_id")));
-				avaliacao.setEntrega(entregaDAO.loadEntrega(rs.getInt("entrega_id")));
+				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("entrega_id")));
 				
 			} 
 		
@@ -120,7 +120,7 @@ public class AvaliacaoDAO {
 		return avaliacao;
 	}
 	
-	public ArrayList<Avaliacao> loadEntregaId(int entrega) {
+	public ArrayList<Avaliacao> selectEntrega(int entrega) {
 		AlunoDAO alunoDAO = new AlunoDAO();
 		EntregaDAO entregaDAO = new EntregaDAO();
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
@@ -140,7 +140,7 @@ public class AvaliacaoDAO {
 				avaliacao.setDataAvaliacao(rs.getDate("dt_avaliacao"));
 				avaliacao.setComentarios(rs.getString("comentarios"));
 				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("turma_aluno_id")));
-				avaliacao.setEntrega(entregaDAO.loadEntrega(rs.getInt("entrega_id")));
+				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("entrega_id")));
 				lista.add(avaliacao);
 			} 
 

@@ -10,15 +10,19 @@ import connection.ConnectionFactory;
 import model.Atividade;
 import model.Entrega;
 import model.Grupo;
+import service.AtividadeService;
+import service.GrupoService;
 import dao.AtividadeDAO;
 
 public class EntregaDAO {
 
-	public Entrega loadEntrega(int id) {
+	public Entrega selectEntrega(int id) {
 		Entrega entrega= new Entrega();
+		GrupoService gs = new GrupoService();
+		AtividadeService as = new AtividadeService();
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT id, dt_cadastro FROM entrega WHERE entrega.id = ?";
+		String sqlComand = "SELECT * FROM entrega WHERE entrega.id = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			
@@ -26,6 +30,8 @@ public class EntregaDAO {
 			ResultSet rs = stm.executeQuery();
 			
 			if(rs.next()) {
+				entrega.setGrupo(gs.load(rs.getInt("grupo_id")));
+				entrega.setAtividade(as.load(rs.getInt("atividade_id")));
 				entrega.setId(rs.getInt("id"));
 				entrega.setDtCadastro(rs.getDate("dt_cadastro"));
 			} 
@@ -41,7 +47,7 @@ public class EntregaDAO {
 	 * @param grupo
 	 * @return returna todas as entregas de um grupo
 	 */
-	public ArrayList<Entrega> loadTodos(int id){
+	public ArrayList<Entrega> selectAll(int id){
 		ArrayList<Entrega> listaEntrega= new ArrayList<Entrega>();
 		AtividadeDAO dao = new AtividadeDAO();
 		GrupoDAO grupoDAO = new GrupoDAO();
