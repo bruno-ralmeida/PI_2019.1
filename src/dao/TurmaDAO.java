@@ -75,26 +75,28 @@ public class TurmaDAO {
 		return turma;
 	}
 	
-	public ArrayList<Turma> findAll() {
+	public ArrayList<Turma> selectId(int id) {
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT * FROM turma";
+		String sqlComand = "SELECT DISTINCT turma.id, turma.semestre_letivo, turma.ano_letivo, turma.sigla FROM turma  JOIN turma_aluno a ON turma.id = a.turma_id " + 
+				"						 JOIN grupo g ON a.grupo_id = g.id " + 
+				"						 where g.orientador_id = ?";
 		
 		Turma turma = null;
 		ArrayList<Turma> turmas = new ArrayList<>();
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
-			
+			stm.setInt(1, id);
 	
 			
 			ResultSet rs = stm.executeQuery();
 			
             while(rs.next()) {
-            	int id = rs.getInt("turma.id");
+            	int idT = rs.getInt("turma.id");
             	int semestre = rs.getInt("turma.semestre_letivo");
             	int anoLetivo = rs.getInt("turma.ano_letivo");
             	String sigla =  rs.getString("turma.sigla");
             	
-            	turma = new Turma(id, semestre, anoLetivo, sigla);
+            	turma = new Turma(idT, semestre, anoLetivo, sigla);
             	
             	turma.setId(rs.getInt("turma.id"));
             	turma.setSemestreLetivo(rs.getInt("turma.semestre_letivo"));

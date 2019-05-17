@@ -21,8 +21,8 @@ public class TurmaService implements Serializable {
 		dao.create(turma);
 	}
 	
-	public ArrayList<Turma> findAll() {
-		return dao.findAll();
+	public ArrayList<Turma> selectId(int id) {
+		return dao.selectId(id);
 	}
 	
 

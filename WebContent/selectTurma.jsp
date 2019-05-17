@@ -63,7 +63,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						
 						<c:forEach var="turma" items="${listTurma }">
 							<tr>
 								<input type="hidden" value= ${turma.id }>
