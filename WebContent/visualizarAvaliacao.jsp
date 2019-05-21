@@ -60,33 +60,10 @@
 		</div>
 	</div>
 	
-	<a class="btn btn-primary btn-xs" href="ListarEntregaController?acao=reiniciar&id=${idGrupo }">Voltar</a>	
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-${listAvaliacao[1].id}">Excluir</button>
+	<a class="btn btn-primary btn-xs" href="ListarEntregaController	?acao=reiniciar&id=${idGrupo }">Voltar</a>	
+	<a class="btn btn-info btn-xs" href="ManterAvaliacaoController.do?acao=Editar&idEntrega=${idEntrega }">Editar</a>
 	 
 </div>			
-
-<!-- Modal Delete -->
-	<c:forEach var="professor" items="${listAvaliacao}">
-	    <div class="modal fade" id="modal-${listAvaliacao[1].id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	        <div class="modal-dialog modal-dialog-centered" role="document">
-	            <div class="modal-content">
-	                <div class="modal-body">
-                       Deseja realmente excluir essa avaliacao?
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Cancelar
-                        </button>
-                        <a class="btn btn-primary btn-xs" 
-                           href="ManterAvaliacaoController?acao=Apagar&idEntrega=${listaAvaliacao[1].entrega.id}">
-                           Confirmar
-                        </a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</c:forEach>
-
 
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>

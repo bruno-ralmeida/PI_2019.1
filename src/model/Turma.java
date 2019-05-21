@@ -27,6 +27,12 @@ public class Turma {
 		this.sigla = sigla;
 	}
 
+	public Turma(int semestreLetivo, int ano) {
+		this.semestreLetivo = semestreLetivo;
+		this.anoLetivo = ano;
+	}
+
+
 	public int getId() {
 		return id;
 	}

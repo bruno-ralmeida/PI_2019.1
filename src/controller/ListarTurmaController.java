@@ -15,7 +15,6 @@ import model.Professor;
 import model.Turma;
 import service.ProfessorService;
 import service.TurmaService;
-import service.UsuarioService;
 
 /**
  * Servlet implementation class ListarTurmaController
@@ -38,17 +37,25 @@ public class ListarTurmaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String acao = request.getParameter("acao");
-		HttpSession session = request.getSession();
 		
-		Professor professor =  (Professor) session.getAttribute("usuario");
+		
+		
+		String acao = request.getParameter("acao");
+		int pAno = Integer.parseInt(request.getParameter("ano"));
+		int pSemestre = Integer.parseInt(request.getParameter("semestre"));
 		
 		
 		TurmaService ts = new TurmaService();
 		ArrayList<Turma> listTurma = null;
 		
+		HttpSession session = request.getSession();
+		Professor prof = (Professor) session.getAttribute("usuario");
+		
 		if (acao.equals("buscar")) {
-		listTurma = ts.selectId(professor.getId());
+			System.out.println("prof" + prof.getId());
+			System.out.println("ano: " + pAno );
+			System.out.println("Semestre: " + pSemestre);
+		listTurma = ts.selectTurmaPeriodo(prof.getId(), pAno, pSemestre);
 		session.setAttribute("listTurma", listTurma);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("selectTurma.jsp");

@@ -12,7 +12,71 @@ import model.Turma;
 
 
 public class TurmaDAO {
+	//Carrega Todos os anos/semestres -------------------------------------------------------------------------
+		public ArrayList<Turma> mostrarAno() {
+			Turma turma = null;
+			ArrayList<Turma> lista = new ArrayList<Turma>();
+
+			Connection conn = new ConnectionFactory().getConnection();
+			String sqlInsert = "SELECT DISTINCT ano_letivo, semestre_letivo FROM turma ORDER BY ano_letivo DESC, semestre_letivo  DESC";
+
+			try(PreparedStatement stm = conn.prepareStatement(sqlInsert)){
+				ResultSet rs = stm.executeQuery();
+
+				while(rs.next()) {
+					int ano = rs.getInt("ano_letivo");
+					int semestre = rs.getInt("semestre_letivo");
+					turma = new Turma(semestre, ano);
+					
+					lista.add(turma);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			return lista;
+		}	
+		
+		/**
+		 * Retorna todas as turmas referente a um período (ano letivo, semestre)
+		 * @param ano
+		 * @param semestre
+		 * @return ArrayList<Turma>
+		 */
+		public ArrayList<Turma> selectTurmaPeriodo( int idProf, int ano, int semestre) {
+			ArrayList<Turma> lstTurma = new ArrayList<>();
+
+			Connection conn = new ConnectionFactory().getConnection();
+			String sqlInsert = "SELECT DISTINCT turma.id, turma.semestre_letivo, turma.ano_letivo, turma.sigla FROM turma " + 
+					"												JOIN turma_aluno a ON turma.id = a.turma_id" + 
+					"												JOIN grupo g ON a.grupo_id = g.id " + 
+					"											   WHERE g.orientador_id = ?" + 
+					"												 AND turma.ano_letivo = ?" + 
+					"					                             AND turma.semestre_letivo = ?";
+
+			try(PreparedStatement stm = conn.prepareStatement(sqlInsert)){
+				stm.setInt(1, idProf);
+				stm.setInt(2, ano);
+				stm.setInt(3, semestre);
+				ResultSet rs = stm.executeQuery();
+
+				while(rs.next()) {
+					Turma turma = new Turma();
+
+					turma.setId((rs.getInt("id")));
+					turma.setSemestreLetivo((rs.getInt("semestre_letivo")));
+					turma.setAnoLetivo((rs.getInt("ano_letivo")));
+					turma.setSigla((rs.getString("sigla")));
+					lstTurma.add(turma);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return lstTurma;
+		}
+
 	
+
 	public void create(Turma turma) {
 		Connection conn = new ConnectionFactory().getConnection();
 
@@ -43,7 +107,7 @@ public class TurmaDAO {
 
 		String sqlComand = "SELECT * FROM turma" + 
 							"INNER JOIN turma_aluno" + 
-							"ON turma.id = ?;";
+							"ON turma.id = ?";
 
 		Turma turma = null;
 
@@ -117,6 +181,6 @@ public class TurmaDAO {
 		
 		return turmas;
 	}
-
+	
 
 }

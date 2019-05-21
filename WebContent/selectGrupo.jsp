@@ -50,21 +50,20 @@
 						</tr>
 					</thead>
 					<tbody>
-					
+
 						<c:forEach var="grupo" items="${listGrupo }">
-						<c:if test="${usuario.id == grupo.orientador.id }">
-							<tr>
-								<input type="hidden" value=${grupo.id }>
-								<td>${grupo.orientador }</td>
-								<td>${grupo.numero }</td>
-								<td>${grupo.nome }</td>
-								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
-									style="padding: 2%">Selecionar</a></td>
-							</tr>
+							<c:if test="${usuario.id == grupo.orientador.id }">
+								<tr>
+									<input type="hidden" value=${grupo.id }>
+									<td>${grupo.orientador }</td>
+									<td>${grupo.numero }</td>
+									<td>${grupo.nome }</td>
+									<td class="actions"><a class="btn btn-success btn-xs"
+										href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
+										style="padding: 2%">Selecionar</a></td>
+								</tr>
 							</c:if>
 						</c:forEach>
-						
 					<thead>
 					</tbody>
 				</table>

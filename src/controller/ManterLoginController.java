@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import model.Aluno;
 import model.Professor;
+import model.Turma;
 import service.AlunoService;
 import service.ProfessorService;
+import service.TurmaService;
 import service.UsuarioService;
 
 /**
@@ -59,6 +62,8 @@ public class ManterLoginController extends HttpServlet {
 			
 			//Verificação de professor.
 			if(professor != null) {
+				
+				
 				session.setAttribute("usuario", professor);
 				view = request.getRequestDispatcher("index.jsp");
 				view.forward(request, response);

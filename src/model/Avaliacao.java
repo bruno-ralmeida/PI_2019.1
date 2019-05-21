@@ -16,7 +16,10 @@ public class Avaliacao {
 	private String comentarios;
 	private Aluno aluno;
 	
-	public Avaliacao() {
+	public Avaliacao(int id, double nota, String comentarios) {
+		this.id = id;
+		this.nota = nota;
+		this.comentarios = comentarios;
 	}
 	
 	public Avaliacao(Entrega entrega, Grupo grupo, int nota, Date dataAvaliacao, String comentarios) {
@@ -27,6 +30,10 @@ public class Avaliacao {
 		this.comentarios = comentarios;
 	}
 	
+	public Avaliacao() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Avaliação</title>
+<title>Declaração</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -24,11 +24,12 @@
 	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 3%">
 
-		<form action="ListarEntregaController.do" method="post">
+
+		<form action="ListarGrupoController.do" method="post">
 			<div id="top" class="row">
 				<div class="col-md-3">
 					<h3>
-						<strong>Selecione uma Entrega </strong>
+						<strong>Selecione um Grupo </strong>
 					</h3>
 				</div>
 			</div>
@@ -42,25 +43,24 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Grupo</th>
-							<th>Atividade</th>
+							<th>Numero</th>
+							<th>Nome</th>
 							<th class="actions">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
 
-						<c:forEach var="entrega" items="${listEntrega }">
-							<tr>
-								<input type="hidden" value=${entrega.id }>
-								<td>${entrega.grupo.id }</td>
-								<td>${entrega.atividade }</td>
-
-
-
-								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }&idEntrega=${entrega.id }&idGrupo=${entrega.grupo.id }"
-									style="padding: 2%">Selecionar</a></td>
-							</tr>
+						<c:forEach var="grupo" items="${listGrupo }">
+							<c:if test="${usuario.id == grupo.orientador.id }">
+								<tr>
+									<input type="hidden" value=${grupo.id }>
+									<td>${grupo.numero }</td>
+									<td>${grupo.nome }</td>
+									<td class="actions"><a class="btn btn-primary btn-xs"
+										href="GerarDeclaracaoController?id=${grupo.id }">Gerar
+											Declaracao</a></td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					<thead>
 					</tbody>
@@ -72,3 +72,4 @@
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
+

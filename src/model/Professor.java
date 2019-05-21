@@ -19,6 +19,11 @@ public class Professor extends Usuario {
 	}
 
 
+	public Professor(int id, String nome, String email, String senha, String matricula2, int administrador2) {
+		super(email, senha);
+	}
+
+
 	public int getAdministrador() {
 		return administrador;
 	}
