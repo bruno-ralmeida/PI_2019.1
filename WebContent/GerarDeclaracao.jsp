@@ -19,66 +19,50 @@
 
 <!-- MAIN -->
 <link href="assets/style/utils.css" rel="stylesheet" />
-<title>Grupos</title>
+<title>Declaração</title>
 </head>
 
 <body>
-	<div class="row mt-30">
-		<div class="col-md-6 offset-md-3 text-center">
-			<h2 class="text-muted text-capitalize title">Declaração</h2>
-		</div>
-		<div class="col-lg-12">
-			<div class="row justify-content-md-center">
-				<div class="col-4">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Banca</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="professor" items="${listaProfessores}">
-								<tr>
-									<td>${professor.nome}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+	<div class="container-fluid" style="margin-top: 2%">
+		<div class="container bg-light" style="padding-bottom: 2%; border: outset 5px; margin-top: 15px">
+		
+			<!-- LOGO PRINCIPAL -->
+				<div class="row center-block">
+					<div class="col-lg-12">
+					</br>	
+						<img src="Img/usjt.png" class="rounded mx-auto d-block img-width">
+					</div>
 				</div>
-				<div class="col-4">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Nome do grupo</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="grupo" items="${lstGrupo}">
-								<tr>
-									<td>${grupo.nome}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-4">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Integrantes</th>
-							</tr>
-						</thead>
-						<tbody>
+
+				<div class="row mt-30" style="padding: 2%">
+					<div class="col-md-6 offset-md-3 text-center">
+						<h4>Declaração</h4>
+						</br>
+						<p>
+							Declaro para os devidos fins que o(a) professor(a) <b>${orientador.nome}</b>
+							, participou da Banca do Trabalho de Conclusão de Curso (TCC) dos
+							discentes
 							<c:forEach var="aluno" items="${listaAlunos}">
-								<tr>
-									<td>${aluno.nome}</td>
-								</tr>
+								<b>${aluno.nome}</b>, </c:forEach>
+							da turma de ${grupo.nome}, da Universidade São Judas Tadeu, tendo
+							a participação dos(as) professores(as):
+							<c:forEach var="professor" items="${listaProfessores}">
+								<c:if test="${professor.nome != orientador.nome}">
+									<b>${professor.nome}, </b>
+								</c:if>
 							</c:forEach>
-						</tbody>
-					</table>
+						</p>
+
+						<p>
+							São Paulo,
+							<fmt:formatDate pattern="dd/MM/yyyy" value="${banca.data}" />
+						</p>
+					</div>
+					
 				</div>
-			</div>
 		</div>
 	</div>
+	<script src="assets/scripts/jquery.min.js"></script>
+	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

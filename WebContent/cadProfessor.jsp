@@ -19,62 +19,42 @@
 <title>Cadastro de Professor</title>
 </head>
 <body>
-	<div class="container" style="padding-top: 3%">
-		<div class="row">
-			<div class="col-lg-12  mt-30">
-				<h1 class=" offset-md-3">Cadastro Professor</h1>
-				<form action="ManterProfessorController.do" method="post"
-					class="form-horizontal" name="cad">
+	<div class="container-fluid"  style="padding-top: 2%">
+
+				<form action="ManterProfessorController.do" method="post" class="form-horizontal" name="cad">
 					<div class="form-row align-items-center">
 						<div class="form-group col-md-6 offset-md-3">
-							<label for="inputName">Nome</label> <input id="inputName"
-								type="text" class="form-control" name="nome" required="required" />
+						
+							<label for="inputName">Nome</label> 
+							<input id="inputName"type="text" class="form-control" name="nome" required="required" />
+							<label for="inputMatricula">Matrícula</label> 
+							<input id="inputMatricula" type="text" class="form-control"name="matricula" placeholder="Ex: 908045" required="required">
+							<label for="inputEmail4">E-mail</label> 
+							<input  type="email" class="form-control" name="email" placeholder="Ex: prof@usjt.com.br" required="required" /> 
+							
+							<div class="form-group ">
+							<label for="inputPassword4">Senha</label> 
+							<input type="password" class="form-control" name="senha" style="width: 50%" required="required">
+							<label for="inputPassword5">Confirmar senha</label> 
+							<input type="password" class="form-control" name="cSenha"style="width: 50%" required="required"> 
+							</div>
+							
+							<div class="form-group form-check">
+									<input id="customControlAutosizing" type="checkbox" name="administrador" class="custom-control-input" />
+									<label class="custom-control-label" for="customControlAutosizing"> Administrador? </label> 
+							</div>
+							
 						</div>
 					</div>
-
-					<div class="form-row">
-						<div class="form-group col-md-4  offset-md-3">
-							<label for="inputMatricula">Matrícula</label> <input
-								id="inputMatricula" type="text" class="form-control"
-								name="matricula" placeholder="Ex: 908045" required="required">
-						</div>
+					<div class="form-group offset-md-3" >
+					<a href="professor.jsp" class="btn btn-default" style="width: 25%;">Voltar</a>
+					<input type="reset" class="btn btn-secondary" value="Limpar Campos" style="width: 20%">
+					<button type="submit" class="btn btn-primary" name="acao" value="Criar" style="width: 20%">Salvar</button>
 					</div>
-
-					<div class="form-row">
-						<div class="form-group col-md-6  offset-md-3">
-							<label for="inputEmail4">E-mail</label> <input id="inputEmail4"
-								type="email" class="form-control" name="email"
-								placeholder="Ex: prof@usjt.com.br" required="required" />
-						</div>
-						<div class="form-group col-md-12  offset-md-3">
-							<div class="form-group col-md-0">
-								<label for="inputPassword4">Senha</label> <input type="password"
-									class="form-control" name="senha" style="width: 20%"
-									required="required">
-							</div>
-							<div class="form-group col-md-0">
-								<label for="inputPassword5">Confirmar senha</label> <input
-									type="password" class="form-control" name="cSenha"
-									style="width: 20%" required="required">
-							</div>
-							<div class="form-group">
-								<div class="custom-control custom-checkbox">
-									<input id="customControlAutosizing" type="checkbox"
-										name="administrador" class="custom-control-input" /> <label
-										class="custom-control-label" for="customControlAutosizing">
-										Administrador? </label>
-								</div>
-							</div>
-							<input type="reset" class="btn btn-secondary"
-								value="Limpar Campos" style="width: 20%">
-							<button type="submit" class="btn btn-primary" name="acao"
-								value="Criar" style="width: 20%">Salvar</button>
 				</form>
 			</div>
-		</div>
-	</div>
-	<script src="assets/scripts/jquery.min.js"></script>
-	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+		<script src="assets/scripts/jquery.min.js"></script>
+		<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
 

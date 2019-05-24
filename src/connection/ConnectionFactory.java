@@ -28,7 +28,7 @@ public class ConnectionFactory {
         try {
             return DriverManager.getConnection(connectionURL, usuario, senha);
         } catch (SQLException e) {
-        	JOptionPane.showMessageDialog(null, "N�o foi poss�vel conectar com o BD", "Error", JOptionPane.ERROR_MESSAGE);
+        	JOptionPane.showMessageDialog(null,"Erro:" + e, connectionURL, JOptionPane.ERROR_MESSAGE);
         	e.printStackTrace();
         	throw new RuntimeException(e);
         }

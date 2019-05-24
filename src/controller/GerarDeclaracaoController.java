@@ -20,66 +20,64 @@ import service.ProfessorBancaService;
 /**
  * Servlet implementation class GerarDeclaracaoController
  */
-@WebServlet("/GerarDeclaracaoController")
+@WebServlet("/GerarDeclaracaoController.do")
 public class GerarDeclaracaoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public GerarDeclaracaoController() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public GerarDeclaracaoController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-//Pega o id do grupo
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Pega o id do grupo
 		String pId = request.getParameter("id");
+		System.out.println(pId);
 		int id = -1;
 		try {
 			id = Integer.parseInt(pId);
-		} catch (Exception e) {
-
+		} catch(Exception e) {
+			
 		}
-
-//Instacia a placa ProfessorBancaService
+		
+		//Instacia a placa ProfessorBancaService
 		ProfessorBancaService pbs = new ProfessorBancaService();
 		GrupoService gs = new GrupoService();
-
-//Carrega todoas as informacoes de declaracao
+		
+		//Carrega todoas as informacoes de declaracao
 		String tema = pbs.loadTemaGrupo(id);
 		ArrayList<Aluno> listaAlunos = pbs.loadAlunosGrupoBanca(id);
 		Professor orientador = pbs.loadOrientadorGrupo(id);
 		Banca banca = pbs.loadBancaGrupo(id);
 		ArrayList<Professor> listaProfessores = pbs.loadProfessoresBanca(banca.getId());
 		Grupo grupo = gs.load(id);
-
-//Envia as informacoes para a pagina
+		
+		
+		//Envia as informacoes para a pagina
 		request.setAttribute("tema", tema);
 		request.setAttribute("listaAlunos", listaAlunos);
 		request.setAttribute("orientador", orientador);
 		request.setAttribute("banca", banca);
 		request.setAttribute("listaProfessores", listaProfessores);
 		request.setAttribute("grupo", grupo);
-
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("GerarDeclaracao.jsp");
 		dispatcher.forward(request, response);
-
+		
 	}
 
 }

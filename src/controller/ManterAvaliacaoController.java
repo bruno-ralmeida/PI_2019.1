@@ -90,14 +90,16 @@ public class ManterAvaliacaoController extends HttpServlet {
 		AlunoService as = new AlunoService();
 		EntregaService es = new EntregaService();
 
-		if (pAcao.equals("Turma")) {
+		if (pAcao.equals("Buscar")) {
 			ArrayList<Grupo> listGrupo = null;
 			session = request.getSession();
 			listGrupo = gs.loadGrupoByTurma(id);
 			session.setAttribute("listGrupo", listGrupo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupo.jsp");
 			dispatcher.forward(request, response);
-		} else if (pAcao.equals("Grupo")) {
+		}
+
+		else if (pAcao.equals("Grupo")) {
 			ArrayList<Entrega> listEntrega = null;
 			session = request.getSession();
 			listEntrega = es.loadTodos(id);
@@ -169,9 +171,6 @@ public class ManterAvaliacaoController extends HttpServlet {
 			AvaliacaoService aS = new AvaliacaoService();
 			ArrayList<Avaliacao> listaAvaliacao = new ArrayList<Avaliacao>();
 			listaAvaliacao = aS.load(idEn);
-			
-			System.out.println("Atualizar request idEntrega: " + idEn);
-			System.out.println("Tamanho: " + listaAvaliacao.size());
 
 			for (int i = 0; i < listaAvaliacao.size(); i++) {
 				Avaliacao avaliacao = null;
@@ -186,13 +185,21 @@ public class ManterAvaliacaoController extends HttpServlet {
 				avaliacao = new Avaliacao(idAva, pNota, pComentarios);
 				listaAvaliacao.set(i, avaliacao);
 
-				System.out.println("Id = " + idAva + "  Nota = " + pNota + " Comentarios = " + pComentarios);
 			}
 
 			aS.updateAvaliacao(listaAvaliacao);
 			// enviar para o jsp
 			request.setAttribute("idGrupo", idGrupo);
 			request.setAttribute("listAvaliacao", listaAvaliacao);
+			view = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
+			view.forward(request, response);
+		} else if (pAcao.equals("Visualizar")) {
+			int idEn = Integer.parseInt(request.getParameter("idEntrega"));
+			AvaliacaoService aS = new AvaliacaoService();
+			ArrayList<Avaliacao> listaAvaliacao = aS.load(idEn);
+			// enviar para o jsp
+			request.setAttribute("listAvaliacao", listaAvaliacao);
+			request.setAttribute("idGrupo", idGrupo);
 			view = request.getRequestDispatcher("visualizarAvaliacao.jsp");
 			view.forward(request, response);
 		}

@@ -53,7 +53,10 @@ public class EntregaDAO {
 		GrupoDAO grupoDAO = new GrupoDAO();
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT * FROM entrega WHERE grupo_id = ?";
+		String sqlComand = "SELECT *" + 
+				           "  FROM ENTREGA E" + 
+				           " WHERE E.ATIVIDADE_ID NOT IN (SELECT ENTREGA_ID FROM AVALIACAO)\r\n" + 
+				           "   AND E.GRUPO_ID = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			

@@ -36,6 +36,8 @@ public class TurmaDAO {
 			return lista;
 		}	
 		
+	
+		
 		/**
 		 * Retorna todas as turmas referente a um período (ano letivo, semestre)
 		 * @param ano
@@ -180,6 +182,37 @@ public class TurmaDAO {
 		}
 		
 		return turmas;
+	}
+	/**
+	 * Retorna todas as turmas referente a um período (ano letivo, semestre)
+	 * @param ano
+	 * @param semestre
+	 * @return ArrayList<Turma>
+	 */
+	public ArrayList<Turma> getTurmasPeriodo(int ano, int semestre) {
+		ArrayList<Turma> lstTurma = new ArrayList<>();
+
+		Connection conn = new ConnectionFactory().getConnection();
+		String sqlInsert = "SELECT * FROM turma WHERE ano_letivo = ? AND semestre_letivo = ?";
+
+		try(PreparedStatement stm = conn.prepareStatement(sqlInsert)){
+			stm.setInt(1, ano);
+			stm.setInt(2, semestre);
+			ResultSet rs = stm.executeQuery();
+
+			while(rs.next()) {
+				Turma turma = new Turma();
+				turma.setId(rs.getInt("id"));
+				turma.setSigla(rs.getString("sigla"));
+				turma.setAnoLetivo(rs.getInt("ano_letivo"));
+				turma.setSemestreLetivo(rs.getInt("semestre_letivo"));
+				lstTurma.add(turma);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lstTurma;
 	}
 	
 

@@ -92,7 +92,7 @@ public class Atividade {
 
 	@Override
 	public String toString() {
-		return "Atividade [id=" + id + ", descricao=" + descricao + "]";
+		return  descricao ;
 	}
 	
 	

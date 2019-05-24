@@ -21,18 +21,18 @@
 <link href="assets/style/utils.css" rel="stylesheet" />
 </head>
 <body>
-	<!-- Barra superior com os menus de navegação -->
-	<div id="main" class="container" style="padding-top: 3%">
+<div class="container-fluid">
+	<div class="container" style="padding-top: 2%">
 
 		<form action="ListarEntregaController.do" method="post">
-			<div id="top" class="row">
-				<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-8">
 					<h3>
-						<strong>Selecione uma Entrega </strong>
+						<strong>Selecione uma atividade</strong>
 					</h3>
 				</div>
+
 			</div>
-			<!-- /#top -->
 		</form>
 		<hr />
 		<div id="list" class="row">
@@ -50,8 +50,9 @@
 					<tbody>
 
 						<c:forEach var="entrega" items="${listEntrega }">
+							<input type="hidden" value=${entrega.id }>
 							<tr>
-								<input type="hidden" value=${entrega.id }>
+
 								<td>${entrega.grupo.id }</td>
 								<td>${entrega.atividade }</td>
 
@@ -67,6 +68,8 @@
 				</table>
 			</div>
 		</div>
+	</div>
+</div>
 </body>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>

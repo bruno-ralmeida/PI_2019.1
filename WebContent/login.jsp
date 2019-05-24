@@ -26,9 +26,10 @@
 			<div class="row">
 				<div class="col-md-4 col-md-offset-12" style="margin: 0 auto;">
 					<div class="panel panel-default">
-						<div
-							style="background-color: #000080; border-radius: 10px; padding: 2%;">
-							<img alt="" src="Img/LogoUsjt.png" id="logoLogin">
+						<div style="background-color: #000080; border-radius: 10px; padding-top:  5%">
+						<div align="center">
+							<img alt="" src="Img/LogoUsjtMin.png">
+							</div>
 						</div>
 						<div class="panel-body">
 							<form action="ManterLoginController.do" method="post"

@@ -76,23 +76,6 @@ public class AvaliacaoDAO {
 		
 	}
 	
-
-	/**
-     * CRUD: Deleta avaliacao
-     * @param conn: Connection
-     */
-	public void deleteAvaliacao(int entregaId) {
-		Connection conn = new ConnectionFactory().getConnection();
-		
-		String sqlComand = "DELETE FROM avaliacao WHERE entrega_id = ?";
-		try(PreparedStatement stm = conn.prepareStatement(sqlComand, Statement.RETURN_GENERATED_KEYS)){
-			stm.setInt(1, entregaId);
-			stm.executeUpdate();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public Avaliacao selectId(int id) {
 		Avaliacao avaliacao = new Avaliacao();
 		AlunoDAO alunoDAO = new AlunoDAO();
@@ -154,31 +137,41 @@ public class AvaliacaoDAO {
 	}
 	
 	
-	//Passando um idEntrega e idGrupo ele verifica se essa entrega ja foi avaliada
-	public int verrifica(Entrega entrega) {
+	public ArrayList<Avaliacao> selectAvaliados(int idProf) {
+		AlunoDAO alunoDAO = new AlunoDAO();
+		EntregaDAO entregaDAO = new EntregaDAO();
+		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		Connection conn = new ConnectionFactory().getConnection();
-		int i = 0;
 		
-		String sqlComand = 	"SELECT * from avaliacao WHERE entrega_id = ?";
-				
+		String sqlComand = "SELECT A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
+							"  FROM AVALIACAO A" + 
+							"  JOIN ENTREGA E" + 
+							"    ON A.ENTREGA_ID = E.ID" + 
+							"  JOIN GRUPO G" + 
+							" WHERE G.ID = E.GRUPO_ID" + 
+							"   AND G.ORIENTADOR_ID = ?" ;
+		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
-			
-			stm.setInt(1, entrega.getId());
+			stm.setInt(1,idProf);
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
-				int resp = rs.getInt("id");
-				if(resp > 0) {
-					i = 1;
-				}
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao.setId(rs.getInt("A.ID"));
+				avaliacao.setNota(rs.getDouble("A.NOTA"));
+				avaliacao.setDataAvaliacao(rs.getDate("A.DT_AVALIACAO"));
+				avaliacao.setComentarios(rs.getString("A.COMENTARIOS"));
+				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("A.TURMA_ALUNO_ID")));
+				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("A.ENTREGA_ID")));
+				lista.add(avaliacao);
 			} 
-		
+			System.out.println("Dados carregados com sucesso");
 		}catch(SQLException e) {
 			e.printStackTrace();
+			System.out.println("Dados carregados SEM sucesso erro: " + e);
 		}
-		return i;
+		return lista;
 	}
-	
 	
 	
 }

@@ -32,5 +32,9 @@ public class TurmaService implements Serializable {
 	public ArrayList<Turma> selectTurmaPeriodo( int idProf,int ano, int semestre) {
 		return dao.selectTurmaPeriodo( idProf,ano, semestre);
 	}
+	
+	public ArrayList<Turma> getTurmasPeriodo(int ano, int semestre) {
+		return dao.getTurmasPeriodo(ano, semestre);
+	}
 
 }

@@ -1,89 +1,88 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <c:import url="Menu.jsp" />
-<%@page import="model.Avaliacao"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<!-- Bootstrap -->
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
+<link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
+<title>Avaliação</title>
 
-<!-- MAIN -->
-<link href="assets/style/utils.css" rel="stylesheet" />
-<title>AvaliaÃ§Ã£o</title>
+
 </head>
 <body>
+	<div class="container-fluid" style="padding-top: 3%">
 
-	<div class="container header-margin">
-		<div class="row">
-			<div class="col-lg-12  mt-30">
+		<form
+			action="ManterAvaliacaoController.do?idEntrega=${listaAvaliacao[1].entrega.id}"
+			method="post">
+			<div id="top" class="row">
 
-				<!-- TITULO -->
-				<div class="col-md-4 offset-md-4">
-					<h1 class="">Avaliar Alunos</h1>
+				<div class="col-md-3">
+					<h3>
+						<strong>Avaliar Aluno </strong>
+					</h3>
 				</div>
-
-				<form
-					action="ManterAvaliacaoController.do?idEntrega=${listaAvaliacao[1].entrega.id}"
-					method="post" class="form-horizontal">
-
-					<!-- Data -->
-					<div class="form-group col-md-4 offset-md-4">
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="inputName">Data da avaliacao: </label> <label><fmt:formatDate
-										pattern="dd/MM/yyyy" value="${listaAvaliacao[1].dataAvaliacao}" /></label>
-							</div>
-						</div>
-					</div>
-
-					<c:forEach var="avaliacao" items="${listaAvaliacao}">
-						<div class="form-row">
-						<div class="form-group col-md-10">
-								<label>${avaliacao.aluno.id}</label> <input type="hidden"
-									class="form-control" name="alunoId${avaliacao.id}"
-									id="avaliacaoId${avaliacao.id}" value="${avaliacao.id}" />
-							</div>
-							<div class="form-group col-md-10">
-								<label>${avaliacao.aluno.nome}</label> <input type="hidden"
-									class="form-control" name="aId${avaliacao.id}"
-									id="avaliacaoId${avaliacao.id}" value="${avaliacao.id}" />
-							</div>
-							<div class="form-group">
-								<label for="inputName">Nota: </label> <input type="text"
-									class="form-control" name="n${avaliacao.id }"
-									id="nota${avaliacao.id }" value="${avaliacao.nota}" />
-							</div>
-							<div class="form-group">
-								<label for="inputName">Comentarios: </label> <input type="text"
-									class="form-control" name="comentario${avaliacao.id }"
-									id="comentarios${avaliacao.id }"
-									value="${avaliacao.comentarios}" />
-							</div>
-						</div>
-					</c:forEach>
-					<input type="hidden" name="entregaId" id="entregaId"
-						value="${listaAvaliacao[1].entrega.id }" /> <a
-						class="btn btn-danger btn-xs"
-						href="ListarEntregaController?acao=reiniciar&id=${idGrupo }">Cancelar</a>
-						<button type="submit" class="btn btn-success" name="acao" value="Salvar">Enviar</button>
-
-				</form>
 			</div>
-		</div>
+			<hr />
+			<div id="list" class="row">
+
+				<div class="table-responsive col-md-12">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>E-mail</th>
+								<th>Nota</th>
+								<th>Descrição</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="avaliacao" items="${listaAvaliacao}">
+								<input type="hidden" name="aId${avaliacao.id}"
+									value="${avaliacao.id}" />
+								<tr>
+									<td>${avaliacao.aluno.nome}</td>
+									<td>${avaliacao.aluno.email}</td>
+									<td style="width: 15%"><input name="n${avaliacao.id }"
+										class="form-control" type="number" min="0" max="10"
+										step="0.01" required="required" value="${avaliacao.nota}"></td>
+									<td><input input type="text" class="form-control"
+										name="comentario${avaliacao.id }"
+										id="comentarios${avaliacao.id }"
+										value="${avaliacao.comentarios}"></td>
+								</tr>
+							</c:forEach>
+						<thead>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="container row">
+				<input class="form-control" type=text
+					placeholder="Comentar para todos" id="comentAll"> <input
+					class="form-control" type="number" min="0" max="10" step="0.01"
+					placeholder="Avaliar todos" id="notaAll"> <a
+					class="btn btn-danger btn-xs"
+					href="ListarAvaliadosController.do?acao=Buscar">Cancelar</a>
+				<button type="submit" class="btn btn-success" name="acao"
+					value="Salvar">Enviar</button>
+			</div>
+		</form>
+		<div class="row" id="all"></div>
 	</div>
 
-	<script src="assets/scripts/jquery.min.js"></script>
-	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+</body>
+<script src="assets/scripts/jquery.min.js"></script>
+<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

@@ -34,17 +34,14 @@ public class ProfessorBancaService implements Serializable {
 		return dao.loadProfessorBanca(id);
 	}
 
-//----
 	public String loadTemaGrupo(int idGrupo) {
 		return dao.loadTemaGrupo(idGrupo);
 	}
 
-//--
 	public ArrayList<Aluno> loadAlunosGrupoBanca(int idGrupo) {
 		return dao.loadAlunosGrupoBanca(idGrupo);
 	}
 
-//--
 	public Professor loadOrientadorGrupo(int idGrupo) {
 		return dao.loadOrientadorGrupo(idGrupo);
 	}

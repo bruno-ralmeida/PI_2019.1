@@ -22,9 +22,10 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="container" style="padding-top: 2%;">
+		<div class="container" style="padding-top: 2%">
 
-			<form action="ListarGrupoController.do" method="post">
+
+			<form action="ListarGrupoDeclaracao.do" method="post">
 				<div class="row">
 					<div class="col-md-3">
 						<h3>
@@ -33,9 +34,10 @@
 					</div>
 					<div class="col-md-6">
 						<div class="input-group h2">
-						<input name="bGrupo" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)" disabled> 
-							<span class="input-group-btn" style="padding-left: 5%">
+							<input name="bGrupo" class="form-control" id="search" type="text"
+								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)"
+								disabled> <span class="input-group-btn"
+								style="padding-left: 5%">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar">
 									<span class="glyphicon glyphicon-search">Buscar</span>
@@ -46,34 +48,35 @@
 				</div>
 			</form>
 			<hr />
-			<div class="row">
-				<div class="table-responsive col-md-12">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Professor</th>
-								<th>Número do grupo</th>
-								<th>Nome do Grupo</th>
-								<th class="actions">Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="grupo" items="${listGrupo }">
-								<c:if test="${usuario.id == grupo.orientador.id }">
-									<input type="hidden" value=${grupo.id }>
-									<tr>
-										<td>${grupo.orientador }</td>
-										<td>${grupo.numero }</td>
-										<td>${grupo.nome }</td>
-										<td class="actions"><a class="btn btn-success btn-xs"
-											href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
-											style="padding: 2%">Selecionar</a></td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						<thead>
-						</tbody>
-					</table>
+			<div id="list" class="row">
+
+				<div class="container">
+					<div class="table-responsive col-md-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Orientador</th>
+									<th>Nome do Grupo</th>
+									<th class="actions">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<c:forEach var="grupo" items="${lstGrupo }">
+									<c:if test="${usuario.id == grupo.orientador.id }">
+										<input type="hidden" value=${grupo.id }>
+										<tr>
+											<td>${grupo.orientador }</td>
+											<td>${grupo.nome }</td>
+											<td class="actions"><a class="btn btn-outline-info"
+												href="GerarDeclaracaoController.do?id=${grupo.id }">Gerar Declaração</a></td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							<thead>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
