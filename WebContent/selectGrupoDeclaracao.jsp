@@ -19,6 +19,7 @@
 	rel="stylesheet" />
 
 <link href="assets/style/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid">
@@ -33,16 +34,17 @@
 						</h3>
 					</div>
 					<div class="col-md-6">
-						<div class="input-group h2">
+						<div class="input-group mb-3">
 							<input name="bGrupo" class="form-control" id="search" type="text"
 								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)"
-								disabled> <span class="input-group-btn"
-								style="padding-left: 5%">
+								disabled>
+							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar">
-									<span class="glyphicon glyphicon-search">Buscar</span>
+									<span class="glyphicon glyphicon-search"><i
+										class="fas fa-search"></i></span>
 								</button>
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -69,7 +71,8 @@
 											<td>${grupo.orientador }</td>
 											<td>${grupo.nome }</td>
 											<td class="actions"><a class="btn btn-outline-info"
-												href="GerarDeclaracaoController.do?id=${grupo.id }">Gerar Declaração</a></td>
+												href="GerarDeclaracaoController.do?id=${grupo.id }">Gerar
+													Declaração</a></td>
 										</tr>
 									</c:if>
 								</c:forEach>

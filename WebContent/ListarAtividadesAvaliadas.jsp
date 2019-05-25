@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-
+<link href="fonts/css/all.css" rel="stylesheet">
 <title>Avaliados</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
@@ -32,15 +32,15 @@
 					</div>
 
 					<div class="col-md-6">
-						<div class="input-group h2">
-						<input name="bAtiv" class="form-control" id="search" type="text"
+						<div class="input-group mb-3">
+							<input name="bAtiv" class="form-control" id="search" type="text"
 								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)" disabled> 
-							<span class="input-group-btn" style="padding-left: 5%">
+							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar" >
-									<span class="glyphicon glyphicon-search">Buscar</span>
+									<span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
 								</button>
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -64,12 +64,14 @@
 									<td>${a.aluno.nome  }</td>
 									<td>${a.entrega.atividade }</td>
 									<td>${a.nota }</td>
-									<td class="actions"><a class="btn btn-secondary btn-xs "
+									<td class="actions"><a class="btn btn-default btn-xs "
 										href="ManterAvaliacaoController.do?acao=Visualizar&idEntrega=${a.entrega.id}"
-										style="background-color: #228a00; color: white; width: 28%">Detalhes</a>
+										style="color: gray; width: 28%"><i class="far fa-eye"></i></a>
 										<button type="button" class="btn  btn-xs" data-toggle="modal"
 											data-target="#modalU-${a.entrega.id}"
-											style="background-color: #00458a; color: white; width: 28%">Editar</button>
+											style="background-color: #00458a; color: white; width: 28%">
+											<i class="far fa-edit"></i>
+										</button>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -92,7 +94,8 @@
 						</button>
 					</div>
 					<div class="modal-body">Deseja realizar alterações na
-						avaliação do grupo de ${a.aluno.nome} referente a entrega da atividade "${a.entrega.atividade }"?</div>
+						avaliação do grupo de ${a.aluno.nome} referente a entrega da
+						atividade "${a.entrega.atividade }"?</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancelar</button>

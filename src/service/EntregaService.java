@@ -19,7 +19,7 @@ public class EntregaService implements Serializable{
 		return dao.selectEntrega(id);
 	}
 	
-	public ArrayList<Entrega> loadTodos(int id){
+	public ArrayList<Entrega> selectNaoAvaliados(int id){
 		return dao.selectAll(id);
 	}
 	

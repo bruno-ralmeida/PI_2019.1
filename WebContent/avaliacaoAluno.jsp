@@ -15,6 +15,7 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.css" rel="stylesheet">
 <title>Avaliação</title>
 
 
@@ -39,7 +40,7 @@
 						</div>
 					</div>
 					<button type="submit" class="btn btn-success" name="acao"
-						value="avaliacao">Avaliar</button>
+						value="avaliacao"><i class="fas fa-check"></i></button>
 				</div>
 				<hr />
 				<div id="list" class="row">

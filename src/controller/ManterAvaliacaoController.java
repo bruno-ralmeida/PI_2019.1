@@ -67,7 +67,6 @@ public class ManterAvaliacaoController extends HttpServlet {
 		String pAcao = request.getParameter("acao");
 		String sNota = null;
 		String com = null;
-		System.out.println(pId);
 		ArrayList<Aluno> listAluno = null;
 
 		listAluno = null;
@@ -102,7 +101,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 		else if (pAcao.equals("Grupo")) {
 			ArrayList<Entrega> listEntrega = null;
 			session = request.getSession();
-			listEntrega = es.loadTodos(id);
+			listEntrega = es.selectNaoAvaliados(id);
 			session.setAttribute("listEntrega", listEntrega);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
 			dispatcher.forward(request, response);

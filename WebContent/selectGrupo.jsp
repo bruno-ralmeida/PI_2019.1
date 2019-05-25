@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-
+<link href="fonts/css/all.css" rel="stylesheet">
 <title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
@@ -23,7 +23,6 @@
 <body>
 	<div class="container-fluid">
 		<div class="container" style="padding-top: 2%;">
-
 			<form action="ListarGrupoController.do" method="post">
 				<div class="row">
 					<div class="col-md-3">
@@ -31,16 +30,19 @@
 							<strong>Seleção de Grupo</strong>
 						</h3>
 					</div>
+
 					<div class="col-md-6">
-						<div class="input-group h2">
-						<input name="bGrupo" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)" disabled> 
-							<span class="input-group-btn" style="padding-left: 5%">
+						<div class="input-group mb-3">
+							<input name="bGrupo" class="form-control" id="search" type="text"
+								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)"
+								disabled>
+							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar">
-									<span class="glyphicon glyphicon-search">Buscar</span>
+									<span class="glyphicon glyphicon-search"><i
+										class="fas fa-search"></i></span>
 								</button>
-							</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -66,7 +68,7 @@
 										<td>${grupo.numero }</td>
 										<td>${grupo.nome }</td>
 										<td class="actions"><a class="btn btn-success btn-xs"
-											href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }"
+											href="ManterAvaliacaoController.do?acao=Grupo&id=${grupo.id }&idGrupo=${grupo.id }"
 											style="padding: 2%">Selecionar</a></td>
 									</tr>
 								</c:if>

@@ -55,7 +55,7 @@ public class EntregaDAO {
 		
 		String sqlComand = "SELECT *" + 
 				           "  FROM ENTREGA E" + 
-				           " WHERE E.ATIVIDADE_ID NOT IN (SELECT ENTREGA_ID FROM AVALIACAO)\r\n" + 
+				           " WHERE E.ID NOT IN (SELECT ENTREGA_ID FROM AVALIACAO)" + 
 				           "   AND E.GRUPO_ID = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){

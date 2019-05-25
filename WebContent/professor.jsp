@@ -8,7 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="fonts/css/all.css" rel="stylesheet">
 
 <title>Professor</title>
 
@@ -32,21 +34,21 @@
 
 					<div class="col-md-6">
 						<div class="input-group h2">
-							<input name="bProf" class="form-control" id="search" type="text"
+							<div class="input-group">
+								<input name="bProf" class="form-control" id="search" type="text"
 								placeholder="Pesquisar Professores (deixe vazio para trazer todos)">
-							<span class="input-group-btn" style="padding-left: 5%">
-								<button class="btn btn-default" type="submit" name="acao"
+								<div class="input-group-append" id="button-addon4">
+									<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar">
-									<span class="glyphicon glyphicon-search">Buscar</span>
+									<span class="glyphicon glyphicon-search"><i
+										class="fas fa-search"></i></span>
 								</button>
-							</span>
+									<a href="cadProfessor.jsp" type="button" class="btn"
+							style="background-color: #000080; color: white;"><i
+							class="fas fa-user-plus"></i></a>
+								</div>
+							</div>
 						</div>
-					</div>
-
-					<div class="col-md-3">
-						<a href="cadProfessor.jsp" type="button" class="btn"
-							style="background-color: #000080; color: white; padding-left: 2%">Novo
-							Professor</a>
 					</div>
 				</div>
 			</form>
@@ -65,21 +67,26 @@
 
 						<tbody>
 							<c:forEach var="prof" items="${lista }">
-							<input type="hidden" value=${prof.id }>
+								<input type="hidden" value=${prof.id }>
 								<tr>
-									
+
 									<td>${prof.nome }</td>
 									<td>${prof.matricula}</td>
 									<td>${prof.email }</td>
 									<td class="actions"><a class="btn btn-secondary btn-xs "
 										href="ManterProfessorController.do?acao=Visualizar&id=${prof.id }"
-										style="width: 25%; background-color: #228a00; color: white;">Detalhes</a>
+										style="width: 25%; background-color: #228a00; color: white;"><i
+											class="far fa-id-card"></i></a>
 										<button type="button" class="btn  btn-xs" data-toggle="modal"
 											data-target="#modalU-${prof.id}"
-											style="width: 25%; background-color: #00458a; color: white;">Editar</button>
+											style="width: 25%; background-color: #00458a; color: white;">
+											<i class="fas fa-user-edit"></i>
+										</button>
 										<button type="button" class="btn btn-danger btn-xs"
 											data-toggle="modal" data-target="#modal-${prof.id}"
-											style="width: 25%;">Excluir</button></td>
+											style="width: 25%;">
+											<i class="fas fa-user-minus"></i>
+										</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -127,7 +134,8 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">Deseja realmente alterar as informações do professor(a) ${professor.nome}?</div>
+					<div class="modal-body">Deseja realmente alterar as
+						informações do professor(a) ${professor.nome}?</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancelar</button>

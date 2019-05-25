@@ -20,7 +20,7 @@ import service.GrupoService;
 /**
  * Servlet implementation class ListarEntregaController
  */
-@WebServlet("/ListarEntregaController")
+@WebServlet("/ListarEntregaController.do")
 public class ListarEntregaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,17 +39,16 @@ public class ListarEntregaController extends HttpServlet {
 		//SESSION
 				HttpSession session   = request.getSession();
 				String grupoIdSession = session.getAttribute("idGrupo").toString();
-				
 				session.setAttribute("pIdGrupo", grupoIdSession);
 				//BUSCA ENTREGAS DE ACORDO COM O GRUPO
-				GrupoService gs = new GrupoService();
-				ArrayList<Grupo> listGrupo = null;
+				EntregaService es = new EntregaService();
+				ArrayList<Entrega> listEntrega = null;
 				session = request.getSession();	
 
 				int idGrupo = (grupoIdSession != null) ? Integer.parseInt(grupoIdSession) : -1;
 				
-				listGrupo = gs.loadGrupoByTurma(idGrupo);
-				request.setAttribute("listGrupo", listGrupo);
+				listEntrega = es.selectNaoAvaliados(idGrupo);
+				request.setAttribute("listEntrega", listEntrega);
 				
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
