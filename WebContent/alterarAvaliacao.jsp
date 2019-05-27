@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="fonts/css/all.min.css" rel="stylesheet">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
@@ -15,10 +16,8 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
-<link href="fonts/css/all.css" rel="stylesheet">
+<link href="fonts/css/all.min.css" rel="stylesheet">
 <title>Avaliação</title>
-
-
 </head>
 <body>
 	<div class="container-fluid">
@@ -33,24 +32,6 @@
 					</div>
 
 
-					<!-- <div class="col-md-6">
-
-						<div class="input-group mb-3">
-							<input name="bAtiv" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)" disabled> 
-							<div class="input-group-append">
-								<button class="btn btn-default" type="submit" name="acao"
-									value="Buscar" >
-									<span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
-								</button>
-							</div>
-						</div>
-					</div>
-					 -->
-
-
-
-
 					<div class="col-md-6">
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -59,13 +40,9 @@
 								aria-label="First name" class="form-control"
 								placeholder="Avaliar todos" disabled> <input type="text"
 								aria-label="Last name" class="form-control"
-								placeholder="Avaliar todos" disabled> <a
-								class="btn btn-danger btn-xs"
-								href="ListarAvaliadosController.do?acao=Buscar"><i
-								class="far fa-times-circle"></i></a>
-							<button type="submit" class="btn btn-success" name="acao"
-								value="Salvar">
-								<i class="fas fa-check"></i>
+								placeholder="Avaliar todos" disabled> 
+								<a class="btn btn-danger btn-xs" href="ListarAvaliadosController.do?acao=Buscar" ><i class="fas fa-times"  style="padding-top: 3px;"></i></a>
+							<button type="submit" class="btn btn-success" name="acao" value="Salvar"> <i class="fas fa-check"></i>
 							</button>
 							</div>
 							

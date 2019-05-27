@@ -16,8 +16,7 @@
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-
-<link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #f0f0f0">
 	<!-- Barra superior com os menus de navegação -->

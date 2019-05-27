@@ -35,7 +35,6 @@ public class LoginFilter implements Filter {
 		if (logado == null && !uri.equals(path + "/login.jsp") && !uri.equals(path + "/ManterLoginController.do")) {
 			((HttpServletResponse) response).sendRedirect(path + "/login.jsp");
 		} else {
-			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}
 	}

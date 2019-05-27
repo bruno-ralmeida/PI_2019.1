@@ -10,9 +10,9 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/utils.css" rel="stylesheet" />
-<link href="fonts/css/all.css" rel="stylesheet">
+<link href="fonts/css/all.min.css" rel="stylesheet">
 <c:import url="Menu.jsp" />
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Detalhes</title>
 </head>
 <body>
@@ -53,7 +53,7 @@
 			<hr />
 			<div id="actions" class="row">
 				<div class="col-md-12 offset-1">
-					<a href="professor.jsp" class="btn btn-default" style="width: 25%;"><i class="fas fa-chevron-left" style="font-size: 20px;"></i></a>
+					<a href="professor.jsp" class="btn btn-default" style="width: 25%;"><i class="fas fa-reply"></i></a>
 					<button type="button" class="btn  btn-xs" data-toggle="modal"
 						data-target="#modalU-${professor.id}"
 						style="width: 25%; background-color: #00458a; color: white;"><i class="fas fa-user-edit"></i></button>

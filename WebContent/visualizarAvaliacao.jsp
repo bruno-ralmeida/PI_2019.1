@@ -67,7 +67,7 @@
 		</div>
 		<div class="offset-md-10">
 			<a class="btn btn-default"
-				href="ListarAvaliadosController.do?acao=Buscar" style="width: 30%">Voltar</a>
+				href="ListarAvaliadosController.do?acao=Buscar" style="width: 30%"><i class="fas fa-reply"></i></a>
 		</div>
 	</div>
 	<script src="assets/scripts/jquery.min.js"></script>

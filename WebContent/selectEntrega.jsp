@@ -18,7 +18,7 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 
-<link href="assets/style/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">

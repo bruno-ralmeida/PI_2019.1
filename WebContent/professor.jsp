@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="fonts/css/all.css" rel="stylesheet">
+<link href="fonts/css/all.min.css" rel="stylesheet">
 
 <title>Professor</title>
 
@@ -34,7 +34,10 @@
 
 					<div class="col-md-6">
 						<div class="input-group h2">
+						
+						
 							<div class="input-group">
+							
 								<input name="bProf" class="form-control" id="search" type="text"
 								placeholder="Pesquisar Professores (deixe vazio para trazer todos)">
 								<div class="input-group-append" id="button-addon4">
@@ -43,13 +46,14 @@
 									<span class="glyphicon glyphicon-search"><i
 										class="fas fa-search"></i></span>
 								</button>
-									<a href="cadProfessor.jsp" type="button" class="btn"
-							style="background-color: #000080; color: white;"><i
-							class="fas fa-user-plus"></i></a>
 								</div>
 							</div>
 						</div>
+						
 					</div>
+					<a href="cadProfessor.jsp" type="button" class="btn"
+							style="background-color: #000080; color: white;"><i
+							class="fas fa-user-plus" ></i></a>
 				</div>
 			</form>
 			<hr />

@@ -14,7 +14,7 @@
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-<link href="assets/style/bootstrap/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.min.css" rel="stylesheet">
 
 <title>Cadastro de Professor</title>
 </head>

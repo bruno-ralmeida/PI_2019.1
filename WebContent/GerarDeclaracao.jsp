@@ -17,8 +17,7 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 
-<!-- MAIN -->
-<link href="assets/style/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.min.css" rel="stylesheet">
 <title>Declaração</title>
 </head>
 

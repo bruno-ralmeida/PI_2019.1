@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="fonts/css/all.css" rel="stylesheet">
 <title>Avaliação</title>
 
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
@@ -18,7 +17,7 @@
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
 
-<link href="assets/style/utils.css" rel="stylesheet" />
+<link href="fonts/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid">
@@ -39,8 +38,7 @@
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar">
-									<span class="glyphicon glyphicon-search"><i
-										class="fas fa-search"></i></span>
+									<span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
 								</button>
 							</div>
 						</div>

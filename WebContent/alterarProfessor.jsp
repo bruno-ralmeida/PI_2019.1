@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="ISO-8859-1">
+<link href="fonts/css/all.min.css" rel="stylesheet">
+<meta charset="utf-8">
 <title>Alterar Professor</title>
 <link href="assets/style/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
 	rel="stylesheet" />
-<link href="fonts/css/all.css" rel="stylesheet">
+
 </head>
 <body>
 	<c:import url="Menu.jsp" />
