@@ -5,7 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="model.Turma"%>
 <link href="fonts/css/all.min.css" rel="stylesheet">
-<div class="continer-fluid">
+
+<script type="text/javascript">
+function selecioneTurma(){
+	if(${turmaId == null}){
+	alert("SELECIONE O SEMESTRE LETIVO E A TURMA");
+	}
+}
+</script>
+
+<div class="continer-fluid" >
 	<!-- LOGO MENU -->
 	<nav class="navbar " style="background-color: #000088;">
 		<a class="navbar-brand" href="index.jsp"> <img
@@ -58,7 +67,7 @@
 			</div>
 		</div>
 	</nav>
-	<nav class="navbar navbar-light bg-light">
+	<nav class="navbar navbar-light bg-light" onclick="selecioneTurma()">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -72,13 +81,19 @@
 				aria-haspopup="true" aria-expanded="false" style="color: black;">${usuario.nome }
 			</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<!-- VERIFICA SE É ADMINISTRADOR PARA QUE POSSA REALIZAR ALTERAÇÕES NO CADASTRO
+				<c:if test="${usuario.administrador == 1}">
+					<a class="dropdown-item" href="ManterProfessorController.do?acao=Editar&id=${usuario.id }">Editar</a>
+				</c:if> 
+					  <div class="dropdown-divider"></div>-->
 					<a class="dropdown-item" href="login.jsp">Sair</a>
 				</div></li>
 		</ul>
 		
 		
 		<!-- SÓ ATIVA O MENU SE O USUÁRIO SELECIONAR A TURMA  -->
-		<c:if test="${turmaId != null }">
+		<c:if test="${turmaId != null }"  >
+		
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 
 				<ul class="navbar-nav">

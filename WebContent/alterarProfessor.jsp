@@ -15,6 +15,20 @@
 
 </head>
 <body>
+<script>
+<!-- FUNÇÃO PARA VALIDAR A SENHA DO USUÁRIO -->
+function validarSenha(){
+	senha = document.cad.senha.value
+	cSenha = document.cad.cSenha.value
+
+	if (senha != cSenha){
+		alert("As senhas não coincidem. Verifique!")
+		return false	
+	}else{
+		return true
+	}
+}
+</script>
 	<c:import url="Menu.jsp" />
 
 
@@ -60,7 +74,7 @@
 			<div class="form-group offset-md-3">
 				<a href="professor.jsp" class="btn btn-default" style="width: 20%">Cancelar</a>
 				<button type="submit" class="btn btn-primary" name="acao"
-					value="Alterar" style="width: 20%">Salvar</button>
+					value="Alterar" style="width: 20%" onClick="return validarSenha()">Salvar</button>
 			</div>
 		</form>
 	</div>

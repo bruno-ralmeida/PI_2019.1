@@ -19,6 +19,20 @@
 <title>Cadastro de Professor</title>
 </head>
 <body>
+<script>
+<!-- FUNÇÃO PARA VALIDAR A SENHA DO USUÁRIO -->
+function validarSenha(){
+	senha = document.cad.senha.value
+	cSenha = document.cad.cSenha.value
+
+	if (senha != cSenha){
+		alert("As senhas não coincidem")
+		return false	
+	}else{
+		return true
+	}
+}
+</script>
 	<div class="container-fluid"  style="padding-top: 2%">
 
 				<form action="ManterProfessorController.do" method="post" class="form-horizontal" name="cad">
@@ -47,9 +61,9 @@
 						</div>
 					</div>
 					<div class="form-group offset-md-3" >
-					<a href="professor.jsp" class="btn btn-default" style="width: 25%;">Voltar</a>
-					<input type="reset" class="btn btn-secondary" value="Limpar Campos" style="width: 20%">
-					<button type="submit" class="btn btn-primary" name="acao" value="Criar" style="width: 20%">Salvar</button>
+					<a href="professor.jsp" class="btn btn-default" style="width: 25%; "><i class="fas fa-reply"></i></a>
+					<button type="reset" class="btn btn-secondary"  style="width: 20%; "><i class="fas fa-undo"></i></button>
+					<button type="submit" class="btn btn-success" name="acao" value="Criar" style="width: 20%" onClick="return validarSenha()"><i class="fas fa-check"></i></button>
 					</div>
 				</form>
 			</div>

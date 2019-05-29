@@ -19,7 +19,6 @@
 <link href="fonts/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #f0f0f0">
-	<!-- Barra superior com os menus de navegação -->
 	<div id="main" class="container" style="padding-top: 10%;">
 		<div class="container">
 			<div class="row">

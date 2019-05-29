@@ -8,7 +8,10 @@
 <html>
 <head>
 <link href="fonts/css/all.min.css" rel="stylesheet">
-
+<link href="assets/style/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="assets/style/bootstrap/css/bootstrap-theme.min.css"
+	rel="stylesheet" />
 <title>Avaliação</title>
 
 

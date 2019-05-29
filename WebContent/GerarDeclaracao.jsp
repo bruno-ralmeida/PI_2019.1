@@ -21,7 +21,15 @@
 <title>Declaração</title>
 </head>
 
+
+<script>
+function imprimir() {
+  window.print();
+}
+</script>
+
 <body>
+<button onclick="imprimir()" class="btn btn-primary" ><i  class="fas fa-print"></i></button>
 	<div class="container-fluid" style="margin-top: 2%">
 		<div class="container bg-light" style="padding-bottom: 2%; border: outset 5px; margin-top: 15px">
 		
@@ -59,8 +67,10 @@
 					</div>
 					
 				</div>
+				
 		</div>
 	</div>
+	
 	<script src="assets/scripts/jquery.min.js"></script>
 	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
