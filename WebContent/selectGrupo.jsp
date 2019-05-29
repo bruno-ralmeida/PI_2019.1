@@ -33,7 +33,7 @@
 					<div class="col-md-6">
 						<div class="input-group mb-3">
 							<input name="bGrupo" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)"
+								placeholder="Pesquisar Grupo (deixe vazio para trazer todos)"
 								disabled>
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"

@@ -34,7 +34,7 @@
 					<div class="col-md-6">
 						<div class="input-group mb-3">
 							<input name="bAtiv" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)" disabled> 
+								placeholder="Buscar Aluno(a) (deixe vazio para trazer todos)" disabled> 
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar" >

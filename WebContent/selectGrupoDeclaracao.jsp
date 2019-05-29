@@ -36,7 +36,7 @@
 					<div class="col-md-6">
 						<div class="input-group mb-3">
 							<input name="bGrupo" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Atividade (deixe vazio para trazer todos)"
+								placeholder="Pesquisar Grupo (deixe vazio para trazer todos)"
 								disabled>
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
@@ -71,7 +71,7 @@
 											<td>${grupo.orientador }</td>
 											<td>${grupo.nome }</td>
 											<td class="actions"><a class="btn btn-outline-info"
-												href="GerarDeclaracaoController.do?id=${grupo.id }">Gerar
+												href="GerarDeclaracaoController.do?id=${grupo.id }" target="_blank">Gerar
 													Declaração</a></td>
 										</tr>
 									</c:if>
