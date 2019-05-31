@@ -166,45 +166,7 @@ public class ProfessorDAO extends UsuarioDAO {
 		return prof;
 	}
 
-	public ArrayList<Professor> findAllId(int id) {
-		Connection conn = new ConnectionFactory().getConnection();
-
-		String sqlComand = "SELECT professor.matricula, professor.administrador,usuario.id, usuario.nome, "
-				+ "usuario.email, usuario.senha FROM Professor as professor "
-				+ "INNER JOIN Usuario as usuario ON usuario.Id = professor.professor_id " + "WHERE usuario.id  like ? ";
-
-		Professor professor = null;
-		ArrayList<Professor> prof = new ArrayList<>();
-		try (PreparedStatement stm = conn.prepareStatement(sqlComand)) {
-			stm.setString(1, "%" + id + "%");
-			ResultSet rs = stm.executeQuery();
-
-			while (rs.next()) {
-				String email = rs.getString("usuario.email");
-				String senha = rs.getString("usuario.senha");
-
-				professor = new Professor(email, senha);
-
-				professor.setId(rs.getInt("usuario.id"));
-				professor.setNome(rs.getString("usuario.nome"));
-				professor.setMatricula(rs.getString("professor.matricula"));
-				professor.setAdministrador(rs.getInt("professor.administrador"));
-				prof.add(professor);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return prof;
-	}
-
+	
 	/**
 	 * CRUD: Atualiza dados do professor
 	 */

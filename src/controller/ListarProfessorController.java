@@ -45,9 +45,6 @@ public class ListarProfessorController extends HttpServlet {
 		if (acao.equals("Buscar")) {
 			lista = ps.findAllName(buscar);
 			session.setAttribute("lista", lista);
-		} else if (acao.equals("reiniciar")) {
-			lista = ps.findAll();
-			session.setAttribute("lista", lista);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("professor.jsp");
 		dispatcher.forward(request, response);

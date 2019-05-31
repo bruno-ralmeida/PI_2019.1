@@ -37,7 +37,5 @@ public class ProfessorService {
 		return dao.findAllName(nome);
 	}
 	
-	public ArrayList<Professor> findAllId(int id){
-		return dao.findAllId(id);
-	}
+	
 }
