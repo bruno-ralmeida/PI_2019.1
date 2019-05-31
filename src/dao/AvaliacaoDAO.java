@@ -20,7 +20,6 @@ public class AvaliacaoDAO {
      */
 	
 	
-	
 	public void insertAvaliacao(Avaliacao avaliacao, int idGrupo, int id) {
 		Connection conn = new ConnectionFactory().getConnection();
 	
@@ -68,7 +67,6 @@ public class AvaliacaoDAO {
 				stm.setInt(3, listaAvaliacao.get(i).getId());
 				stm.executeUpdate();
 			}	
-			System.out.println("Alterado com sucesso");
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Erro ao alterar: " + e);
@@ -127,8 +125,6 @@ public class AvaliacaoDAO {
 				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("entrega_id")));
 				lista.add(avaliacao);
 			} 
-
-			System.out.println("Dados carregados com sucesso");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("Dados carregados SEM sucesso erro: " + e);
@@ -136,23 +132,27 @@ public class AvaliacaoDAO {
 		return lista;
 	}
 	
-	
-	public ArrayList<Avaliacao> selectAvaliados(int idProf) {
+	public ArrayList<Avaliacao> selectAvaliadosNome(int idProf, String nomeAluno) {
 		AlunoDAO alunoDAO = new AlunoDAO();
 		EntregaDAO entregaDAO = new EntregaDAO();
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		Connection conn = new ConnectionFactory().getConnection();
 		
 		String sqlComand = "SELECT A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
-							"  FROM AVALIACAO A" + 
-							"  JOIN ENTREGA E" + 
-							"    ON A.ENTREGA_ID = E.ID" + 
-							"  JOIN GRUPO G" + 
-							" WHERE G.ID = E.GRUPO_ID" + 
-							"   AND G.ORIENTADOR_ID = ?" ;
+				"							 FROM AVALIACAO A" + 
+				"							  JOIN ENTREGA E" + 
+				"							    ON A.ENTREGA_ID = E.ID" + 
+				"							  JOIN GRUPO G" + 
+				"                              JOIN USUARIO UA" + 
+				"                              ON UA.ID = A.TURMA_ALUNO_ID" + 
+				"							 WHERE G.ID = E.GRUPO_ID" + 
+				"							   AND G.ORIENTADOR_ID = ?" + 
+				"                               AND UA.NOME LIKE ?" + 
+				"                               " ;
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			stm.setInt(1,idProf);
+			stm.setString(2, "%" + nomeAluno + "%");
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
@@ -165,13 +165,11 @@ public class AvaliacaoDAO {
 				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("A.ENTREGA_ID")));
 				lista.add(avaliacao);
 			} 
-			System.out.println("Dados carregados com sucesso");
 		}catch(SQLException e) {
 			e.printStackTrace();
-			System.out.println("Dados carregados SEM sucesso erro: " + e);
+			System.out.println("Erro: " + e);
 		}
 		return lista;
 	}
-	
 	
 }

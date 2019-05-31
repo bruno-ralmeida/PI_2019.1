@@ -33,8 +33,8 @@
 
 					<div class="col-md-6">
 						<div class="input-group mb-3">
-							<input name="bAtiv" class="form-control" id="search" type="text"
-								placeholder="Buscar Aluno(a) (deixe vazio para trazer todos)" disabled> 
+							<input name="alunoAvaliado" class="form-control" id="search" type="text"
+								placeholder="Buscar Aluno(a) (deixe vazio para trazer todos)" > 
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
 									value="Buscar" >

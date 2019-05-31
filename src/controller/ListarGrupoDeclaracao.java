@@ -39,6 +39,7 @@ public class ListarGrupoDeclaracao extends HttpServlet {
 		//SESSION
 		HttpSession session   = request.getSession();
 		String turmaIdSession = (String) session.getAttribute("turmaId");
+		String grupoNome = request.getParameter("nomeGrupo");
 
 		//BUSCA GRUPO DE ACORDO COM TURMA
 		GrupoService gs = new GrupoService();
@@ -50,7 +51,7 @@ public class ListarGrupoDeclaracao extends HttpServlet {
 		if(acao.equals("Buscar")) {
 			int idTurma = (turmaIdSession != null) ? Integer.parseInt(turmaIdSession) : -1;
 			
-			lstGrupos = gs.loadGrupoByTurma(idTurma);
+			lstGrupos =  gs.selectGrupoNome(idTurma, grupoNome);
 				
 			//Verifica se o professor logado é administrador
 			Professor orientador = (Professor) session.getAttribute("usuario");

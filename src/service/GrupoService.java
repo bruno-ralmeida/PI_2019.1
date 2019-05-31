@@ -22,6 +22,11 @@ public class GrupoService {
 		return dao.loadGrupoByTurma(idTurma);
 	}
 	
+	public ArrayList<Grupo> selectGrupoNome(int idTurma, String grupoNome) {
+		return dao.selectGrupoNome(idTurma, grupoNome);
+	}
+	
+	
 	public ArrayList<Grupo> carrega() {
 		return dao.carrega();
 	}

@@ -40,7 +40,7 @@ public class AvaliacaoService {
 		return dao.selectId(id);
 	}
 
-	public ArrayList<Avaliacao> selectAvaliados(int idProf) {
-		return dao.selectAvaliados(idProf);
+	public ArrayList<Avaliacao> selectAvaliadosNome(int idProf, String nomeAluno) {
+		return dao.selectAvaliadosNome(idProf, nomeAluno);
 	}
 }

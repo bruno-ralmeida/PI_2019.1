@@ -121,9 +121,6 @@ function selecioneTurma(){
 					<li class="nav-item"><a class="nav-link"
 						href="selectGrupoDeclaracao.jsp">Declaração</a></li>
 				</ul>
-
-
-
 			</div>
 		</c:if>
 	</nav>

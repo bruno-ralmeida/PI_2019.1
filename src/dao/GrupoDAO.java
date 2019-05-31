@@ -76,6 +76,39 @@ public class GrupoDAO {
 	}
 	
 	
+	/**
+	 * Carregar grupos de acordo com a turma
+	 * @param idTurma
+	 * @return ArrayList<Grupo>
+	 */
+	public ArrayList<Grupo> selectGrupoNome(int idTurma, String grupoNome) {
+		ArrayList<Grupo> lista = new ArrayList<>();
+		ProfessorDAO professorDAO = new ProfessorDAO();
+		Connection conn = new ConnectionFactory().getConnection();
+		String sqlInsert = "SELECT DISTINCT g.nome, g.numero, g.orientador_id, g.id FROM turma t" + 
+				"						 JOIN turma_aluno a ON t.id = a.turma_id" + 
+				"						 JOIN grupo g ON a.grupo_id = g.id " + 
+				"						 WHERE a.turma_id = ?" + 
+				"						 AND g.nome like ?";
+
+		try(PreparedStatement stm = conn.prepareStatement(sqlInsert)){
+			stm.setInt(1, idTurma);
+			stm.setString(2, "%" + grupoNome + "%");
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()) {
+				Grupo grupo = new Grupo();
+				grupo.setId(rs.getInt("id"));
+				grupo.setNome(rs.getString("nome"));
+				grupo.setNumero(rs.getInt("numero"));
+				grupo.setOrientador(professorDAO.load(rs.getInt("orientador_id")));
+				lista.add(grupo);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
 	/***
 	 * 
 	 * @return Carrega todos os grupos
