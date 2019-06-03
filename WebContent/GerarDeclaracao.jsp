@@ -22,8 +22,10 @@
 <div class="d-print-none">
 	<div class="card text-center">
 		<div class="card-body">
-			<a href="selectGrupoDeclaracao.jsp" class="btn btn-default" style="width: 15%;"><i class="fas fa-reply"></i></a>
-			<button onclick="imprimir()" class="btn btn-primary" style="width:15%">
+			<a href="selectGrupoDeclaracao.jsp" class="btn btn-default"
+				style="width: 15%;"><i class="fas fa-reply"></i></a>
+			<button onclick="imprimir()" class="btn btn-primary"
+				style="width: 15%">
 				<i class="fas fa-print"></i>
 			</button>
 
@@ -45,30 +47,53 @@
 
 		<div class="row mt-30" style="padding: 2%">
 			<div class="col-md-6 offset-md-3 text-center">
-				<h4>Declaração</h4>
-				</br>
-				<p>
-					Declaro para os devidos fins que o(a) professor(a) <b>${orientador.nome}</b>
-					, participou da Banca do Trabalho de Conclusão de Curso (TCC) dos
-					discentes
-					<c:forEach var="aluno" items="${listaAlunos}">
-						<b>${aluno.nome}</b>, </c:forEach>
-					da turma de ${grupo.nome}, da Universidade São Judas Tadeu, tendo a
-					participação dos(as) professores(as):
-					<c:forEach var="professor" items="${listaProfessores}">
-						<c:if test="${professor.nome != orientador.nome}">
-							<b>${professor.nome}, </b>
-						</c:if>
-					</c:forEach>
-				</p>
+				<h1>Declaração</h1>
+				<h3 style="font-size: 24px;">
+					Declaro, para os devidos fins, que o professor
+					</h3>
+					<h3 style="font-size: 24px;">${orientador.nome}</h3>
+					<p>
+						participou, na qualidade de professor orientador, da Banca de
+						Trabalho de Conclusão de Curso de Graduação dos alunos
+						<c:forEach var="aluno" items="${listaAlunos}">
+							<b>${aluno.nome}</b>, </c:forEach>
+						no dia
+						<fmt:formatDate pattern="dd/MM/yyyy" value="${banca.data }" />
+						, nesta Universidade, sob o título:
+						<c:forEach var="entrega" items="${listEntrega }">${entrega.atividade }</c:forEach>
+					</p>
 
-				<p>
-					São Paulo,
-					<fmt:formatDate pattern="dd/MM/yyyy" value="${banca.data}" />
-				</p>
+					<p>
+						São Paulo, <fmt:formatDate pattern="dd/MM/yyyy" value="${listAvaliacao.dataAvaliacao}"/>.
+					</p>
+
+					<div class="table-responsive col-md-12">
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td>Banca Examinadora</td>
+								</tr>
+								<tr>
+									<td>Professor orientador: <c:forEach var="professor"
+											items="${listaProfessores}">
+											<c:if test="${professor.nome != orientador.nome}">
+												<b>${professor.nome}, </b>
+											</c:if>
+										</c:forEach>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 			</div>
 
 		</div>
+		<p style="text-align: center;">Professora Dra. Ana Paula Gonçalves Serra</br> Coordenadora dos
+						cursos Ciência da Computação, Engenharia de Computação, Sistemas
+						de Informação e</br> Tecnologia em Análise e Desenvolvimento de
+						Sistemas
+					</p>
+		
 
 	</div>
 </div>
