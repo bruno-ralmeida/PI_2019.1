@@ -31,8 +31,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">Nota e Comentario</span>
 							</div>
-							<input type="number" min="0" max="10" step="0.01" aria-label="First name" class="form-control" placeholder="Avaliar todos" disabled>
-							<input type="text" aria-label="Last name" class="form-control" placeholder="Avaliar todos" disabled>
+							<input name="nTodos" type="number" min="0" max="10" step="0.01" aria-label="First name" class="form-control" placeholder="Avaliar todos">
+							<input name="cTodos" type="text" aria-label="Last name" class="form-control" placeholder="Avaliar todos">
 						</div>
 					</div>
 					<button type="submit" class="btn btn-success" name="acao"
@@ -49,7 +49,7 @@
 									<th>Nome</th>
 									<th>E-mail</th>
 									<th>Nota</th>
-									<th>Descrição</th>
+									<th>Comentário</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -63,7 +63,7 @@
 										<td style="width: 15%"><input name="n${u.id }"
 											class="form-control" type="number" min="0" max="10"
 											step="0.01" ></td>
-										<td><input name="comentario${u.id }" class="form-control"
+										<td><input name="c${u.id }" class="form-control"
 											type="text"></td>
 									</tr>
 								</c:forEach>

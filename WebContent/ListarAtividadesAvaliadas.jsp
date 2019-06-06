@@ -84,14 +84,10 @@
 	<c:forEach var="a" items="${listAvaliados }">
 		<div class="modal fade" id="modalU-${a.entrega.id}"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog" role="document">
+			<div class="modal-dialog modal-dialog-centered"  role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
 					</div>
 					<div class="modal-body">Deseja realizar alterações na
 						avaliação do grupo de ${a.aluno.nome} referente a entrega da

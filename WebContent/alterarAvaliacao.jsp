@@ -26,28 +26,22 @@
 			<form
 				action="ManterAvaliacaoController.do?idEntrega=${listaAvaliacao[1].entrega.id}"
 				method="post">
+
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-9">
 						<h4>Avaliar alunos</h4>
 					</div>
 
-
-					<div class="col-md-6">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">Nota e Comentario</span>
-								<input type="number" min="0" max="10" step="0.01"
-								aria-label="First name" class="form-control"
-								placeholder="Avaliar todos" disabled> <input type="text"
-								aria-label="Last name" class="form-control"
-								placeholder="Avaliar todos" disabled> 
-								<a class="btn btn-danger btn-xs" href="ListarAvaliadosController.do?acao=Buscar" ><i class="fas fa-times"  style="padding-top: 3px;"></i></a>
-							<button type="submit" class="btn btn-success" name="acao" value="Salvar"> <i class="fas fa-check"></i>
-							</button>
-							</div>
-							
-						</div>
+					<div class="align-items-end">
+						<a  class="btn btn-danger btn-xs"
+							href="ListarAvaliadosController.do?acao=Buscar" > <i
+							class="fas fa-times"> Cancelar </i></a>
+						<button type="submit" class="btn btn-success" name="acao"
+							value="Salvar" >
+							<i class="fas fa-check"> Salvar </i>
+						</button>
 					</div>
+
 
 				</div>
 				<hr />
@@ -82,6 +76,7 @@
 							<thead>
 							</tbody>
 						</table>
+
 					</div>
 				</div>
 			</form>
