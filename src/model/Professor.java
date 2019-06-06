@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ProfessorDAO;
@@ -67,7 +68,12 @@ public class Professor extends Usuario {
 
 	public void delete() {
 		ProfessorDAO dao = new ProfessorDAO();		
-		dao.delete(this.getId());
+		try {
+			dao.delete(this.getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 	
 	@Override

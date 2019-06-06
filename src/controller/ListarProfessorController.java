@@ -42,10 +42,11 @@ public class ListarProfessorController extends HttpServlet {
 		String acao = request.getParameter("acao");
 		HttpSession session = request.getSession();
 
-		if (acao.equals("Buscar")) {
 			lista = ps.findAllName(buscar);
 			session.setAttribute("lista", lista);
-		}
+			String error = null;
+			session.setAttribute("erroProf", error);
+			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("professor.jsp");
 		dispatcher.forward(request, response);
 	}

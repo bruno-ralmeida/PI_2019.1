@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ProfessorDAO;
@@ -21,9 +22,9 @@ public class ProfessorService {
 		dao.update(professor);
 	}
 	
-	public void delete(int id) {
+	public void delete(int id) throws SQLException {
 		dao.delete(id);
-	}
+}
 	
 	public Professor load(int id) {
 		return dao.load(id);

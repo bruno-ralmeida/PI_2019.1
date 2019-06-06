@@ -22,9 +22,20 @@
 
 </head>
 <body>
+
+
 	<div class="container-fluid">
 		<div class="container" style="padding-top: 2%">
 			<form action="ListarProfessorController.do" method="post">
+				<c:if test="${erroProf != null}">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						<strong>Erro!</strong> Não foi possível excluir o professor. <a
+							type="button" class="close" data-dismiss="alert"
+							aria-label="Close"
+							href="MListarProfessorController.do.do?acao=Buscar&">&times;</a>
+					</div>
+				</c:if>
 				<div class="row">
 					<div class="col-md-3">
 						<h3>
@@ -33,27 +44,30 @@
 					</div>
 
 					<div class="col-md-6">
+
 						<div class="input-group h2">
-						
-						
+
+
 							<div class="input-group">
-							
+
 								<input name="bProf" class="form-control" id="search" type="text"
-								placeholder="Pesquisar Professores (deixe vazio para trazer todos)">
+									placeholder="Pesquisar Professores (deixe vazio para trazer todos)"
+									style="width: 80px;">
 								<div class="input-group-append" id="button-addon4">
 									<button class="btn btn-default" type="submit" name="acao"
-									value="Buscar">
-									<span class="glyphicon glyphicon-search"><i
-										class="fas fa-search"></i></span>
-								</button>
+										value="Buscar">
+										<span class="glyphicon glyphicon-search"><i
+											class="fas fa-search"></i></span>
+									</button>
 								</div>
+									<div class="input-group-append" id="button-addon4">
+								<a type="button" href="cadProfessor.jsp" class="btn"
+									style="background-color: #000080; color: white;"><i
+									class="fas fa-user-plus"></i></a>
+									</div>
 							</div>
 						</div>
-						
 					</div>
-					<a href="cadProfessor.jsp" type="button" class="btn"
-							style="background-color: #000080; color: white;"><i
-							class="fas fa-user-plus" ></i></a>
 				</div>
 			</form>
 			<hr />
@@ -103,7 +117,7 @@
 	<c:forEach var="professor" items="${lista }">
 		<div class="modal fade" id="modal-${professor.id}" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Alerta!</h5>
@@ -129,7 +143,7 @@
 	<c:forEach var="professor" items="${lista }">
 		<div class="modal fade" id="modalU-${professor.id}"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
@@ -152,9 +166,8 @@
 		</div>
 	</c:forEach>
 
-
-
 </body>
+
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>

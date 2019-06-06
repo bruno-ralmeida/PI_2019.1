@@ -6,15 +6,8 @@
 <%@page import="model.Turma"%>
 <link href="fonts/css/all.min.css" rel="stylesheet">
 
-<script type="text/javascript">
-function selecioneTurma(){
-	if(${turmaId == null}){
-	alert("SELECIONE O SEMESTRE LETIVO E A TURMA");
-	}
-}
-</script>
 
-<div class="continer-fluid" >
+<div class="continer-fluid">
 	<!-- LOGO MENU -->
 	<nav class="navbar " style="background-color: #000088;">
 		<a class="navbar-brand" href="index.jsp"> <img
@@ -40,6 +33,7 @@ function selecioneTurma(){
 									${periodo.semestreLetivo}º / ${periodo.anoLetivo}</option>
 							</c:if>
 							<c:if test="${periodoSelected != item}">
+
 								<option value="${item}">${periodo.semestreLetivo}º/
 									${periodo.anoLetivo}</option>
 							</c:if>
@@ -67,7 +61,7 @@ function selecioneTurma(){
 			</div>
 		</div>
 	</nav>
-	<nav class="navbar navbar-light bg-light" onclick="selecioneTurma()">
+	<nav class="navbar navbar-light bg-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -81,47 +75,39 @@ function selecioneTurma(){
 				aria-haspopup="true" aria-expanded="false" style="color: black;">${usuario.nome }
 			</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				<!-- VERIFICA SE É ADMINISTRADOR PARA QUE POSSA REALIZAR ALTERAÇÕES NO CADASTRO
-				<c:if test="${usuario.administrador == 1}">
-					<a class="dropdown-item" href="ManterProfessorController.do?acao=Editar&id=${usuario.id }">Editar</a>
-				</c:if> 
-					  <div class="dropdown-divider"></div>-->
 					<a class="dropdown-item" href="login.jsp">Sair</a>
 				</div></li>
 		</ul>
-		
-		
-		<!-- SÓ ATIVA O MENU SE O USUÁRIO SELECIONAR A TURMA  -->
-		<c:if test="${turmaId != null }"  >
-		
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-				<ul class="navbar-nav">
-					<!-- VERIFICAÇÃO DE ADMINISTRADOR -->
-					<c:if test="${usuario.administrador == 1}">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> Professor </a>
-							<div class="dropdown-menu"
-								aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="cadProfessor.jsp">Novo</a> <a
-									class="dropdown-item" href="professor.jsp">Buscar</a>
-							</div></li>
-					</c:if>
+
+
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+			<ul class="navbar-nav">
+				<!-- VERIFICAÇÃO DE ADMINISTRADOR -->
+				<c:if test="${usuario.administrador == 1}">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Avaliações </a>
+						aria-haspopup="true" aria-expanded="false"> Professor </a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="selectGrupo.jsp">Novo</a> <a
-								class="dropdown-item" href="ListarAtividadesAvaliadas.jsp">Buscar</a>
+							<a class="dropdown-item" href="cadProfessor.jsp">Novo</a> <a
+								class="dropdown-item" href="professor.jsp">Buscar</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						href="selectGrupoDeclaracao.jsp">Declaração</a></li>
-				</ul>
-			</div>
-		</c:if>
+				</c:if>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Avaliações </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="selectGrupo.jsp">Novo</a> <a
+							class="dropdown-item" href="ListarAtividadesAvaliadas.jsp">Buscar</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					href="selectGrupoDeclaracao.jsp">Declaração</a></li>
+			</ul>
+		</div>
 	</nav>
+
 </div>

@@ -52,6 +52,7 @@ public class ManterLoginController extends HttpServlet {
 		//Carrega os dados do BD
 		UsuarioService us = new UsuarioService();
 		int id = us.logar(email, senha);	
+		String error = null;
 		
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();	
@@ -67,14 +68,14 @@ public class ManterLoginController extends HttpServlet {
 				view.forward(request, response);
 			}else {
 				response.sendRedirect("login.jsp");
-				
+				error = "Usuário ou senha inváidos!";
 			}
 		}else {
 			response.sendRedirect("login.jsp");
-			
+			error = "Usuário ou senha inváidos!";
 		}	
 		
-			
+		session.setAttribute("erroLogin", error);
 		
 	}
 

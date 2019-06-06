@@ -46,12 +46,10 @@ public class ListarAvaliadosController extends HttpServlet {
 		ArrayList<Avaliacao> listAvaliados = null;
 		
 	
-		if (acao.equals("Buscar")) {
 			System.out.println(prof.getId());
 			listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno);
 			
 			session.setAttribute("listAvaliados", listAvaliados);
-		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
 		dispatcher.forward(request, response);

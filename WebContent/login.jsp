@@ -24,12 +24,20 @@
 			<div class="row">
 				<div class="col-md-4 col-md-offset-12" style="margin: 0 auto;">
 					<div class="panel panel-default">
-						<div style="background-color: #000080; border-radius: 10px; padding:  5%">
-						<div align="center">
-							<img alt="" src="Img/LogoUsjtMin.png">
+						<div
+							style="background-color: #000080; border-radius: 10px; padding: 5%">
+							<div align="center">
+								<img alt="" src="Img/LogoUsjtMin.png">
 							</div>
 						</div>
+							
+									
 						<div class="panel-body">
+						<!-- Erro de Login -->
+						<c:if test="${erroLogin != null}">
+						</br>
+						<div class="alert alert-danger" role="alert">${erroLogin }</div>
+						</c:if>		
 							<form action="ManterLoginController.do" method="post"
 								style="margin-top: 5%;">
 								<fieldset>

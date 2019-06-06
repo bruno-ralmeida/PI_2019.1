@@ -52,8 +52,6 @@ public class ListarTurmaController extends HttpServlet {
 		Professor prof = (Professor) session.getAttribute("usuario");
 		
 		if (acao.equals("buscar")) {
-			System.out.println("prof" + prof.getId());
-			System.out.println("ano: " + pAno );
 			System.out.println("Semestre: " + pSemestre);
 		listTurma = ts.selectTurmaPeriodo(prof.getId(), pAno, pSemestre);
 		session.setAttribute("listTurma", listTurma);

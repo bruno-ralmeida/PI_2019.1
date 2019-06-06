@@ -166,7 +166,6 @@ public class ProfessorDAO extends UsuarioDAO {
 		return prof;
 	}
 
-	
 	/**
 	 * CRUD: Atualiza dados do professor
 	 */
@@ -195,9 +194,12 @@ public class ProfessorDAO extends UsuarioDAO {
 	}
 
 	/**
-	 * CRUD: Excluir professor
+	 * CRUD: Deleta professor
+	 * 
+	 * @param conn: Connection
+	 * @throws SQLException
 	 */
-	public void delete(int id) {
+	public void delete(int id) throws SQLException {
 		Connection conn = new ConnectionFactory().getConnection();
 
 		String sqlComand = "DELETE FROM Professor WHERE professor_id = ?";
@@ -205,7 +207,7 @@ public class ProfessorDAO extends UsuarioDAO {
 			stm.setInt(1, id);
 			stm.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				conn.close();

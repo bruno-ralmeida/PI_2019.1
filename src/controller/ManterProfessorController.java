@@ -43,6 +43,7 @@ public class ManterProfessorController extends HttpServlet {
 		String pSenha = request.getParameter("senha");
 		String pMatricula = request.getParameter("matricula");
 		String pAdministrador = request.getParameter("administrador");
+		
 
 		if (pAdministrador == null || pAdministrador.isEmpty())
 			pAdministrador = "0";
@@ -65,8 +66,11 @@ public class ManterProfessorController extends HttpServlet {
 		ProfessorService ps = new ProfessorService();
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
+		String error = null;
+		
 		// CRIAR
 		if (pAcao.equals("Criar")) {
+			error = null;
 			ps.create(professor);
 			ArrayList<Professor> lista = new ArrayList<>();
 			lista.add(professor);
@@ -74,12 +78,21 @@ public class ManterProfessorController extends HttpServlet {
 			view = request.getRequestDispatcher("professor.jsp");
 			// EXCLUIR
 		} else if (pAcao.equals("Excluir")) {
-			ps.delete(professor.getId());
-			ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
-			lista.remove(busca(professor, lista));
+			
+			try {
+				ps.delete(professor.getId());
+				ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+				lista.remove(busca(professor, lista));
+			} catch (Exception e) {
+				if(e != null) {
+					error = "Não Foi possivel excluir o professor";
+					
+					}
+			}
 			view = request.getRequestDispatcher("professor.jsp");
 			// ALTERAR
 		} else if (pAcao.equals("Alterar")) {
+			error = null;
 			ps.update(professor);
 			ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
 			int pos = busca(professor, lista);
@@ -89,18 +102,21 @@ public class ManterProfessorController extends HttpServlet {
 			request.setAttribute("professor", professor);
 			view = request.getRequestDispatcher("detProfessor.jsp");
 		} else if (pAcao.equals("Visualizar")) {
+			error = null;
 			professor = ps.load(professor.getId());
 			request.setAttribute("professor", professor);
 			view = request.getRequestDispatcher("detProfessor.jsp");
 		} else if (pAcao.equals("Editar")) {
+			error = null;
 			professor = ps.load(professor.getId());
 			request.setAttribute("professor", professor);
 			view = request.getRequestDispatcher("alterarProfessor.jsp");
 		}
-
+		session.setAttribute("erroProf", error);
 		view.forward(request, response);
 
 	}
+
 	public int busca(Professor professor, ArrayList<Professor> lista) {
 		Professor to;
 		for (int i = 0; i < lista.size(); i++) {

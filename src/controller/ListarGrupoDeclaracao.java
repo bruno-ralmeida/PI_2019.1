@@ -23,60 +23,60 @@ import service.ProfessorBancaService;
 @WebServlet("/ListarGrupoDeclaracao.do")
 public class ListarGrupoDeclaracao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ListarGrupoDeclaracao() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//SESSION
-		HttpSession session   = request.getSession();
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ListarGrupoDeclaracao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// SESSION
+		HttpSession session = request.getSession();
 		String turmaIdSession = (String) session.getAttribute("turmaId");
 		String grupoNome = request.getParameter("nomeGrupo");
 
-		//BUSCA GRUPO DE ACORDO COM TURMA
+		// BUSCA GRUPO DE ACORDO COM TURMA
 		GrupoService gs = new GrupoService();
 		ArrayList<Grupo> lstGrupos = null;
-				
-		//Pega as informacoes principais da pagina
-		String acao = request.getParameter("acao");
 
-		if(acao.equals("Buscar")) {
-			int idTurma = (turmaIdSession != null) ? Integer.parseInt(turmaIdSession) : -1;
-			
-			lstGrupos =  gs.selectGrupoNome(idTurma, grupoNome);
-				
-			//Verifica se o professor logado é administrador
-			Professor orientador = (Professor) session.getAttribute("usuario");
-			if(orientador.getAdministrador() == 0) {
-				//Verifica quais grupos o professor participou da banca
-				ProfessorBancaService pbs = new ProfessorBancaService();
-				Professor professorLogado = (Professor) session.getAttribute("usuario");
-				ArrayList<Grupo> lstGruposParticipados = pbs.gruposParticipados(lstGrupos, professorLogado);
-				
-				request.setAttribute("lstGrupo", lstGruposParticipados);
-			}
-			
-			request.setAttribute("lstGrupo", lstGrupos);
+		// Pega as informacoes principais da pagina
+		int idTurma = (turmaIdSession != null) ? Integer.parseInt(turmaIdSession) : -1;
+
+		lstGrupos = gs.selectGrupoNome(idTurma, grupoNome);
+
+		// VERIFICAÇÃO -- O PROFESSOR LOGADO É ADMINISTRADOR
+		Professor orientador = (Professor) session.getAttribute("usuario");
+		if (orientador.getAdministrador() == 0) {
+			// Verifica quais grupos o professor participou da banca
+			ProfessorBancaService pbs = new ProfessorBancaService();
+			Professor professorLogado = (Professor) session.getAttribute("usuario");
+			ArrayList<Grupo> lstGruposParticipados = pbs.gruposParticipados(lstGrupos, professorLogado);
+
+			request.setAttribute("lstGrupo", lstGruposParticipados);
 		}
-		
+
+		request.setAttribute("lstGrupo", lstGrupos);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupoDeclaracao.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}	
+	}
 
 }
