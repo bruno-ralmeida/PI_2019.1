@@ -36,7 +36,7 @@
 
 <div class="container-fluid" style="margin-top: 2%">
 	<div class="container bg-light"
-		style="padding-bottom: 2%; border: outset 5px; margin-top: 15px">
+		style="padding-bottom: 2%">
 
 		<!-- LOGO PRINCIPAL -->
 		<div class="row center-block">
@@ -63,8 +63,7 @@
 				<p>
 					São Paulo,
 					<fmt:formatDate pattern="dd/MM/yyyy"
-						value="${listAvaliacao.dataAvaliacao}" />
-					.
+						value="${dataAtual}" />.
 				</p>
 
 				<div class="table-responsive col-md-12">
@@ -102,7 +101,15 @@
 	function imprimir() {
 		window.print();
 	}
+	
+	function RetornaDataHoraAtual(){
+		  var dNow = new Date();
+		  var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear() + ' ' + dNow.getHours() + ':' + dNow.getMinutes();
+		  return localdate;
+		}
 </script>
+
+
 
 <body>
 

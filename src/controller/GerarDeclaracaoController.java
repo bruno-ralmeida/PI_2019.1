@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -74,10 +75,18 @@ public class GerarDeclaracaoController extends HttpServlet {
 		request.setAttribute("banca", banca);
 		request.setAttribute("listaProfessores", listaProfessores);
 		request.setAttribute("grupo", grupo);
-		
+		request.setAttribute("dataAtual", pegarData());
 		RequestDispatcher dispatcher = request.getRequestDispatcher("GerarDeclaracao.jsp");
 		dispatcher.forward(request, response);
 		
+		
+	}
+	public static Date pegarData() {
+		java.util.Date dataUtil;
+		Date data = new Date(System.currentTimeMillis());
+		dataUtil = data;
+		java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+		return dataSql;
 	}
 
 }

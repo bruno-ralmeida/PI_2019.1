@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,6 +51,8 @@ public class ListarAvaliadosController extends HttpServlet {
 			listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno);
 			
 			session.setAttribute("listAvaliados", listAvaliados);
+			
+			
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
 		dispatcher.forward(request, response);
@@ -62,5 +65,7 @@ public class ListarAvaliadosController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
 
 }
