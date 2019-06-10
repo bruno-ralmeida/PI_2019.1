@@ -27,19 +27,19 @@ public class LogFilter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
-		Usuario usuario = (Usuario)session.getAttribute("logado");
+		Usuario usuario = (Usuario)session.getAttribute("usuario");
 		
 		if(usuario == null){
-			System.out.println(req.getParameter("command"));
+			System.out.println(req.getParameter("login.jsp"));
 		} else {
-			System.out.println(usuario.getNome()+ " -> " + req.getParameter("command"));
+			System.out.println(usuario.getNome()+ " -> " + req.getParameter("index.jsp"));
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 		if(usuario == null){
-			System.out.println(req.getParameter("command"));
+			System.out.println(req.getParameter("login.jsp"));
 		} else {
-			System.out.println(req.getParameter("command")+" -> " + usuario.getNome());
+			System.out.println(req.getParameter("index.jsp")+" -> " + usuario.getEmail());
 		}
 	}
 

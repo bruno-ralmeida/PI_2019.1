@@ -33,7 +33,7 @@
 						<strong>Erro!</strong> Não foi possível excluir o professor. <a
 							type="button" class="close" data-dismiss="alert"
 							aria-label="Close"
-							href="MListarProfessorController.do.do?acao=Buscar&">&times;</a>
+							href="ListarProfessorController.do?acao=Buscar&">&times;</a>
 					</div>
 				</c:if>
 				<div class="row">

@@ -75,7 +75,7 @@
 				aria-haspopup="true" aria-expanded="false" style="color: black;">${usuario.nome }
 			</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="login.jsp">Sair</a>
+					<a class="dropdown-item" href="ManterUsuarioController?acao=Sair">Sair</a>
 				</div></li>
 		</ul>
 
