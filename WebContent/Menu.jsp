@@ -43,17 +43,17 @@
 
 				<form name="turmaMenu" class="form-turma float-left col-lg-6"
 					method=post action=LoginManter>
-					<select name="turma" class="custom-select"
-						onchange="javascript:document.turmaMenu.submit();">
+					<select name="turma" class="custom-select" 
+						onchange="javascript:document.turmaMenu.submit();" >
 
-						<option value="" selected disabled>Turmas</option>
-
+						<option value="" selected disabled >Turmas</option>
+						
 						<c:forEach var="turma" items="${lstTurmas}">
 							<c:if test="${turmaId == turma.id}">
-								<option selected value="${turma.id}">${turma.sigla}</option>
+								<option selected value="${turma.id}" >${turma.sigla}</option>
 							</c:if>
 							<c:if test="${turmaId != turma.id}">
-								<option value="${turma.id}">${turma.sigla}</option>
+								<option value="${turma.id}" >${turma.sigla}</option>
 							</c:if>
 						</c:forEach>
 					</select>
@@ -111,3 +111,8 @@
 	</nav>
 
 </div>
+<script>
+	function r(){
+		window.location.href = "http://localhost:8080/PI_2019.1/index.jsp"
+	}
+</script>
