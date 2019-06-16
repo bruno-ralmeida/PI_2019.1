@@ -21,55 +21,67 @@
 <link href="fonts/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid">
-	<div class="container" style="padding-top: 2%">
+	<div class="container-fluid">
+		<div class="container" style="padding-top: 2%">
 
-		<form action="ListarEntregaController.do" method="post">
-			<div class="row">
-				<div class="col-md-8">
-					<h3>
-						<strong>Selecione uma atividade</strong>
-					</h3>
+			<form action="ListarEntregaController.do" method="post">
+				<div class="row">
+					<div class="col-md-8">
+						<h3>
+							<strong>Selecione uma atividade</strong>
+						</h3>
+					</div>
+
 				</div>
-
-			</div>
-		</form>
-		<hr />
-		<div id="list" class="row">
+			</form>
+			<hr />
+			<div id="list" class="row">
 
 
-			<div class="table-responsive col-md-12">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Grupo</th>
-							<th>Atividade</th>
-							<th class="actions">Ações</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<c:forEach var="entrega" items="${listEntrega }">
-							<input type="hidden" value=${entrega.id }>
+				<div class="table-responsive col-md-12">
+					<table class="table table-striped">
+						<thead>
 							<tr>
-
-								<td>${entrega.grupo.id }</td>
-								<td>${entrega.atividade }</td>
-
-
-
-								<td class="actions"><a class="btn btn-success btn-xs"
-									href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }&idEntrega=${entrega.id }&idGrupo=${entrega.grupo.id }"
-									style="padding: 2%">Selecionar</a></td>
+								<th>Grupo</th>
+								<th>Atividade</th>
+								<th>Link</th>
+								<th class="actions">Ações</th>
 							</tr>
-						</c:forEach>
-					<thead>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+
+							<c:forEach var="entrega" items="${listEntrega }">
+								<input type="hidden" value=${entrega.id }>
+								<tr>
+
+									<td>${entrega.grupo.id }</td>
+									<td>${entrega.atividade }</td>
+						
+									<c:choose>
+   									<c:when test="${entrega.link != null}">
+   									
+     								<td><a href="${entrega.link }" target="blank"> Visualizar entrega</a></td>
+     								
+   									</c:when>    
+  									<c:otherwise>
+  									
+      								<td> - </td>
+      								
+    								</c:otherwise>
+									</c:choose>
+																
+									<td class="actions"><a class="btn btn-success btn-xs"
+										href="ManterAvaliacaoController.do?acao=Entrega&id=${entrega.id }&idEntrega=${entrega.id }&idGrupo=${entrega.grupo.id }"
+										style="padding: 2%">Selecionar</a></td>
+								</tr>
+							</c:forEach>
+						<thead>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </body>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>

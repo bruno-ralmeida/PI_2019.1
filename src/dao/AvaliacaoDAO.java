@@ -146,7 +146,6 @@ public class AvaliacaoDAO {
 				"							                              JOIN USUARIO UA" + 
 				"				                                              ON UA.ID = A.TURMA_ALUNO_ID" + 
 				"				                                              JOIN TURMA T" + 
-				"				                                             ON T.ID =  A.TURMA_ALUNO_ID" + 
 				"															 WHERE G.ID = E.GRUPO_ID" + 
 				"															   AND G.ORIENTADOR_ID = ?" + 
 				"															   AND UA.NOME LIKE ?" + 

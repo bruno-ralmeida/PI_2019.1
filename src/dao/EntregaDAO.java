@@ -34,6 +34,7 @@ public class EntregaDAO {
 				entrega.setAtividade(as.load(rs.getInt("atividade_id")));
 				entrega.setId(rs.getInt("id"));
 				entrega.setDtCadastro(rs.getDate("dt_cadastro"));
+				entrega.setLink(rs.getString("link"));
 			} 
 		
 		}catch(SQLException e) {
@@ -69,6 +70,7 @@ public class EntregaDAO {
 				entrega.setDtCadastro(rs.getDate("dt_cadastro"));
 				entrega.setAtividade(dao.load(rs.getInt("atividade_id")));
 				entrega.setGrupo(grupoDAO.load(rs.getInt("grupo_id")));
+				entrega.setLink(rs.getString("link"));
 				listaEntrega.add(entrega);
 			} 
 		

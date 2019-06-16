@@ -12,6 +12,7 @@ public class Entrega {
 	private Grupo grupo;
 	private Atividade atividade;
 	private Date dataCadastro;
+	private String link;
 	
 	public Entrega() {
 		// TODO Auto-generated constructor stub
@@ -29,6 +30,30 @@ public class Entrega {
 		this.dataCadastro = dtCadastro;
 	}
 	
+	public Entrega(Grupo grupo, Atividade atividade, int id, Date dtCadastro, String link) {
+		this.id = id;
+		this.grupo = grupo;
+		this.atividade = atividade;
+		this.dataCadastro = dtCadastro;
+		this.link = link;
+	}
+	
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	public Grupo getGrupo() {
 		return this.grupo;
 	}
