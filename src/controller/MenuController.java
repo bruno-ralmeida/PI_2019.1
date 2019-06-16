@@ -66,6 +66,7 @@ public class MenuController extends HttpServlet {
 		request.setAttribute("lstTurmas", lstTurmas);
 		session.setAttribute("lstTurmas", lstTurmas);
 		session.setAttribute("turmaId", turmaId);
+		session.setAttribute("listAvaliados", null);
 		//REDIRECIONAMENTO DE PÁGINA
 		String uri = request.getHeader("referer");
 		String pageName = uri.substring(uri.lastIndexOf("/")+1);

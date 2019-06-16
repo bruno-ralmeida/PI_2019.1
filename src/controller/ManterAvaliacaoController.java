@@ -86,9 +86,14 @@ public class ManterAvaliacaoController extends HttpServlet {
 
 		if (pAcao.equals("Buscar")) {
 			ArrayList<Grupo> listGrupo = null;
-			session = request.getSession();
-			listGrupo = gs.loadGrupoByTurma(id);
-			session.setAttribute("listGrupo", listGrupo);
+			try {
+				String idT = (String) session.getAttribute("turmaId");
+				int idTurma = Integer.parseInt(idT);
+				listGrupo = gs.loadGrupoByTurma(idTurma);
+				session.setAttribute("listGrupo", listGrupo);
+			} catch (Exception e) {
+				// COLOCAR MENSAGEM DE LISTA VAZIA
+			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupo.jsp");
 			dispatcher.forward(request, response);
 		}

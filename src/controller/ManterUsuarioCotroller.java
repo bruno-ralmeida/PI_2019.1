@@ -40,6 +40,8 @@ public class ManterUsuarioCotroller extends HttpServlet {
 			session.setAttribute("erro", null);
 			session.setAttribute("periodoSelected", null);
 			session.setAttribute("turmaId", null);
+			session.setAttribute("listAluno", null);
+			session.setAttribute("listAvaliacao", null);
 			response.sendRedirect("Login.jsp");
 		}
 	}

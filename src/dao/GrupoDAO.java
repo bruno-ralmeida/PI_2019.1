@@ -52,10 +52,10 @@ public class GrupoDAO {
 		ArrayList<Grupo> lista = new ArrayList<>();
 		ProfessorDAO professorDAO = new ProfessorDAO();
 		Connection conn = new ConnectionFactory().getConnection();
-		String sqlInsert = "SELECT DISTINCT g.nome, g.numero, g.orientador_id, g.id FROM turma t "
-						 + "JOIN turma_aluno a ON t.id = a.turma_id "
-						 + "JOIN grupo g ON a.grupo_id = g.id "
-						 + "WHERE a.turma_id = ?";
+		String sqlInsert = "SELECT DISTINCT g.nome, g.numero, g.orientador_id, g.id FROM turma t\n" + 
+				"						 JOIN turma_aluno a ON t.id = a.turma_id\n" + 
+				"						 JOIN grupo g ON a.grupo_id = g.id\n" + 
+				"						 WHERE t.id = ?";
 
 		try(PreparedStatement stm = conn.prepareStatement(sqlInsert)){
 			stm.setInt(1, idTurma);

@@ -37,7 +37,7 @@ public class ListarAvaliadosController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String acao = request.getParameter("acao");
+		String pAcao = request.getParameter("acao");
 		String nomeAluno = request.getParameter("alunoAvaliado");
 
 		HttpSession session = request.getSession();
@@ -46,18 +46,23 @@ public class ListarAvaliadosController extends HttpServlet {
 
 		AvaliacaoService as = new AvaliacaoService();
 		ArrayList<Avaliacao> listAvaliados = null;
-
-		try {
-			String idT = (String) session.getAttribute("turmaId");
-			idTurma = Integer.parseInt(idT);
-			listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno, idTurma);
+		if (pAcao.equals("Buscar")) {
+			try {
+				
+				String idT = (String) session.getAttribute("turmaId");
+				idTurma = Integer.parseInt(idT);
+				System.out.println(idTurma);
+				listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno, idTurma);
+				
+			} catch (Exception e) {
+				// COLOCAR MENSAGEM DE LISTA VAZIA
+			}
 			session.setAttribute("listAvaliados", listAvaliados);
-		} catch (Exception e) {
-			//COLOCAR MENSAGEM DE LISTA VAZIA
+			RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
+			dispatcher.forward(request, response);
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
-		dispatcher.forward(request, response);
+	
 	}
 
 	/**
