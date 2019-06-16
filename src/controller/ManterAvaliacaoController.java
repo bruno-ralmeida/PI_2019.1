@@ -13,15 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
-import dao.AlunoDAO;
-import dao.EntregaDAO;
 import model.Aluno;
 import model.Avaliacao;
 import model.Entrega;
 import model.Grupo;
-import model.Professor;
 import service.AlunoService;
 import service.AvaliacaoService;
 import service.EntregaService;
@@ -113,46 +108,45 @@ public class ManterAvaliacaoController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacaoAluno.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("avaliacao")) {
+			
 			listAluno = (ArrayList<Aluno>) session.getAttribute("listAluno");
 			ArrayList<Avaliacao> listAvaliacao = new ArrayList<Avaliacao>();
 			int idGrupoSel = (int) session.getAttribute("idGrupo");
 			int idEntregaSel = (int) session.getAttribute("idEntrega");
+			
 			String pNotaTodos = request.getParameter("nTodos");
 			String pComentariosTodos = request.getParameter("cTodos");
 
 			if (!pNotaTodos.equals("")) {
-
+				double nota = Double.parseDouble(pNotaTodos);
+				System.out.println(nota);
 				// pegar as informacoes do formulario para criar o objeto, logo em seguida joga
 				// o mesmo para dentro de uma lista
 				for (int i = 0; i < listAluno.size(); i++) {
 					int idT = listAluno.get(i).getId();
-					String pNota = request.getParameter("n" + listAluno.get(i).getId());
-					String pComentarios = request.getParameter("c" + listAluno.get(i).getId());
 					Avaliacao avaliacao = new Avaliacao();
-					avaliacao.setEntrega(es.loadEntrega(idEntrega));
-					avaliacao.setNota(Double.parseDouble(pNotaTodos));
+					avaliacao.setEntrega(es.loadEntrega(idEntregaSel));
+					avaliacao.setNota(nota);
 					avaliacao.setComentarios(pComentariosTodos);
 					avaliacao.setDataAvaliacao(pegarData());
 					avaliacao.setAluno(as.load(idT));
 					listAvaliacao.add(avaliacao);
 				}
 
-				// instanciar o service e cria os objetos(avaliacao) no banco
+				// AVALIACAO SERVICE
 				AvaliacaoService aS = new AvaliacaoService();
 				aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
 
-				ArrayList<Avaliacao> lista = new ArrayList<>();
-				// carrega os objetos para mostrar na tela
+				ArrayList<Avaliacao> listaT = new ArrayList<>();
+				//carrega os objetos para mostrar na tela
 				for (int i = 0; i < listAvaliacao.size(); i++) {
 					Avaliacao avaliacao = new Avaliacao();
 					avaliacao = aS.selectId(listAvaliacao.get(i).getId());
-					lista.add(avaliacao);
+					listaT.add(avaliacao);
+
 				}
-
-				// enviar para o jsp
-				request.setAttribute("listaAvaliacao", lista);
-				view = request.getRequestDispatcher("VisualizarAvaliacao.jsp");
-
+				
+				
 			} else {
 
 				for (int i = 0; i < listAluno.size(); i++) {
@@ -190,6 +184,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 			request.setAttribute("idGrupo", idGrupo);
 			view = request.getRequestDispatcher("visualizarAvaliacao.jsp");
 			view.forward(request, response);
+			
 		} else if (pAcao.equals("Editar")) {
 			int idEn = Integer.parseInt(request.getParameter("idEntrega"));
 			// enviar para o jsp
