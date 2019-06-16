@@ -101,19 +101,26 @@ public class ManterAvaliacaoController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("Entrega")) {
-			session.setAttribute("idEntrega", idEntrega);
-			listAluno = as.grupoAlunos(idGrupo);
+
+			try {
+				session.setAttribute("idEntrega", idEntrega);
+				String idT = (String) session.getAttribute("turmaId");
+				int idTurma = Integer.parseInt(idT);
+				listAluno = as.grupoAlunos(idGrupo, idTurma);
+			} catch (Exception e) {
+				// COLOCAR MENSAGEM DE LISTA VAZIA
+			}
 			session.setAttribute("idGrupo", idGrupo);
 			session.setAttribute("listAluno", listAluno);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacaoAluno.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("avaliacao")) {
-			
+
 			listAluno = (ArrayList<Aluno>) session.getAttribute("listAluno");
 			ArrayList<Avaliacao> listAvaliacao = new ArrayList<Avaliacao>();
 			int idGrupoSel = (int) session.getAttribute("idGrupo");
 			int idEntregaSel = (int) session.getAttribute("idEntrega");
-			
+
 			String pNotaTodos = request.getParameter("nTodos");
 			String pComentariosTodos = request.getParameter("cTodos");
 
@@ -138,15 +145,14 @@ public class ManterAvaliacaoController extends HttpServlet {
 				aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
 
 				ArrayList<Avaliacao> listaT = new ArrayList<>();
-				//carrega os objetos para mostrar na tela
+				// carrega os objetos para mostrar na tela
 				for (int i = 0; i < listAvaliacao.size(); i++) {
 					Avaliacao avaliacao = new Avaliacao();
 					avaliacao = aS.selectId(listAvaliacao.get(i).getId());
 					listaT.add(avaliacao);
 
 				}
-				
-				
+
 			} else {
 
 				for (int i = 0; i < listAluno.size(); i++) {
@@ -184,7 +190,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 			request.setAttribute("idGrupo", idGrupo);
 			view = request.getRequestDispatcher("visualizarAvaliacao.jsp");
 			view.forward(request, response);
-			
+
 		} else if (pAcao.equals("Editar")) {
 			int idEn = Integer.parseInt(request.getParameter("idEntrega"));
 			// enviar para o jsp

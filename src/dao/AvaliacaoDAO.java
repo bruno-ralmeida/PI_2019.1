@@ -132,27 +132,31 @@ public class AvaliacaoDAO {
 		return lista;
 	}
 	
-	public ArrayList<Avaliacao> selectAvaliadosNome(int idProf, String nomeAluno) {
+	public ArrayList<Avaliacao> selectAvaliadosNome(int idProf, String nomeAluno, int idTurma) {
 		AlunoDAO alunoDAO = new AlunoDAO();
 		EntregaDAO entregaDAO = new EntregaDAO();
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		Connection conn = new ConnectionFactory().getConnection();
 		
 		String sqlComand = "SELECT A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
-				"							 FROM AVALIACAO A" + 
-				"							  JOIN ENTREGA E" + 
-				"							    ON A.ENTREGA_ID = E.ID" + 
-				"							  JOIN GRUPO G" + 
-				"                              JOIN USUARIO UA" + 
-				"                              ON UA.ID = A.TURMA_ALUNO_ID" + 
-				"							 WHERE G.ID = E.GRUPO_ID" + 
-				"							   AND G.ORIENTADOR_ID = ?" + 
-				"                               AND UA.NOME LIKE ?" + 
-				"                               " ;
+				"															 FROM AVALIACAO A" + 
+				"															  JOIN ENTREGA E " + 
+				"															    ON A.ENTREGA_ID = E.ID" + 
+				"															  JOIN GRUPO G" + 
+				"							                              JOIN USUARIO UA" + 
+				"				                                              ON UA.ID = A.TURMA_ALUNO_ID" + 
+				"				                                              JOIN TURMA T" + 
+				"				                                             ON T.ID =  A.TURMA_ALUNO_ID" + 
+				"															 WHERE G.ID = E.GRUPO_ID" + 
+				"															   AND G.ORIENTADOR_ID = ?" + 
+				"															   AND UA.NOME LIKE ?" + 
+				"                                                               AND T.ID = ?" ;
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			stm.setInt(1,idProf);
 			stm.setString(2, "%" + nomeAluno + "%");
+			stm.setInt(3, idTurma);
+			
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {

@@ -30,8 +30,8 @@ public class AlunoService {
 	}
 	
 	//passando um grupo id ele retorna a lista de alunos que pertence ao mesmo
-	public ArrayList<Aluno> grupoAlunos(int id) {
-		return dao.grupoAlunos(id);
+	public ArrayList<Aluno> grupoAlunos(int id, int idTurma) {
+		return dao.grupoAlunos(id, idTurma);
 	}
 	
 	//retorna o id de turma_aluno de um aluno passando seu grupo e id

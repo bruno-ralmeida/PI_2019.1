@@ -140,19 +140,22 @@ public class AlunoDAO extends UsuarioDAO {
 	
 	
 	//passando um grupo id ele retorna a lista de alunos que pertence ao mesmo
-	public ArrayList<Aluno> grupoAlunos(int id) {
+	public ArrayList<Aluno> grupoAlunos(int id, int turmaId) {
 		Connection conn = new ConnectionFactory().getConnection();
 		ArrayList<Aluno> lista = new ArrayList<>();
 		Aluno aluno = null;
 		
-		String sqlComand = 	"SELECT DISTINCT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g "
-								+ "JOIN turma_aluno t ON g.id = t.grupo_id "
-								+ "JOIN aluno a ON t.aluno_id = a.aluno_id "
-								+ "JOIN usuario u ON a.aluno_id = u.id WHERE g.id = ?";
+		String sqlComand = 	"SELECT DISTINCT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g \n" + 
+				"								JOIN turma_aluno t ON g.id = t.grupo_id \n" + 
+				"								JOIN aluno a ON t.aluno_id = a.aluno_id \n" + 
+				"								JOIN usuario u ON a.aluno_id = u.id\n" + 
+				"                                WHERE g.id = ?" + 
+				"                                AND t.turma_id = ?";
 				
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			
 			stm.setInt(1, id);
+			stm.setInt(2, turmaId);
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
