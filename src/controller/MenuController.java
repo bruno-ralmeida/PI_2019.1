@@ -43,6 +43,8 @@ public class MenuController extends HttpServlet {
 		String periodoSelected = request.getParameter("periodo");
 		
 		
+		
+		
 		//SUBSTITUI PELA SESSION CASO PARÂMETRO VENHA NULO
 		if(periodoSelected == null) periodoSelected = periodoSession;
 		
@@ -54,6 +56,13 @@ public class MenuController extends HttpServlet {
 		
 		//BUSCA PERÍODOS
 		TurmaService ts = new TurmaService();
+		
+		Turma trava = new Turma();
+		trava = ts.anoCorrente();
+		
+		session.setAttribute("anoMax", trava.getAnoLetivo());
+		session.setAttribute("semMax", trava.getSemestreLetivo());
+		
 		ArrayList<Turma> lstPeriodo = ts.mostrarAno();
 		request.setAttribute("lstPeriodo", lstPeriodo);
 		session.setAttribute("lstPeriodo", lstPeriodo);
@@ -61,6 +70,10 @@ public class MenuController extends HttpServlet {
 		//BUSCA TURMAS
 		int ano = (splitPeriodo[0] != null) ? Integer.parseInt(splitPeriodo[0]) : 0;
 		int semestre = (splitPeriodo[1] != null) ? Integer.parseInt(splitPeriodo[1]) : 0;
+		
+		session.setAttribute("ano", ano);
+		session.setAttribute("semestre", semestre);
+		
 		Professor prof = (Professor) session.getAttribute("usuario");
 		ArrayList<Turma> lstTurmas = ts.selectTurmaPeriodo(prof.getId(), ano, semestre);
 		request.setAttribute("lstTurmas", lstTurmas);

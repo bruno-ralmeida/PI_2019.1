@@ -21,6 +21,10 @@ public class TurmaService implements Serializable {
 		dao.create(turma);
 	}
 	
+	public Turma anoCorrente() {
+		 return dao.anoCorrente();
+	}
+	
 	public ArrayList<Turma> selectId(int id) {
 		return dao.selectId(id);
 	}

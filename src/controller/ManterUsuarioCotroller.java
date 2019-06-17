@@ -38,6 +38,7 @@ public class ManterUsuarioCotroller extends HttpServlet {
 		if(acao.equals("Sair")) {
 			session.setAttribute("usuario", null);
 			session.setAttribute("erro", null);
+			session.setAttribute("lstPeriodo", null);
 			session.setAttribute("periodoSelected", null);
 			session.setAttribute("turmaId", null);
 			session.setAttribute("listAluno", null);

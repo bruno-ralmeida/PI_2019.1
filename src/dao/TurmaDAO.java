@@ -12,6 +12,40 @@ import model.Turma;
 
 
 public class TurmaDAO {
+	public Turma anoCorrente() {
+		// RETORNA O ANO CORRENTE
+		Connection conn = new ConnectionFactory().getConnection();
+
+		String sqlComand = "SELECT  ano_letivo, semestre_letivo "
+				+ 	       "FROM turma ORDER BY ano_letivo DESC, semestre_letivo  "
+				+ 		   "DESC LIMIT 1";
+
+		Turma turma = null;
+
+		try (PreparedStatement stm = conn.prepareStatement(sqlComand)) {
+
+			ResultSet rs = stm.executeQuery();
+
+			if (rs.next()) {
+				turma = new Turma();
+				turma.setAnoLetivo((rs.getInt("ano_letivo")));
+				turma.setSemestreLetivo((rs.getInt("semestre_letivo")));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return turma;
+	}
+	
+	
 	//Carrega Todos os anos/semestres -------------------------------------------------------------------------
 		public ArrayList<Turma> mostrarAno() {
 			Turma turma = null;

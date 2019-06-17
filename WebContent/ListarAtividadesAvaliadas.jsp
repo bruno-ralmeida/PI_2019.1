@@ -66,12 +66,14 @@
 									<td>${a.nota }</td>
 									<td class="actions"><a class="btn btn-default btn-xs "
 										href="ManterAvaliacaoController.do?acao=Visualizar&idEntrega=${a.entrega.id}"
-										style="color: gray; width: 28%"><i class="far fa-eye"></i></a>
+										style="color: gray; "><i class="far fa-eye"></i></a>
+										<c:if test="${ano == anoMax && semestre == semMax }">
 										<button type="button" class="btn  btn-xs" data-toggle="modal"
 											data-target="#modalU-${a.entrega.id}"
-											style="background-color: #00458a; color: white; width: 28%">
+											style="background-color: #00458a; color: white; ">
 											<i class="far fa-edit"></i>
 										</button>
+										</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
