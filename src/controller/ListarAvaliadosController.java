@@ -47,17 +47,21 @@ public class ListarAvaliadosController extends HttpServlet {
 		AvaliacaoService as = new AvaliacaoService();
 		ArrayList<Avaliacao> listAvaliados = null;
 		if (pAcao.equals("Buscar")) {
+			session.setAttribute("listAvaliados", null);
 			try {
 				
 				String idT = (String) session.getAttribute("turmaId");
 				idTurma = Integer.parseInt(idT);
 				System.out.println(idTurma);
 				listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno, idTurma);
+				session.setAttribute("listAvaliados", listAvaliados);
 				
 			} catch (Exception e) {
 				// COLOCAR MENSAGEM DE LISTA VAZIA
+				session.setAttribute("listAvaliados", null);
 			}
-			session.setAttribute("listAvaliados", listAvaliados);
+			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
 			dispatcher.forward(request, response);
 		}

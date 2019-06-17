@@ -66,14 +66,16 @@ public class MenuController extends HttpServlet {
 		request.setAttribute("lstTurmas", lstTurmas);
 		session.setAttribute("lstTurmas", lstTurmas);
 		session.setAttribute("turmaId", turmaId);
-		session.setAttribute("listAvaliados", null);
 		//REDIRECIONAMENTO DE PÁGINA
 		String uri = request.getHeader("referer");
 		String pageName = uri.substring(uri.lastIndexOf("/")+1);
 		if(pageName.equals("login.jsp")) pageName = "index.jsp";
 		//TODA HORA QUE O MENU CONTROLLER FOR CHAMADO ELE IRÁ REDIRECIONAR A PÁGINA PARA O INDEX
-			if(!pageName.equals("index.jsp"))
-			pageName = "index.jsp";
+			if(!pageName.equals("index.jsp")) {
+				session.setAttribute("listAvaliados", null);
+				pageName = "index.jsp";
+			}
+			
 		
 		response.sendRedirect(pageName);
 	}

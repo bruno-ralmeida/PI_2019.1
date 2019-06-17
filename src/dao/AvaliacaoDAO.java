@@ -138,22 +138,19 @@ public class AvaliacaoDAO {
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT DISTINCT A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
-				"																		  FROM AVALIACAO A" + 
-				"																		  JOIN ENTREGA E " + 
-				"																		    ON A.ENTREGA_ID = E.ID" + 
-				"																		  JOIN GRUPO G" + 
-				"																		  JOIN USUARIO UA" + 
-				"							                                                ON UA.ID = A.TURMA_ALUNO_ID" + 
-				"																		  JOIN TURMA T" + 
-				"                                                                         JOIN TURMA_ALUNO TA" + 
-				"																		    ON TA.TURMA_ID = T.ID" + 
-				"																		 WHERE G.ID = E.GRUPO_ID" + 
-				"																		   AND G.ID = TA.GRUPO_ID" + 
-				"                                                                          AND G.ORIENTADOR_ID = ?" + 
-				"																		   AND UA.NOME LIKE ?" + 
-				"				                                                           AND T.ID = ?" + 
-				"                                                                             " ;
+		String sqlComand = "SELECT DISTINCT  A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
+				"				  FROM avaliacao a  " + 
+				"				  JOIN turma_aluno ta " + 
+				"				    ON ta.aluno_id = a.turma_aluno_id" + 
+				"				  JOIN turma t" + 
+				"					ON t.id = ta.turma_id" + 
+				"				  JOIN grupo g" + 
+				"				  JOIN usuario ua" + 
+				"				 JOIN entrega e" +
+				"				 WHERE  G.ORIENTADOR_ID = ?"+
+				"				  AND G.ID =  e.grupo_id" + 
+				"				   AND UA.NOME LIKE ? " + 
+				"				   AND T.ID = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			stm.setInt(1,idProf);
