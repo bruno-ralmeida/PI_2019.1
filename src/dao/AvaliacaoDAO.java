@@ -138,35 +138,37 @@ public class AvaliacaoDAO {
 		ArrayList<Avaliacao> lista = new ArrayList<Avaliacao>();
 		Connection conn = new ConnectionFactory().getConnection();
 		
-		String sqlComand = "SELECT DISTINCT  A.ID, A.NOTA, A.DT_AVALIACAO, A.COMENTARIOS, A.TURMA_ALUNO_ID, A.ENTREGA_ID" + 
-				"				  FROM avaliacao a  " + 
-				"				  JOIN turma_aluno ta " + 
-				"				    ON ta.aluno_id = a.turma_aluno_id" + 
-				"				  JOIN turma t" + 
-				"					ON t.id = ta.turma_id" + 
-				"				  JOIN grupo g" + 
-				"				  JOIN usuario ua" + 
-				"				 JOIN entrega e" +
-				"				 WHERE  G.ORIENTADOR_ID = ?"+
-				"				  AND G.ID =  e.grupo_id" + 
-				"				   AND UA.NOME LIKE ? " + 
-				"				   AND T.ID = ?";
+		String sqlComand = "SELECT AV.ID, AV.NOTA, AV.DT_AVALIACAO, AV.COMENTARIOS, AV.TURMA_ALUNO_ID, AV.ENTREGA_ID " + 
+						   "  FROM USUARIO A " + 
+						   "  JOIN TURMA_ALUNO TA " + 
+						   "    ON TA.ALUNO_ID = A.ID" + 
+						   "  JOIN AVALIACAO AV " + 
+						   "    ON AV.TURMA_ALUNO_ID = A.ID" + 
+						   "  JOIN ENTREGA E" + 
+						   "    ON E.ID =  AV.ENTREGA_ID" + 
+						   "  JOIN GRUPO G " + 
+						   "    ON G.ID = E.GRUPO_ID" + 
+						   "  JOIN TURMA T" + 
+						   "    ON T.ID = TA.TURMA_ID" + 
+						   " WHERE G.ORIENTADOR_ID = ?" + 
+						   "   AND A.NOME like ?" + 
+						   "   AND T.ID = ?";
 		
 		try(PreparedStatement stm = conn.prepareStatement(sqlComand)){
 			stm.setInt(1,idProf);
 			stm.setString(2, "%" + nomeAluno + "%");
 			stm.setInt(3, idTurma);
-			
+			System.out.println(nomeAluno + " no Banco");
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
 				Avaliacao avaliacao = new Avaliacao();
-				avaliacao.setId(rs.getInt("A.ID"));
-				avaliacao.setNota(rs.getDouble("A.NOTA"));
-				avaliacao.setDataAvaliacao(rs.getDate("A.DT_AVALIACAO"));
-				avaliacao.setComentarios(rs.getString("A.COMENTARIOS"));
-				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("A.TURMA_ALUNO_ID")));
-				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("A.ENTREGA_ID")));
+				avaliacao.setId(rs.getInt("AV.ID"));
+				avaliacao.setNota(rs.getDouble("AV.NOTA"));
+				avaliacao.setDataAvaliacao(rs.getDate("AV.DT_AVALIACAO"));
+				avaliacao.setComentarios(rs.getString("AV.COMENTARIOS"));
+				avaliacao.setAluno(alunoDAO.loadTurmaAluno(rs.getInt("AV.TURMA_ALUNO_ID")));
+				avaliacao.setEntrega(entregaDAO.selectEntrega(rs.getInt("AV.ENTREGA_ID")));
 				lista.add(avaliacao);
 			} 
 		}catch(SQLException e) {

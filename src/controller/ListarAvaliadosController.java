@@ -38,7 +38,7 @@ public class ListarAvaliadosController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pAcao = request.getParameter("acao");
-		String nomeAluno = request.getParameter("alunoAvaliado");
+		
 
 		HttpSession session = request.getSession();
 		Professor prof = (Professor) session.getAttribute("usuario");
@@ -49,9 +49,11 @@ public class ListarAvaliadosController extends HttpServlet {
 		if (pAcao.equals("Buscar")) {
 			session.setAttribute("listAvaliados", null);
 			try {
-				
+				String nomeAluno = request.getParameter("alunoAvaliado");
 				String idT = (String) session.getAttribute("turmaId");
 				idTurma = Integer.parseInt(idT);
+				System.out.println(nomeAluno);
+				System.out.println(prof.getId());
 				System.out.println(idTurma);
 				listAvaliados = as.selectAvaliadosNome(prof.getId(), nomeAluno, idTurma);
 				session.setAttribute("listAvaliados", listAvaliados);
