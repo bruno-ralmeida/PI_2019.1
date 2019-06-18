@@ -30,7 +30,7 @@
 				<c:if test="${erroProf != null}">
 					<div class="alert alert-danger alert-dismissible fade show"
 						role="alert">
-						<strong>Erro!</strong> Não foi possível excluir o professor. <a
+						<strong>Erro!</strong> ${erroProf } <a
 							type="button" class="close" data-dismiss="alert"
 							aria-label="Close"
 							href="ListarProfessorController.do?acao=Buscar&">&times;</a>

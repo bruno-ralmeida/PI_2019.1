@@ -36,6 +36,15 @@ function validarSenha(){
 	<div class="container-fluid"  style="padding-top: 2%">
 
 				<form action="ManterProfessorController.do" method="post" class="form-horizontal" name="cad">
+				<c:if test="${erroC != null}">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						<strong>Erro!</strong> ${erroC }  <a
+							type="button" class="close" data-dismiss="alert"
+							aria-label="Close"
+							href="ListarProfessorController.do?acao=Buscar&">&times;</a>
+					</div>
+				</c:if>
 					<div class="form-row align-items-center">
 						<div class="form-group col-md-6 offset-md-3">
 						

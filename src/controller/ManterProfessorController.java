@@ -43,7 +43,6 @@ public class ManterProfessorController extends HttpServlet {
 		String pSenha = request.getParameter("senha");
 		String pMatricula = request.getParameter("matricula");
 		String pAdministrador = request.getParameter("administrador");
-		
 
 		if (pAdministrador == null || pAdministrador.isEmpty())
 			pAdministrador = "0";
@@ -67,27 +66,34 @@ public class ManterProfessorController extends HttpServlet {
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
 		String error = null;
-		
+		String errorC = null;
 		// CRIAR
 		if (pAcao.equals("Criar")) {
-			error = null;
-			ps.create(professor);
-			ArrayList<Professor> lista = new ArrayList<>();
-			lista.add(professor);
-			session.setAttribute("lista", lista);
-			view = request.getRequestDispatcher("professor.jsp");
+			errorC = null;
+			try {
+				ps.create(professor);
+				ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+				lista.add(professor);
+				session.setAttribute("lista", lista);
+				view = request.getRequestDispatcher("professor.jsp");
+			} catch (Exception e) {
+				if (e != null) {
+					errorC = "Não Foi possivel inserir o novo professor";
+					view = request.getRequestDispatcher("cadProfessor.jsp");
+				}
+			}
+
 			// EXCLUIR
 		} else if (pAcao.equals("Excluir")) {
-			
+
 			try {
 				ps.delete(professor.getId());
 				ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
 				lista.remove(busca(professor, lista));
 			} catch (Exception e) {
-				if(e != null) {
+				if (e != null) {
 					error = "Não Foi possivel excluir o professor";
-					
-					}
+				}
 			}
 			view = request.getRequestDispatcher("professor.jsp");
 			// ALTERAR
@@ -113,6 +119,7 @@ public class ManterProfessorController extends HttpServlet {
 			view = request.getRequestDispatcher("alterarProfessor.jsp");
 		}
 		session.setAttribute("erroProf", error);
+		session.setAttribute("erroC", errorC);
 		view.forward(request, response);
 
 	}
