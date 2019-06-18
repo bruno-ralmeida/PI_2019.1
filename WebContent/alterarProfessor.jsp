@@ -28,6 +28,8 @@ function validarSenha(){
 		return true
 	}
 }
+
+
 </script>
 	<c:import url="Menu.jsp" />
 
@@ -48,10 +50,10 @@ function validarSenha(){
 						value="${professor.email }" />
 
 					<div class="form-group">
-						<label for="inputPassword4">Senha</label> <input type="password"
+						<label for="inputPassword4">Senha</label> <input id=senha type="password"
 							class="form-control" value="${professor.senha }" name="senha"
 							style="width: 50%"> <label for="inputPassword5">Confirmar
-							senha</label> <input type="password" class="form-control" name="cSenha"
+							senha</label> <input id=senha type="password" class="form-control" name="cSenha"
 							required="required" style="width: 50%">
 					</div>
 

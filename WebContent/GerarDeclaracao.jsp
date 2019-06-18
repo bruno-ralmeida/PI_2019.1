@@ -17,13 +17,35 @@
 	rel="stylesheet" />
 
 <link href="fonts/css/all.min.css" rel="stylesheet">
+
+<style type="text/css">
+p {
+	font-family: 'Oswald', sans-serif;
+}
+
+p.prof{
+	font-size: 12pt;
+}
+
+h6{
+	font-size: 10pt;
+}
+
+tr {
+	font-family: 'Raleway', sans-serif;
+}
+</style>
+
 <title>Declaração</title>
 </head>
 <div class="d-print-none">
 	<div class="card text-center">
 		<div class="card-body">
-		
-		<button onclick="window.close()" class="btn btn-default" style="width: 15%"><i class="fas fa-reply"></i></button>
+
+			<button onclick="window.close()" class="btn btn-default"
+				style="width: 15%">
+				<i class="fas fa-reply"></i>
+			</button>
 			<button onclick="imprimir()" class="btn btn-primary"
 				style="width: 15%">
 				<i class="fas fa-print"></i>
@@ -35,8 +57,7 @@
 
 
 <div class="container-fluid" style="margin-top: 2%">
-	<div class="container bg-light"
-		style="padding-bottom: 2%">
+	<div class="container bg-light" style="padding-bottom: 2%">
 
 		<!-- LOGO PRINCIPAL -->
 		<div class="row center-block">
@@ -46,54 +67,48 @@
 		</div>
 
 		<div class="row mt-30" style="padding: 2%">
-			<div class="col-md-6 offset-md-3 text-center">
-				<h4>Declaração</h4>
-				<p>Declaro, para os devidos fins, que
-					o(a) professor(a) <strong>${orientador.nome}</strong>
+			<div class="col-md-8 offset-md-2 text-center">
+				<h3>Declaração</h3>
+				</br> </br>
+				<p class="text-justify">
+					Declaro, para os devidos fins, que o(a) professor(a) <strong>${orientador.nome}</strong>
 					participou, na qualidade de professor orientador, da Banca de
 					Trabalho de Conclusão de Curso de Graduação dos alunos
 					<c:forEach var="aluno" items="${listaAlunos}">
 						<b>${aluno.nome}</b>, </c:forEach>
 					no dia
 					<fmt:formatDate pattern="dd/MM/yyyy" value="${banca.data }" />
-					, nesta Universidade, sob o título:
-					<c:forEach var="entrega" items="${listEntrega }">${entrega.atividade }</c:forEach>
+					, nesta Universidade, sob o título:<strong> ${tema } </strong>
+
 				</p>
 
-				<p>
-					São Paulo,
-					<fmt:formatDate pattern="dd/MM/yyyy"
-						value="${dataAtual}" />.
-				</p>
+
 
 				<div class="table-responsive col-md-12">
 					<table class="table table-striped">
-						<tbody>
+						<thead>
 							<tr>
-								<td>Banca Examinadora</td>
+								<th><strong> Banca Examinadora </strong></th>
 							</tr>
+						</thead>
+
+						<c:forEach var="professor" items="${listaProfessores}">
 							<tr>
-								<td>Professor orientador: <c:forEach var="professor"
-										items="${listaProfessores}">
-										<c:if test="${professor.nome != orientador.nome}">
-											<b>${professor.nome}, </b>
-										</c:if>
-									</c:forEach>
-								</td>
+								<td><strong>Professor (a): </strong> ${professor.nome}</td>
 							</tr>
+						</c:forEach>
+
 						</tbody>
 					</table>
 				</div>
+				</br>
+				<h5 style="text-align: center;">São Paulo, <fmt:formatDate pattern="dd/MM/yyyy" value="${dataAtual}" />.</h5>
+				</br>
+				<p class="prof">Professora Dra. Ana Paula Gonçalves Serra</p> 
+				<h6>Coordenadora dos cursos Ciência da Computação, Engenharia de Computação, Sistemas de
+				Informação e Tecnologia em Análise e Desenvolvimento de Sistemas</h6> 
 			</div>
-
 		</div>
-		<p style="text-align: center;">
-			Professora Dra. Ana Paula Gonçalves Serra</br> Coordenadora dos cursos
-			Ciência da Computação, Engenharia de Computação, Sistemas de
-			Informação e</br> Tecnologia em Análise e Desenvolvimento de Sistemas
-		</p>
-
-
 	</div>
 </div>
 
@@ -101,12 +116,7 @@
 	function imprimir() {
 		window.print();
 	}
-	
-	function RetornaDataHoraAtual(){
-		  var dNow = new Date();
-		  var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear() + ' ' + dNow.getHours() + ':' + dNow.getMinutes();
-		  return localdate;
-		}
+
 </script>
 
 

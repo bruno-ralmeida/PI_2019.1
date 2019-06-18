@@ -43,6 +43,10 @@ public class ManterUsuarioCotroller extends HttpServlet {
 			session.setAttribute("turmaId", null);
 			session.setAttribute("listAluno", null);
 			session.setAttribute("listAvaliacao", null);
+			session.setAttribute("ano", null);
+			session.setAttribute("semestre", null);
+			session.setAttribute("anoMax", null);
+			session.setAttribute("semMax", null);
 			response.sendRedirect("Login.jsp");
 		}
 	}
