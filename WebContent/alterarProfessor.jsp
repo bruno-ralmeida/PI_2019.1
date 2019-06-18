@@ -71,7 +71,7 @@ function validarSenha(){
 				</div>
 			</div>
 			<div class="form-group offset-md-3">
-				<a href="professor.jsp" class="btn btn-default" style="width: 20%">Cancelar</a>
+				<a href="ListarProfessor.jsp" class="btn btn-default" style="width: 20%">Cancelar</a>
 				<button type="submit" class="btn btn-primary" name="acao"
 					value="Alterar" style="width: 20%" onClick="return validarSenha()">Salvar</button>
 			</div>

@@ -23,6 +23,16 @@
 	<div class="container-fluid">
 		<div class="container" style="padding-top: 2%;">
 			<form action="ListarGrupoController.do" method="post">
+			<c:if test="${erroG != null}">
+				
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						${erroG} <a
+							type="button" class="close" data-dismiss="alert"
+							aria-label="Close"
+							href="ListarProfessorController.do?acao=Buscar&">&times;</a>
+					</div>
+				</c:if>
 				<div class="row">
 					<div class="col-md-3">
 						<h3>

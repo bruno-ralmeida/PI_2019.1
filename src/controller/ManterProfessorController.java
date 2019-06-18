@@ -100,7 +100,7 @@ public class ManterProfessorController extends HttpServlet {
 					error = "Não Foi possivel excluir o professor";
 				}
 			}
-			view = request.getRequestDispatcher("professor.jsp");
+			view = request.getRequestDispatcher("ListarProfessor.jsp");
 			// ALTERAR
 		} else if (pAcao.equals("Alterar")) {
 			error = null;

@@ -83,7 +83,8 @@ public class ManterAvaliacaoController extends HttpServlet {
 		GrupoService gs = new GrupoService();
 		AlunoService as = new AlunoService();
 		EntregaService es = new EntregaService();
-
+		String erroG = null;
+		String erroE = null;
 		if (pAcao.equals("Buscar")) {
 			ArrayList<Grupo> listGrupo = null;
 			try {
@@ -92,17 +93,23 @@ public class ManterAvaliacaoController extends HttpServlet {
 				listGrupo = gs.loadGrupoByTurma(idTurma);
 				session.setAttribute("listGrupo", listGrupo);
 			} catch (Exception e) {
-				// COLOCAR MENSAGEM DE LISTA VAZIA
+				erroG = "Dados não encontrados!";
 			}
+			session.setAttribute("erroG", erroG);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectGrupo.jsp");
 			dispatcher.forward(request, response);
 		}
 
 		else if (pAcao.equals("Grupo")) {
 			ArrayList<Entrega> listEntrega = null;
-			session = request.getSession();
 			listEntrega = es.selectNaoAvaliados(id);
+
+			if(listEntrega.size() <= 0) {
+				erroE = "O grupo não possuí entregas para serem avaliadas!";
+				
+			}
 			session.setAttribute("listEntrega", listEntrega);
+			session.setAttribute("erroE", erroE);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("selectEntrega.jsp");
 			dispatcher.forward(request, response);
 		} else if (pAcao.equals("Entrega")) {

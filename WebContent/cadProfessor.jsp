@@ -78,6 +78,7 @@ function validarSenha(){
 			</div>
 		<script src="assets/scripts/jquery.min.js"></script>
 		<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" rc="assets/scripts/funcoes.js"></script>
 </body>
 </html>
 

@@ -41,13 +41,20 @@ public class ListarProfessorController extends HttpServlet {
 		String buscar = request.getParameter("bProf");
 		String acao = request.getParameter("acao");
 		HttpSession session = request.getSession();
-
+		String error = null;
+		session.setAttribute("erroProf", error);
+		String notFound = null;
+		if (acao.equals("Buscar")) {
+			notFound = null;
 			lista = ps.findAllName(buscar);
 			session.setAttribute("lista", lista);
-			String error = null;
-			session.setAttribute("erroProf", error);
-			
-		RequestDispatcher dispatcher = request.getRequestDispatcher("professor.jsp");
+			if (lista.size() <= 0) {
+				notFound = "Dados não encontrados!";
+
+			}
+		session.setAttribute("notFound", notFound);
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ListarProfessor.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -58,7 +65,7 @@ public class ListarProfessorController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		
+
 	}
 
 }

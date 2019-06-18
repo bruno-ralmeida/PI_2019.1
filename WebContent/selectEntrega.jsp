@@ -25,6 +25,16 @@
 		<div class="container" style="padding-top: 2%">
 
 			<form action="ListarEntregaController.do" method="post">
+			<c:if test="${erroE != null}">
+				
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						${erroE} <a
+							type="button" class="close" data-dismiss="alert"
+							aria-label="Close"
+							href="ListarProfessorController.do?acao=Buscar&">&times;</a>
+					</div>
+				</c:if>
 				<div class="row">
 					<div class="col-md-8">
 						<h3>

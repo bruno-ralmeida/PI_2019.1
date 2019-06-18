@@ -24,6 +24,15 @@
 	<div class="container-fluid">
 		<div class="container" style="padding-top: 2%">
 			<form action="ListarAvaliadosController.do" method="post">
+				<c:if test="${erroA != null}">
+
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert">
+						${erroA } <a type="button" class="close" data-dismiss="alert"
+							aria-label="Close"
+							href="ListarProfessorController.do?acao=Buscar&">&times;</a>
+					</div>
+				</c:if>
 				<div class="row">
 					<div class="col-md-3">
 						<h3>
@@ -33,12 +42,14 @@
 
 					<div class="col-md-6">
 						<div class="input-group mb-3">
-							<input name="alunoAvaliado" class="form-control" id="search" type="text"
-								placeholder="Buscar Aluno(a) (deixe vazio para trazer todos)" > 
+							<input name="alunoAvaliado" class="form-control" id="search"
+								type="text"
+								placeholder="Buscar Aluno(a) (deixe vazio para trazer todos)">
 							<div class="input-group-append">
 								<button class="btn btn-default" type="submit" name="acao"
-									value="Buscar" >
-									<span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
+									value="Buscar">
+									<span class="glyphicon glyphicon-search"><i
+										class="fas fa-search"></i></span>
 								</button>
 							</div>
 						</div>
@@ -48,7 +59,7 @@
 			<hr />
 			<div class="form-group col-md-12">
 				<div class="table-responsive ">
-					<table class="table table-hover">
+					<table class="table table-hover" id="listAvaliados">
 						<thead>
 							<tr>
 								<th>Aluno</th>
@@ -66,13 +77,13 @@
 									<td>${a.nota }</td>
 									<td class="actions"><a class="btn btn-default btn-xs "
 										href="ManterAvaliacaoController.do?acao=Visualizar&idEntrega=${a.entrega.id}"
-										style="color: gray; "><i class="far fa-eye"></i></a>
-										<c:if test="${ano == anoMax && semestre == semMax }">
-										<button type="button" class="btn  btn-xs" data-toggle="modal"
-											data-target="#modalU-${a.entrega.id}"
-											style="background-color: #00458a; color: white; ">
-											<i class="far fa-edit"></i>
-										</button>
+										style="color: gray;"><i class="far fa-eye"></i></a> <c:if
+											test="${ano == anoMax && semestre == semMax }">
+											<button type="button" class="btn  btn-xs" data-toggle="modal"
+												data-target="#modalU-${a.entrega.id}"
+												style="background-color: #00458a; color: white;">
+												<i class="far fa-edit"></i>
+											</button>
 										</c:if>
 								</tr>
 							</c:forEach>
@@ -86,7 +97,7 @@
 	<c:forEach var="a" items="${listAvaliados }">
 		<div class="modal fade" id="modalU-${a.entrega.id}"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered"  role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
@@ -105,10 +116,10 @@
 			</div>
 		</div>
 	</c:forEach>
-
+	<script src="assets/scripts/jquery.min.js"></script>
+	<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
-<script src="assets/scripts/jquery.min.js"></script>
-<script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+
 </body>
 </html>
 

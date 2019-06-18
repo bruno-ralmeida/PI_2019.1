@@ -93,7 +93,7 @@
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="cadProfessor.jsp">Novo</a> <a
-								class="dropdown-item" href="professor.jsp">Buscar</a>
+								class="dropdown-item" href="ListarProfessor.jsp">Buscar</a>
 						</div></li>
 				</c:if>
 				<li class="nav-item dropdown"><a

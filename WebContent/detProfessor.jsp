@@ -53,7 +53,7 @@
 			<hr />
 			<div id="actions" class="row">
 				<div class="col-md-12 offset-1">
-					<a href="professor.jsp" class="btn btn-default" style="width: 25%;"><i class="fas fa-reply"></i></a>
+					<a href="ListarProfessor.jsp" class="btn btn-default" style="width: 25%;"><i class="fas fa-reply"></i></a>
 					<button type="button" class="btn  btn-xs" data-toggle="modal"
 						data-target="#modalU-${professor.id}"
 						style="width: 25%; background-color: #00458a; color: white;"><i class="fas fa-user-edit"></i></button>

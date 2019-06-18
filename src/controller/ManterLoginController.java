@@ -76,6 +76,9 @@ public class ManterLoginController extends HttpServlet {
 		}	
 		
 		session.setAttribute("erroLogin", error);
+		session.setAttribute("erro", null);
+		session.setAttribute("erroProf", null);
+		session.setAttribute("erroC", null);
 		
 	}
 

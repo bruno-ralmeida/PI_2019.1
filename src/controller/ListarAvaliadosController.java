@@ -43,6 +43,7 @@ public class ListarAvaliadosController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Professor prof = (Professor) session.getAttribute("usuario");
 		int idTurma;
+		String erroA = null;
 
 		AvaliacaoService as = new AvaliacaoService();
 		ArrayList<Avaliacao> listAvaliados = null;
@@ -59,10 +60,10 @@ public class ListarAvaliadosController extends HttpServlet {
 				session.setAttribute("listAvaliados", listAvaliados);
 				
 			} catch (Exception e) {
-				// COLOCAR MENSAGEM DE LISTA VAZIA
 				session.setAttribute("listAvaliados", null);
+				erroA = "Dados não encontrados!";
 			}
-			
+			session.setAttribute("erroA", erroA);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("ListarAtividadesAvaliadas.jsp");
 			dispatcher.forward(request, response);
