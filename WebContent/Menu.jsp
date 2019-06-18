@@ -99,7 +99,7 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> Avaliações </a>
+					aria-haspopup="true" aria-expanded="false"> Avaliação </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<c:if test="${ano == anoMax && semestre == semMax }">
 						<a class="dropdown-item" href="selectGrupo.jsp">Novo</a>
