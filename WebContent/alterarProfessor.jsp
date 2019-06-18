@@ -22,14 +22,12 @@ function validarSenha(){
 	cSenha = document.cad.cSenha.value
 
 	if (senha != cSenha){
-		alert("As senhas não coincidem. Verifique!")
+		alert("As senhas não coincidem")
 		return false	
 	}else{
 		return true
 	}
 }
-
-
 </script>
 	<c:import url="Menu.jsp" />
 
@@ -50,11 +48,10 @@ function validarSenha(){
 						value="${professor.email }" />
 
 					<div class="form-group">
-						<label for="inputPassword4">Senha</label> <input id=senha type="password"
-							class="form-control" value="${professor.senha }" name="senha"
-							style="width: 50%"> <label for="inputPassword5">Confirmar
-							senha</label> <input id=senha type="password" class="form-control" name="cSenha"
-							required="required" style="width: 50%">
+							<label for="inputPassword4">Senha</label> 
+							<input type="password" class="form-control" name="senha" style="width: 50%" required="required">
+							<label for="inputPassword5">Confirmar senha</label> 
+							<input type="password" class="form-control" name="cSenha"style="width: 50%" required="required"> 
 					</div>
 
 					<div class="form-group">
