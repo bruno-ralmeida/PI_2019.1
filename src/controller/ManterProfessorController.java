@@ -70,7 +70,6 @@ public class ManterProfessorController extends HttpServlet {
 		String errorC = null;
 		// CRIAR
 		if (pAcao.equals("Criar")) {
-			errorC = null;
 			try {
 				if (ps.create(professor)) {
 					ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
@@ -81,7 +80,7 @@ public class ManterProfessorController extends HttpServlet {
 					errorC = "Não Foi possivel inserir o novo professor";
 					view = request.getRequestDispatcher("cadProfessor.jsp");
 				}
-				
+
 			} catch (SQLException e) {
 				if (e != null) {
 					errorC = "Não Foi possivel inserir o novo professor ";

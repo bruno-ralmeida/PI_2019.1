@@ -15,35 +15,6 @@ import model.Usuario;
 public class AlunoDAO extends UsuarioDAO {
 	
 	/**
-     * CRUD: Insere aluno
-     * @param conn: Connection
-     */
-	public void create(Aluno aluno) {
-		Connection conn = new ConnectionFactory().getConnection();
-		
-		Usuario usuario = createUsuario(aluno);
-		
-		String sqlComand = "INSERT INTO Aluno (aluno_id, ra) VALUES (?, ?)";
-		
-		try(PreparedStatement stm = conn.prepareStatement(sqlComand);){
-			System.out.println(usuario.getId());
-			stm.setInt(1, usuario.getId());
-			stm.setString(2, aluno.getRa());
-			
-			stm.executeUpdate();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
-	
-	/**
      * CRUD: Carrega dados do aluno
      * @param conn: Connection
      */
@@ -85,69 +56,15 @@ public class AlunoDAO extends UsuarioDAO {
 		return aluno;
 	}
 	
-	/**
-     * CRUD: Atualiza dados do aluno
-     * @param conn: Connection
-     */
-	public void update(Aluno aluno) {
-		Connection conn = new ConnectionFactory().getConnection();
-		
-		//Atualiza email e senha
-		updateUsuario(aluno);
-		
-		String sqlComand = "UPDATE Aluno SET ra = ? WHERE aluno_id = ?";
-		
-		try(PreparedStatement stm = conn.prepareStatement(sqlComand);){
-			stm.setString(1, aluno.getRa());
-			stm.setInt(2, aluno.getId());
-			
-			stm.executeUpdate();            
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-     * CRUD: Deleta usuário
-     * @param conn: Connection
-     */
-	public void delete(int id) {
-		Connection conn = new ConnectionFactory().getConnection();
-		
-		String sqlComand = "DELETE FROM Aluno WHERE aluno_id = ?";
-		try(PreparedStatement stm = conn.prepareStatement(sqlComand);){
-			stm.setInt(1, id);
-			stm.executeUpdate();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		deleteUsuario(id);
-	}
-	
-	
-	
-	
 	//passando um grupo id ele retorna a lista de alunos que pertence ao mesmo
 	public ArrayList<Aluno> grupoAlunos(int id, int turmaId) {
 		Connection conn = new ConnectionFactory().getConnection();
 		ArrayList<Aluno> lista = new ArrayList<>();
 		Aluno aluno = null;
 		
-		String sqlComand = 	"SELECT DISTINCT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g \n" + 
-				"								JOIN turma_aluno t ON g.id = t.grupo_id \n" + 
-				"								JOIN aluno a ON t.aluno_id = a.aluno_id \n" + 
+		String sqlComand = 	"SELECT DISTINCT u.id, u.nome, u.email, u.senha, a.ra FROM grupo g" + 
+				"								JOIN turma_aluno t ON g.id = t.grupo_id " + 
+				"								JOIN aluno a ON t.aluno_id = a.aluno_id " + 
 				"								JOIN usuario u ON a.aluno_id = u.id\n" + 
 				"                                WHERE g.id = ?" + 
 				"                                AND t.turma_id = ?";

@@ -45,29 +45,9 @@ public class Aluno extends Usuario {
 		this.grupo = grupo;
 	}
 	
-	public void create() {
-		AlunoDAO dao = new AlunoDAO();
-		dao.create(this);
-	}
-	
 	public void load() {
 		AlunoDAO dao = new AlunoDAO();
 		dao.load(this.getId());
-	}
-	
-	public void update() {
-		AlunoDAO dao = new AlunoDAO();		
-		dao.update(this);
-	}
-
-	public void delete() {
-		AlunoDAO dao = new AlunoDAO();		
-		dao.delete(this.getId());
-	}	
-	
-	@Override
-	public String toString() {
-		return "Aluno [id=" + this.getId() + " ra=" + this.getRa() + " nome=" + this.getNome() + " email=" + this.getEmail() + "]"; 
 	}
    
 }

@@ -13,28 +13,16 @@ public class AlunoService {
 		dao = new AlunoDAO();
 	}
 	
-	public void create(Aluno aluno) {
-		dao.create(aluno);
-	}
-	
-	public void update(Aluno aluno) {
-		dao.update(aluno);
-	}
-	
-	public void delete(int id) {
-		dao.delete(id);
-	}
-	
 	public Aluno load(int id) {
 		return dao.load(id);
 	}
 	
-	//passando um grupo id ele retorna a lista de alunos que pertence ao mesmo
+	//PASSANDO UM ID DE GRUPO ELE RETORNA A LISTA DE ALUNOS QUE OS MESMOS PERTECEM
 	public ArrayList<Aluno> grupoAlunos(int id, int idTurma) {
 		return dao.grupoAlunos(id, idTurma);
 	}
 	
-	//retorna o id de turma_aluno de um aluno passando seu grupo e id
+	//RETORNA O ID DE TURMA_ALUNO DE UM ALUNO PASSANDO SEU GRUPO E ID
 	public ArrayList<Integer> turmaAluno(int idGrupo, ArrayList<Aluno> listaAluno) {
 		return dao.turmaAluno(idGrupo, listaAluno);
 	}

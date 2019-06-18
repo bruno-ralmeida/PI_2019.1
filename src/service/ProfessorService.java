@@ -30,10 +30,6 @@ public class ProfessorService {
 		return dao.load(id);
 	}
 	
-	public ArrayList<Professor> findAll() {
-		return dao.findAll();
-	}
-	
 	public ArrayList<Professor> findAllName(String nome){
 		return dao.findAllName(nome);
 	}
