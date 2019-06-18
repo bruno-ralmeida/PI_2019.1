@@ -101,8 +101,10 @@
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> Avaliações </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="selectGrupo.jsp">Novo</a> <a
-							class="dropdown-item" href="ListarAtividadesAvaliadas.jsp">Buscar</a>
+					<c:if test="${ano == anoMax && semestre == semMax }">
+						<a class="dropdown-item" href="selectGrupo.jsp">Novo</a>
+					</c:if>
+					 <a class="dropdown-item" href="ListarAtividadesAvaliadas.jsp">Buscar</a>
 					</div></li>
 				<li class="nav-item"><a class="nav-link"
 					href="selectGrupoDeclaracao.jsp">Declaração</a></li>
@@ -111,8 +113,3 @@
 	</nav>
 
 </div>
-<script>
-	function r(){
-		window.location.href = "http://localhost:8080/PI_2019.1/index.jsp"
-	}
-</script>
