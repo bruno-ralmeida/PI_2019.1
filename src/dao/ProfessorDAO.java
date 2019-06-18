@@ -17,8 +17,9 @@ public class ProfessorDAO extends UsuarioDAO {
 	 * CRUD: Insere professor
 	 * 
 	 * @param conn: Connection
+	 * @throws SQLException 
 	 */
-	public void create(Professor professor) {
+	public boolean create(Professor professor) throws SQLException {
 		Connection conn = new ConnectionFactory().getConnection();
 
 		Usuario usuario = createUsuario(professor);
@@ -30,10 +31,10 @@ public class ProfessorDAO extends UsuarioDAO {
 			stm.setInt(1, usuario.getId());
 			stm.setString(2, professor.getMatricula());
 			stm.setInt(3, professor.getAdministrador());
-
 			stm.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return true;
+		} catch (SQLException ex) {
+			return false;
 		} finally {
 			try {
 				conn.close();
@@ -43,6 +44,7 @@ public class ProfessorDAO extends UsuarioDAO {
 		}
 	}
 
+	
 	/**
 	 * CRUD: Carrega dados do professor
 	 */

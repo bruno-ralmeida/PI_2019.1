@@ -51,9 +51,9 @@ public class Professor extends Usuario {
 		this.lstGrupos = lstGrupos;
 	}
 	
-	public void create() {
+	public boolean create() throws SQLException {
 		ProfessorDAO dao = new ProfessorDAO();
-		dao.create(this);
+		return dao.create(this);
 	}
 	
 	public void load() {

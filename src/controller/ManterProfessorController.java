@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -71,14 +72,19 @@ public class ManterProfessorController extends HttpServlet {
 		if (pAcao.equals("Criar")) {
 			errorC = null;
 			try {
-				ps.create(professor);
-				ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
-				lista.add(professor);
-				session.setAttribute("lista", lista);
-				view = request.getRequestDispatcher("professor.jsp");
-			} catch (Exception e) {
-				if (e != null) {
+				if (ps.create(professor)) {
+					ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+					lista.add(professor);
+					session.setAttribute("lista", lista);
+					view = request.getRequestDispatcher("professor.jsp");
+				} else {
 					errorC = "Não Foi possivel inserir o novo professor";
+					view = request.getRequestDispatcher("cadProfessor.jsp");
+				}
+				
+			} catch (SQLException e) {
+				if (e != null) {
+					errorC = "Não Foi possivel inserir o novo professor ";
 					view = request.getRequestDispatcher("cadProfessor.jsp");
 				}
 			}

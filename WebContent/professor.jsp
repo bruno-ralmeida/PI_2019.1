@@ -27,7 +27,8 @@
 	<div class="container-fluid">
 		<div class="container" style="padding-top: 2%">
 			<form action="ListarProfessorController.do" method="post">
-				<c:if test="${erroProf != null}">
+				<c:if test="${erroProf != null}">,
+				
 					<div class="alert alert-danger alert-dismissible fade show"
 						role="alert">
 						<strong>Erro!</strong> ${erroProf } <a

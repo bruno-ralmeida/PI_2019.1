@@ -14,8 +14,8 @@ public class ProfessorService {
 		dao = new ProfessorDAO();
 	}
 	
-	public void create(Professor professor) {
-		dao.create(professor);
+	public boolean create(Professor professor) throws SQLException {
+		return dao.create(professor);
 	}
 	
 	public void update(Professor professor) {
