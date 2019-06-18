@@ -119,7 +119,7 @@ public class ManterAvaliacaoController extends HttpServlet {
 			session.setAttribute("listAluno", listAluno);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacaoAluno.jsp");
 			dispatcher.forward(request, response);
-		} else if (pAcao.equals("avaliacao")) {
+		} else if (pAcao.equals("avaliacaoT")) {
 
 			listAluno = (ArrayList<Aluno>) session.getAttribute("listAluno");
 			ArrayList<Avaliacao> listAvaliacao = new ArrayList<Avaliacao>();
@@ -129,66 +129,74 @@ public class ManterAvaliacaoController extends HttpServlet {
 			String pNotaTodos = request.getParameter("nTodos");
 			String pComentariosTodos = request.getParameter("cTodos");
 
-			if (!pNotaTodos.equals("")) {
-				double nota = Double.parseDouble(pNotaTodos);
-				System.out.println(nota);
-				// pegar as informacoes do formulario para criar o objeto, logo em seguida joga
-				// o mesmo para dentro de uma lista
-				for (int i = 0; i < listAluno.size(); i++) {
-					int idT = listAluno.get(i).getId();
-					Avaliacao avaliacao = new Avaliacao();
-					avaliacao.setEntrega(es.loadEntrega(idEntregaSel));
-					avaliacao.setNota(nota);
-					avaliacao.setComentarios(pComentariosTodos);
-					avaliacao.setDataAvaliacao(pegarData());
-					avaliacao.setAluno(as.load(idT));
-					listAvaliacao.add(avaliacao);
-				}
+			double nota = Double.parseDouble(pNotaTodos);
+			System.out.println(nota);
+			// pegar as informacoes do formulario para criar o objeto, logo em seguida joga
+			// o mesmo para dentro de uma lista
+			for (int i = 0; i < listAluno.size(); i++) {
+				int idT = listAluno.get(i).getId();
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao.setEntrega(es.loadEntrega(idEntregaSel));
+				avaliacao.setNota(nota);
+				avaliacao.setComentarios(pComentariosTodos);
+				avaliacao.setDataAvaliacao(pegarData());
+				avaliacao.setAluno(as.load(idT));
+				listAvaliacao.add(avaliacao);
+			}
 
-				// AVALIACAO SERVICE
-				AvaliacaoService aS = new AvaliacaoService();
-				aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
+			// AVALIACAO SERVICE
+			AvaliacaoService aS = new AvaliacaoService();
+			aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
 
-				ArrayList<Avaliacao> listaT = new ArrayList<>();
-				// carrega os objetos para mostrar na tela
-				for (int i = 0; i < listAvaliacao.size(); i++) {
-					Avaliacao avaliacao = new Avaliacao();
-					avaliacao = aS.selectId(listAvaliacao.get(i).getId());
-					listaT.add(avaliacao);
+			ArrayList<Avaliacao> listaT = new ArrayList<>();
+			// carrega os objetos para mostrar na tela
+			for (int i = 0; i < listAvaliacao.size(); i++) {
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao = aS.selectId(listAvaliacao.get(i).getId());
+				listaT.add(avaliacao);
 
-				}
+			}
 
-			} else {
+			// enviar para o jsp
+			request.setAttribute("listAvaliacao", listAvaliacao);
+			request.setAttribute("idGrupo", idGrupo);
+			view = request.getRequestDispatcher("visualizarAvaliacao.jsp");
+			view.forward(request, response);
 
-				for (int i = 0; i < listAluno.size(); i++) {
-					int idT = listAluno.get(i).getId();
-					sNota = (String) request.getParameter("n" + idT);
-					com = (String) request.getParameter("c" + idT);
-					double dNota = Double.parseDouble(sNota);
-					// AVALIACAO MODEL
-					Avaliacao ava = new Avaliacao();
-					ava.setEntrega(es.loadEntrega(idEntregaSel));
-					ava.setGrupo(gs.load(idGrupoSel));
-					ava.setDataAvaliacao(pegarData());
-					ava.setComentarios(com);
-					ava.setNota(dNota);
-					ava.setAluno(as.load(idT));
-					listAvaliacao.add(ava);
+		} else if (pAcao.equals("avaliacaoI")) {
 
-				}
+			listAluno = (ArrayList<Aluno>) session.getAttribute("listAluno");
+			ArrayList<Avaliacao> listAvaliacao = new ArrayList<Avaliacao>();
+			int idGrupoSel = (int) session.getAttribute("idGrupo");
+			int idEntregaSel = (int) session.getAttribute("idEntrega");
 
-				// AVALIACAO SERVICE
-				AvaliacaoService aS = new AvaliacaoService();
-				aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
+			for (int i = 0; i < listAluno.size(); i++) {
+				int idT = listAluno.get(i).getId();
+				sNota = (String) request.getParameter("n" + idT);
+				com = (String) request.getParameter("c" + idT);
+				double dNota = Double.parseDouble(sNota);
+				// AVALIACAO MODEL
+				Avaliacao ava = new Avaliacao();
+				ava.setEntrega(es.loadEntrega(idEntregaSel));
+				ava.setGrupo(gs.load(idGrupoSel));
+				ava.setDataAvaliacao(pegarData());
+				ava.setComentarios(com);
+				ava.setNota(dNota);
+				ava.setAluno(as.load(idT));
+				listAvaliacao.add(ava);
+			}
 
-				ArrayList<Avaliacao> lista = new ArrayList<>();
-				// carrega os objetos para mostrar na tela
-				for (int i = 0; i < listAvaliacao.size(); i++) {
-					Avaliacao avaliacao = new Avaliacao();
-					avaliacao = aS.selectId(listAvaliacao.get(i).getId());
-					lista.add(avaliacao);
+			// AVALIACAO SERVICE
+			AvaliacaoService aS = new AvaliacaoService();
+			aS.insertAvaliacao(listAvaliacao, idGrupoSel, listAluno);
 
-				}
+			ArrayList<Avaliacao> lista = new ArrayList<>();
+			// carrega os objetos para mostrar na tela
+			for (int i = 0; i < listAvaliacao.size(); i++) {
+				Avaliacao avaliacao = new Avaliacao();
+				avaliacao = aS.selectId(listAvaliacao.get(i).getId());
+				lista.add(avaliacao);
+
 			}
 			// enviar para o jsp
 			request.setAttribute("listAvaliacao", listAvaliacao);

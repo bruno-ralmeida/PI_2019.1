@@ -33,13 +33,10 @@
 					</div>
 
 					<div class="align-items-end">
-						<a  class="btn btn-danger btn-xs"
-							href="ListarAvaliadosController.do?acao=Buscar" > <i
-							class="fas fa-times"> Cancelar </i></a>
-						<button type="submit" class="btn btn-success" name="acao"
-							value="Salvar" >
-							<i class="fas fa-check"> Salvar </i>
-						</button>
+						<a class="btn btn-danger btn-sm"
+							href="ListarAvaliadosController.do?acao=Buscar"> Cancelar </a>
+						<button type="submit" class="btn btn-success btn-sm" name="acao"
+							value="avaliacao">Salvar</button>
 					</div>
 
 
@@ -70,7 +67,7 @@
 										<td><input input type="text" class="form-control"
 											name="comentario${avaliacao.id }"
 											id="comentarios${avaliacao.id }"
-											value="${avaliacao.comentarios}"></td>
+											value="${avaliacao.comentarios}" required="required"></td>
 									</tr>
 								</c:forEach>
 							<thead>
