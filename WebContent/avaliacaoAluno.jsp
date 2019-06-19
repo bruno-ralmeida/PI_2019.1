@@ -37,7 +37,6 @@
 				<div class="container" style="padding-top: 1%">
 
 					<form action="ManterAvaliacaoController.do" method="post">
-							<hr>
 
 						<div id="list" class="row">
 
