@@ -36,7 +36,7 @@
 						<a class="btn btn-danger btn-sm"
 							href="ListarAvaliadosController.do?acao=Buscar"> Cancelar </a>
 						<button type="submit" class="btn btn-success btn-sm" name="acao"
-							value="avaliacao">Salvar</button>
+							value=Salvar>Salvar</button>
 					</div>
 
 
