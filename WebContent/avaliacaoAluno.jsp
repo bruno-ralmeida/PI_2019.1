@@ -161,9 +161,10 @@
 			</div>
 		</div>
 	</div>
-</body>
+<script type="text/javascript">
+	window.alert('Selecione o Método de avaliação!');
 
-
+</script>
 <script src="assets/scripts/jquery.min.js"></script>
 <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
 </body>
