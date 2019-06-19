@@ -72,10 +72,10 @@ public class ManterProfessorController extends HttpServlet {
 		if (pAcao.equals("Criar")) {
 			try {
 				if (ps.create(professor)) {
-					ArrayList<Professor> lista = (ArrayList<Professor>) session.getAttribute("lista");
+					ArrayList<Professor> lista = new ArrayList<Professor>();
 					lista.add(professor);
 					session.setAttribute("lista", lista);
-					view = request.getRequestDispatcher("professor.jsp");
+					view = request.getRequestDispatcher("ListarProfessor.jsp");
 				} else {
 					errorC = "Não Foi possivel inserir o novo professor";
 					view = request.getRequestDispatcher("cadProfessor.jsp");

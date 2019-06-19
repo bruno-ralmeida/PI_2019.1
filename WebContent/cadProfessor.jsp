@@ -70,7 +70,7 @@ function validarSenha(){
 						</div>
 					</div>
 					<div class="form-group offset-md-3" >
-					<a href="professor.jsp" class="btn btn-default" style="width: 25%; "><i class="fas fa-reply"></i></a>
+					<a href="ListarProfessor.jsp" class="btn btn-default" style="width: 25%; "><i class="fas fa-reply"></i></a>
 					<button type="reset" class="btn btn-secondary"  style="width: 20%; "><i class="fas fa-undo"></i></button>
 					<button type="submit" class="btn btn-success" name="acao" value="Criar" style="width: 20%" onClick="return validarSenha()"><i class="fas fa-check"></i></button>
 					</div>
