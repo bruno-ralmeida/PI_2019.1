@@ -37,13 +37,8 @@
 				<div class="container" style="padding-top: 1%">
 
 					<form action="ManterAvaliacaoController.do" method="post">
-						<div class="row">
-							<div class=" offset-5">
-								<h4>Avaliar alunos</h4>
-							</div>
 							<hr>
 
-						</div>
 						<div id="list" class="row">
 
 							<div class="table-responsive col-md-12">
@@ -97,12 +92,6 @@
 			<div class="container-fluid">
 				<div class="container" style="padding-top: 1%">
 					<form action="ManterAvaliacaoController.do" method="post">
-						<div class="row">
-							<div class="col-md-6 offset-5">
-								<h4>Avaliar alunos</h4>
-							</div>
-
-						</div>
 
 
 						<div id="list" class="row">
